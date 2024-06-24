@@ -72,6 +72,7 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
         borderRadius,
         color: isHovered ? hoverColor : color,
         cursor: "pointer",
+        outline: "none",
         transition,
       }}
       onMouseEnter={() => setIsHovered(true)}

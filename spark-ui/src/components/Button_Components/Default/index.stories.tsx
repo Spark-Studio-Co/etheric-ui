@@ -30,7 +30,7 @@ export const Default_Button: Story = {
     color: "#3d9a26",
     hoverBackgroundColor: "#f71515",
     hoverColor: "#2b79d3",
-    hoverBorder: "",
+    hoverBorder: "8px solid grey",
     transition: "0.3s ease-in-out",
   },
 };

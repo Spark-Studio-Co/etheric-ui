@@ -64,6 +64,7 @@ export const Button: React.FC<IButtonProps> = ({
         borderRadius,
         color: isHovered ? hoverColor : color,
         cursor: "pointer",
+        outline: "none",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

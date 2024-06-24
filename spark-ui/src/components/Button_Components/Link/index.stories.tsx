@@ -30,7 +30,7 @@ export const Link_Button: Story = {
     color: "#3d9a26",
     hoverBackgroundColor: "#f71515",
     hoverColor: "#2b79d3",
-    hoverBorder: "",
+    hoverBorder: "6px solid yellow",
     transition: "0.3s ease-in-out",
   },
 };
