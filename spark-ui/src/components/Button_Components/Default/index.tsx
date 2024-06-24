@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   margin?: string;
@@ -44,33 +44,29 @@ export const Button: React.FC<IButtonProps> = ({
   transition,
   ...rest
 }) => {
-  //   const buttonClass = `${styles.button} ${styles[`button--${buttonType}`]}`;
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <button
       id={id}
-      //   className={buttonClass}
       onClick={onClick}
-      style={
-        {
-          margin,
-          backgroundColor,
-          fontSize,
-          fontWeight,
-          fontFamily,
-          width,
-          height,
-          textDecoration,
-          border,
-          transition,
-          borderRadius,
-          color,
-          cursor,
-          "--hover-background-color": hoverBackgroundColor,
-          "--hover-color": hoverColor,
-          "--hover-border": hoverBorder,
-        } as React.CSSProperties
-      }
+      style={{
+        margin,
+        backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
+        fontSize,
+        fontWeight,
+        fontFamily,
+        width,
+        height,
+        textDecoration,
+        border: isHovered ? hoverBorder : border,
+        transition,
+        borderRadius,
+        color: isHovered ? hoverColor : color,
+        cursor: "pointer",
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       {...rest}
       type="submit"
     >
