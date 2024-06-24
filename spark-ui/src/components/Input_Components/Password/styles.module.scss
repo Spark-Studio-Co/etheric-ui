@@ -1,0 +1,14 @@
+.input--borderBottom {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.input_container {
+  position: relative;
+
+  .show_password {
+    position: absolute;
+    cursor: pointer;
+  }
+}
