@@ -134,7 +134,7 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
             flexDirection: "column",
             alignItems: "flex-start",
             right: optionRight,
-            top: optionTop, // Positioning the menu just below the button
+            top: optionTop,
             borderRadius: optionBorderRadius,
             backgroundColor: optionBackgroundColor,
           }}
