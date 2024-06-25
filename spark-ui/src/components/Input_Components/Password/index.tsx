@@ -30,6 +30,7 @@ interface IPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   borderBottomColor?: string;
   iconFontSize?: string;
   iconColor?: string;
+  iconHoverColor?: string;
 }
 
 export const PasswordInput: React.FC<IPasswordProps> = ({
@@ -59,10 +60,12 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
   borderBottomColor,
   iconFontSize,
   iconColor,
+  iconHoverColor,
   ...rest
 }) => {
   const [visible, setVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const inputClass = `default-input ${isFocused ? "focused" : ""} ${
     inputType === "borderBottom" ? s.borderBottom : ""
@@ -85,7 +88,7 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
         : undefined,
     borderBottom:
       inputType === "borderBottom"
-        ? ` ${isFocused ? focusBorderBottomColor : borderBottomColor}`
+        ? `${isFocused ? focusBorderBottomColor : borderBottomColor}`
         : undefined,
     borderRadius,
     color: isFocused ? focusColor : color,
@@ -98,9 +101,10 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
     position: "absolute",
     bottom,
     right,
-    fontSize: iconFontSize || fontSize, // use specific icon font size if provided, otherwise use input font size
-    color: iconColor || color, // use specific icon color if provided, otherwise use input color
+    fontSize: iconFontSize || fontSize,
+    color: isHovered ? iconHoverColor : iconColor || color,
     cursor: "pointer",
+    transition,
   };
 
   return (
@@ -118,6 +122,8 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
       />
       <div
         onClick={() => setVisible(!visible)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className={s.show_password}
         style={iconStyle}
       >

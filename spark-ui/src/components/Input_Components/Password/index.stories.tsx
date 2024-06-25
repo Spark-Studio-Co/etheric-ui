@@ -34,6 +34,8 @@ export const BorderTesting: Story = {
     transition: "all 0.3s ease",
     iconFontSize: "18px",
     iconColor: "#007bff",
+    iconHoverColor: "#ff0000",
+    color: "red",
     bottom: "12px",
     right: "12px",
   },
