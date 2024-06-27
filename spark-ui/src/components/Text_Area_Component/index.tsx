@@ -14,6 +14,7 @@ export interface TextAreaProps
   padding?: string;
   borderRadius?: string;
   color?: string;
+  id?: string;
   focusBorder?: string;
   placeholderColor?: string;
 }
@@ -27,6 +28,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   height,
   textAlign,
   background,
+  id,
   border,
   padding,
   borderRadius,
@@ -54,6 +56,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
 
   return (
     <textarea
+      id={id}
       style={{
         margin,
         fontSize,

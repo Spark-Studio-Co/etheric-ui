@@ -7,6 +7,7 @@ interface IMessage {
   fontSize?: string;
   margin?: string;
   animation?: string;
+  id?: string;
 }
 
 export const ErrorDisplay: React.FC<IMessage> = ({
@@ -14,13 +15,14 @@ export const ErrorDisplay: React.FC<IMessage> = ({
   color,
   fontSize,
   fontWeight,
+  id,
   margin,
   animation,
 }) => {
   if (!message) return null;
 
   return (
-    <div style={{ color, fontWeight, fontSize, margin, animation }}>
+    <div id={id} style={{ color, fontWeight, fontSize, margin, animation }}>
       {message}
     </div>
   );
