@@ -10,9 +10,9 @@ export const breakpoints = {
   tablet_sm: 1200,
   lg: 1360,
   xl: 1520,
-  "2xl": 1980,
+  "2xl": 1680,
   "3xl": 1920,
   "4xl": 2560,
   "5xl": 3840,
-  "6xl": 4000,
+  "6xl": 5120,
 };
