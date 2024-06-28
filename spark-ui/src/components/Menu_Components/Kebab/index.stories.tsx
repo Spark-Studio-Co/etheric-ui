@@ -17,40 +17,53 @@ type Story = StoryObj<typeof meta>;
 
 export const Kebab_Menu: Story = {};
 
-const menuOptions = ["Option 1", "Option 2", "Option 3"];
+const handleClick1 = (index: number) => {
+  console.log(`Option ${index + 1} clicked: Function 1`);
+};
+
+const handleClick2 = (index: number) => {
+  console.log(`Option ${index + 1} clicked: Function 2`);
+};
+
+const handleClick3 = (index: number) => {
+  console.log(`Option ${index + 1} clicked: Function 3`);
+};
 
 export const KebabMenuTest: Story = {
   args: {
-    items: menuOptions,
+    items: ["Option 1", "Option 2", "Option 3"],
     icon: faEllipsisVertical,
-    size: "2x",
     text: "Menu",
-    padding: "10px",
-    top: "50px",
-    right: "80px",
-    backgroundColor: "#007bff",
-    color: "red",
-    hoverBackgroundColor: "#0056b3",
-    hoverColor: "#ffffff",
-    border: "1px solid #007bff",
-    hoverBorder: "1px solid #0056b3",
-    borderRadius: "4px",
+    backgroundColor: "lightgray",
     fontSize: "16px",
-    fontWeight: "bold",
-    transition: "all 0.3s ease",
-    iconFontSize: "18px",
-    iconColor: "#ffffff",
-    iconHoverColor: "#ffcc00",
-    optionBoxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-    optionZIndex: 1000,
-    optionBackgroundColor: "#ffffff",
-    optionRight: "30px", // Positioned directly under the button
-    optionTop: "100px", // Adjust the gap between button and menu
-    optionBorderRadius: "4px",
-    optionPaddingLeft: "10px",
-    optionPaddingRight: "10px",
-    optionHoverColor: "#007bff",
-    optionMarginTop: "5px",
-    optionMarginBottom: "5px",
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    optionBoxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    optionZIndex: 10,
+    optionBackgroundColor: "red",
+    optionRight: "0",
+    optionTop: "50px",
+    xxsOptionTop: "20px",
+    optionBorderRadius: "8px",
+    optionHoverColor: "blue",
+    iconColor: "black",
+    iconHoverColor: "blue",
+    xxsWidth: "40px",
+    xsWidth: "25px",
+    sWidth: "30px",
+    mWidth: "35px",
+    lWidth: "40px",
+    xxsHeight: "20px",
+    xsHeight: "25px",
+    sHeight: "30px",
+    mHeight: "35px",
+    lHeight: "40px",
+    xxsFontSize: "10px",
+    xsFontSize: "12px",
+    sFontSize: "14px",
+    mFontSize: "16px",
+    lFontSize: "18px",
+    onClickFunctions: [handleClick1, handleClick2, handleClick3],
   },
 };

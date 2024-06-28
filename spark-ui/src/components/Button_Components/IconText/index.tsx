@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
 
-interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IIconTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: IconDefinition;
   margin?: string;
   backgroundColor?: string;
   fontSize?: string;
@@ -19,6 +22,11 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   transition?: string;
   cursor?: string;
   text: string;
+  gap?: string;
+  padding?: string;
+  iconFontSize?: string;
+  iconColor?: string;
+  iconHoverColor?: string;
   id?: string;
   xxsWidth?: string;
   xsWidth?: string;
@@ -68,6 +76,22 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fourXlFontSize?: string;
   fiveXlFontSize?: string;
   sixXlFontSize?: string;
+  xxsIconFontSize?: string;
+  xsIconFontSize?: string;
+  sIconFontSize?: string;
+  mIconFontSize?: string;
+  smIconFontSize?: string;
+  lIconFontSize?: string;
+  mdIconFontSize?: string;
+  tabletIconFontSize?: string;
+  tabletSmIconFontSize?: string;
+  lgIconFontSize?: string;
+  xlIconFontSize?: string;
+  twoXlIconFontSize?: string;
+  threeXlIconFontSize?: string;
+  fourXlIconFontSize?: string;
+  fiveXlIconFontSize?: string;
+  sixXlIconFontSize?: string;
   xxsMargin?: string;
   xsMargin?: string;
   sMargin?: string;
@@ -116,10 +140,11 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fourXlBorderRadius?: string;
   fiveXlBorderRadius?: string;
   sixXlBorderRadius?: string;
-  padding?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const Button: React.FC<IButtonProps> = ({
+export const IconTextButton: React.FC<IIconTextProps> = ({
+  icon,
   text,
   onClick,
   id,
@@ -137,9 +162,13 @@ export const Button: React.FC<IButtonProps> = ({
   hoverBackgroundColor,
   hoverColor,
   hoverBorder,
-  padding,
   cursor,
+  iconFontSize,
+  iconColor,
+  iconHoverColor,
   transition,
+  gap,
+  padding,
   xxsWidth,
   xsWidth,
   sWidth,
@@ -188,6 +217,22 @@ export const Button: React.FC<IButtonProps> = ({
   fourXlFontSize,
   fiveXlFontSize,
   sixXlFontSize,
+  xxsIconFontSize,
+  xsIconFontSize,
+  sIconFontSize,
+  mIconFontSize,
+  smIconFontSize,
+  lIconFontSize,
+  mdIconFontSize,
+  tabletIconFontSize,
+  tabletSmIconFontSize,
+  lgIconFontSize,
+  xlIconFontSize,
+  twoXlIconFontSize,
+  threeXlIconFontSize,
+  fourXlIconFontSize,
+  fiveXlIconFontSize,
+  sixXlIconFontSize,
   xxsMargin,
   xsMargin,
   sMargin,
@@ -492,33 +537,91 @@ export const Button: React.FC<IButtonProps> = ({
     }
   };
 
+  const getIconFontSize = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsIconFontSize || iconFontSize;
+      case "xs":
+        return xsIconFontSize || iconFontSize;
+      case "s":
+        return sIconFontSize || iconFontSize;
+      case "m":
+        return mIconFontSize || iconFontSize;
+      case "sm":
+        return smIconFontSize || iconFontSize;
+      case "l":
+        return lIconFontSize || iconFontSize;
+      case "md":
+        return mdIconFontSize || iconFontSize;
+      case "tablet":
+        return tabletIconFontSize || iconFontSize;
+      case "tablet_sm":
+        return tabletSmIconFontSize || iconFontSize;
+      case "lg":
+        return lgIconFontSize || iconFontSize;
+      case "xl":
+        return xlIconFontSize || iconFontSize;
+      case "2xl":
+        return twoXlIconFontSize || iconFontSize;
+      case "3xl":
+        return threeXlIconFontSize || iconFontSize;
+      case "4xl":
+        return fourXlIconFontSize || iconFontSize;
+      case "5xl":
+        return fiveXlIconFontSize || iconFontSize;
+      case "6xl":
+        return sixXlIconFontSize || iconFontSize;
+      default:
+        return iconFontSize;
+    }
+  };
+
   return (
     <button
       id={id}
       onClick={onClick}
       style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         margin: getMargin(),
         backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
-        fontSize: getFontSize(),
-        fontWeight,
-        fontFamily,
-        padding: getPadding(),
-        width: getWidth(),
-        height: getHeight(),
-        textDecoration,
-        border: isHovered ? hoverBorder : border,
-        transition,
         borderRadius: getBorderRadius(),
-        color: isHovered ? hoverColor : color,
+        height: getHeight(),
+        border: isHovered ? hoverBorder : border,
+        gap,
+        padding: getPadding(),
+        transition,
         cursor: "pointer",
         outline: "none",
+        width: getWidth(),
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       {...rest}
-      type="submit"
     >
-      {text}
+      <FontAwesomeIcon
+        icon={icon}
+        style={{
+          color: isHovered ? iconHoverColor : iconColor || color,
+          fontSize: getIconFontSize(),
+          transition,
+        }}
+      />
+      <span
+        style={{
+          fontFamily,
+          fontSize: getFontSize(),
+          color: isHovered ? hoverColor : color,
+          fontWeight,
+          textDecoration,
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {text}
+      </span>
     </button>
   );
 };
