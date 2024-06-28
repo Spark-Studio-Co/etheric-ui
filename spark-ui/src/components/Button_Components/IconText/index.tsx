@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
 
-interface IButtonLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string;
+interface IIconTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: IconDefinition;
   margin?: string;
   backgroundColor?: string;
   fontSize?: string;
@@ -19,9 +20,13 @@ interface IButtonLinkProps
   hoverColor?: string;
   hoverBorder?: string;
   transition?: string;
-  padding?: string;
   cursor?: string;
   text: string;
+  gap?: string;
+  padding?: string;
+  iconFontSize?: string;
+  iconColor?: string;
+  iconHoverColor?: string;
   id?: string;
   xxsWidth?: string;
   xsWidth?: string;
@@ -71,11 +76,27 @@ interface IButtonLinkProps
   fourXlFontSize?: string;
   fiveXlFontSize?: string;
   sixXlFontSize?: string;
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  xxsIconFontSize?: string;
+  xsIconFontSize?: string;
+  sIconFontSize?: string;
+  mIconFontSize?: string;
+  smIconFontSize?: string;
+  lIconFontSize?: string;
+  mdIconFontSize?: string;
+  tabletIconFontSize?: string;
+  tabletSmIconFontSize?: string;
+  lgIconFontSize?: string;
+  xlIconFontSize?: string;
+  twoXlIconFontSize?: string;
+  threeXlIconFontSize?: string;
+  fourXlIconFontSize?: string;
+  fiveXlIconFontSize?: string;
+  sixXlIconFontSize?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const LinkButton: React.FC<IButtonLinkProps> = ({
-  href,
+export const IconTextButton: React.FC<IIconTextProps> = ({
+  icon,
   text,
   onClick,
   id,
@@ -92,10 +113,14 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
   color,
   hoverBackgroundColor,
   hoverColor,
-  padding,
   hoverBorder,
   cursor,
+  iconFontSize,
+  iconColor,
+  iconHoverColor,
   transition,
+  gap,
+  padding,
   xxsWidth,
   xsWidth,
   sWidth,
@@ -144,6 +169,22 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
   fourXlFontSize,
   fiveXlFontSize,
   sixXlFontSize,
+  xxsIconFontSize,
+  xsIconFontSize,
+  sIconFontSize,
+  mIconFontSize,
+  smIconFontSize,
+  lIconFontSize,
+  mdIconFontSize,
+  tabletIconFontSize,
+  tabletSmIconFontSize,
+  lgIconFontSize,
+  xlIconFontSize,
+  twoXlIconFontSize,
+  threeXlIconFontSize,
+  fourXlIconFontSize,
+  fiveXlIconFontSize,
+  sixXlIconFontSize,
   ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -280,37 +321,91 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
     }
   };
 
+  const getIconFontSize = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsIconFontSize || iconFontSize;
+      case "xs":
+        return xsIconFontSize || iconFontSize;
+      case "s":
+        return sIconFontSize || iconFontSize;
+      case "m":
+        return mIconFontSize || iconFontSize;
+      case "sm":
+        return smIconFontSize || iconFontSize;
+      case "l":
+        return lIconFontSize || iconFontSize;
+      case "md":
+        return mdIconFontSize || iconFontSize;
+      case "tablet":
+        return tabletIconFontSize || iconFontSize;
+      case "tablet_sm":
+        return tabletSmIconFontSize || iconFontSize;
+      case "lg":
+        return lgIconFontSize || iconFontSize;
+      case "xl":
+        return xlIconFontSize || iconFontSize;
+      case "2xl":
+        return twoXlIconFontSize || iconFontSize;
+      case "3xl":
+        return threeXlIconFontSize || iconFontSize;
+      case "4xl":
+        return fourXlIconFontSize || iconFontSize;
+      case "5xl":
+        return fiveXlIconFontSize || iconFontSize;
+      case "6xl":
+        return sixXlIconFontSize || iconFontSize;
+      default:
+        return iconFontSize;
+    }
+  };
+
   return (
-    <a
+    <button
       id={id}
       onClick={onClick}
-      href={href}
       style={{
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
         margin,
         backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
-        fontSize: getFontSize(),
-        fontWeight,
-        fontFamily,
-        width: getWidth(),
-        height: getHeight(),
-        textDecoration,
-        border: isHovered ? hoverBorder : border,
         borderRadius,
-        color: isHovered ? hoverColor : color,
+        height: getHeight(),
+        border: isHovered ? hoverBorder : border,
+        gap,
+        padding,
+        transition,
         cursor: "pointer",
         outline: "none",
-        transition,
+        width: getWidth(),
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      role="button"
-      target="_blank"
       {...rest}
     >
-      {text}
-    </a>
+      <FontAwesomeIcon
+        icon={icon}
+        style={{
+          color: isHovered ? iconHoverColor : iconColor || color,
+          fontSize: getIconFontSize(),
+          transition,
+        }}
+      />
+      <span
+        style={{
+          fontFamily,
+          fontSize: getFontSize(),
+          color: isHovered ? hoverColor : color,
+          fontWeight,
+          textDecoration,
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {text}
+      </span>
+    </button>
   );
 };

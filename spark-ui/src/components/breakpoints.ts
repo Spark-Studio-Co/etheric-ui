@@ -1,0 +1,18 @@
+export const breakpoints = {
+  xxs: 360,
+  xs: 390,
+  s: 480,
+  m: 575,
+  sm: 720,
+  l: 860,
+  md: 992,
+  tablet: 1100,
+  tablet_sm: 1024,
+  lg: 1200,
+  xl: 1360,
+  "2xl": 1520,
+  "3xl": 1680,
+  "4xl": 1920,
+  "5xl": 2560,
+  "6xl": 3840,
+};
