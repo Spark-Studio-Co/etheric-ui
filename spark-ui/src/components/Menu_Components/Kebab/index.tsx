@@ -630,7 +630,6 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
   fourXlOptionWidth,
   fiveXlOptionWidth,
   sixXlOptionWidth,
-  onClick,
 }) => {
   const [isKebabOpen, setKebabOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
