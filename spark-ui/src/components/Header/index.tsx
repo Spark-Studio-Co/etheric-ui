@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { getBreakpoint } from "../../../utils/getBreakpoint";
+import { LinkButton } from "../Button_Components/Link";
+import { getBreakpoint } from "@/utils/getBreakpoint";
 
-interface IButtonLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps {
+  text: string;
   href: string;
+}
+
+interface Link {
+  links: LinkProps[];
+  width?: string;
   margin?: string;
+  widthContent?: string;
+  gap?: string;
+  href: string;
+  text: string;
   backgroundColor?: string;
   fontSize?: string;
   fontWeight?: string;
   fontFamily?: string;
-  width?: string;
+  widthLink?: string;
   height?: string;
   textDecoration?: string;
   borderRadius?: string;
@@ -21,7 +31,6 @@ interface IButtonLinkProps
   transition?: string;
   padding?: string;
   cursor?: string;
-  text: string;
   id?: string;
   xxsWidth?: string;
   xsWidth?: string;
@@ -122,17 +131,17 @@ interface IButtonLinkProps
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-export const LinkButton: React.FC<IButtonLinkProps> = ({
-  href,
-  text,
-  onClick,
-  id,
+export const Header: React.FC<Link> = ({
+  links,
+  width,
   margin,
+  widthContent,
+  gap,
+  id,
   backgroundColor,
   fontSize,
   fontWeight,
   fontFamily,
-  width,
   height,
   textDecoration,
   border,
@@ -142,7 +151,6 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
   hoverColor,
   padding,
   hoverBorder,
-  cursor,
   transition,
   xxsWidth,
   xsWidth,
@@ -240,7 +248,6 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
   fourXlPadding,
   fiveXlPadding,
   sixXlPadding,
-  ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -497,37 +504,62 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
   };
 
   return (
-    <a
+    <header
       id={id}
-      onClick={onClick}
-      href={href}
       style={{
-        scrollBehavior: "smooth",
+        width,
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
-        margin: getMargin(),
-        backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
-        fontSize: getFontSize(),
-        fontWeight,
-        padding: getPadding(),
-        fontFamily,
-        width: getWidth(),
-        height: getHeight(),
-        textDecoration,
-        border: isHovered ? hoverBorder : border,
-        borderRadius: getBorderRadius(),
-        color: isHovered ? hoverColor : color,
-        cursor: "pointer",
-        outline: "none",
-        transition,
+        alignItems: "center",
+        margin,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      role="button"
-      {...rest}
     >
-      {text}
-    </a>
+      <div
+        style={{
+          width: widthContent,
+          margin: "auto",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <nav style={{ display: "flex", justifyContent: "center", gap }}>
+          {links.map((link) => (
+            <LinkButton
+              href={link.href}
+              text={link.text}
+              key={link.href}
+              style={{
+                scrollBehavior: "smooth",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: getMargin(),
+                backgroundColor: isHovered
+                  ? hoverBackgroundColor
+                  : backgroundColor,
+                fontSize: getFontSize(),
+                fontWeight,
+                padding: getPadding(),
+                fontFamily,
+                width: getWidth(),
+                height: getHeight(),
+                textDecoration,
+                border: isHovered ? hoverBorder : border,
+                borderRadius: getBorderRadius(),
+                color: isHovered ? hoverColor : color,
+                cursor: "pointer",
+                outline: "none",
+                transition,
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              role="button"
+              target="_blank"
+            />
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 };
