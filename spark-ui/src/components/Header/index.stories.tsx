@@ -21,7 +21,6 @@ const links = [
   { href: "#contact", text: "Contact" },
 ];
 
-// Responsive properties for all breakpoints
 const responsive = {
   xxs: {
     width: "50px",

@@ -6,6 +6,8 @@ interface StyleTypes {
   nav: React.CSSProperties;
   content: React.CSSProperties;
   navlinkbutton: React.CSSProperties;
+  defaultbutton: React.CSSProperties;
+  iconbutton: React.CSSProperties;
   mergeStyles?: (customStyles: Partial<StyleTypes>) => StyleTypes;
 }
 
@@ -41,6 +43,17 @@ const defaultStyles: StyleTypes = {
   nav: {
     display: "flex",
     justifyContent: "center",
+  },
+  defaultbutton: {
+    cursor: "pointer",
+    outline: "none",
+  },
+  iconbutton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+    outline: "none",
   },
   mergeStyles: (customStyles) => {
     return {
