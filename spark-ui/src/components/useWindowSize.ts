@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-// Helper function to throttle an action
 function throttle<T extends (...args: any[]) => void>(
   action: T,
   delay: number
@@ -8,7 +7,7 @@ function throttle<T extends (...args: any[]) => void>(
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
   let lastExec = 0;
 
-  return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
+  return function (this: any, ...args: Parameters<T>) {
     const context = this;
     const elapsed = performance.now() - lastExec;
 
@@ -17,7 +16,10 @@ function throttle<T extends (...args: any[]) => void>(
       lastExec = performance.now();
     };
 
-    clearTimeout(timeoutId as NodeJS.Timeout);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
     if (elapsed > delay) {
       execute();
     } else {
@@ -31,8 +33,7 @@ interface WindowSize {
   height: number;
 }
 
-// Custom hook for window size with throttling
-function useWindowSize(delay: number = 100): WindowSize {
+function useWindowSize(delay = 100): WindowSize {
   const [size, setSize] = useState<WindowSize>({
     width: window.innerWidth,
     height: window.innerHeight,
