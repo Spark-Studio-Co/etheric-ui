@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import useWindowSize from "../../useWindowSize";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
@@ -284,18 +285,7 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
   ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);

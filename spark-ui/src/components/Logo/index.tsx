@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "../useWindowSize";
 
 interface ILogoProps {
   logo: string;
@@ -76,18 +77,7 @@ export const Logo: React.FC<ILogoProps> = ({
   fiveXlHeight,
   sixXlHeight,
 }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getResponsiveValue = (
     xxsValue: string | undefined,

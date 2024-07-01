@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "../useWindowSize";
 
 interface IMessage {
   message: string;
@@ -52,18 +53,7 @@ export const ErrorDisplay: React.FC<IMessage> = ({
   fiveXlFontSize,
   sixXlFontSize,
 }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getFontSize = () => {
     const breakpoint = getBreakpoint(windowWidth);

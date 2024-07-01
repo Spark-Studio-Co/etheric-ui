@@ -1,5 +1,6 @@
-import React, {useState,useEffect} from "react";
+import React from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "../useWindowSize";
 
 interface IHorizontalSeparatorProps {
   width: string;
@@ -54,7 +55,6 @@ interface IHorizontalSeparatorProps {
   fourXlHeight?: string;
   fiveXlHeight?: string;
   sixXlHeight?: string;
-  
 }
 
 export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({
@@ -111,18 +111,7 @@ export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({
   fiveXlHeight,
   sixXlHeight,
 }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getResponsiveValue = (
     xxsValue: string | undefined,
@@ -224,27 +213,26 @@ export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({
       height
     );
 
-
-const getMargin = () => getResponsiveValue (
-  xxsMargin,
-  xsMargin,
-  sMargin,
-  mMargin,
-  smMargin,
-  lMargin,
-  mdMargin,
-  tabletMargin,
-  tabletSmMargin,
-  lgMargin,
-  xlMargin,
-  twoXlMargin,
-  threeXlMargin,
-  fourXlMargin,
-  fiveXlMargin,
-  sixXlMargin,
-  margin,
-)
-
+  const getMargin = () =>
+    getResponsiveValue(
+      xxsMargin,
+      xsMargin,
+      sMargin,
+      mMargin,
+      smMargin,
+      lMargin,
+      mdMargin,
+      tabletMargin,
+      tabletSmMargin,
+      lgMargin,
+      xlMargin,
+      twoXlMargin,
+      threeXlMargin,
+      fourXlMargin,
+      fiveXlMargin,
+      sixXlMargin,
+      margin
+    );
 
   return (
     <hr

@@ -3,6 +3,26 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "types": "dist/spark-ui.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "UI",
+    "library",
+    "Spark",
+    "Component",
+    "Components"
+  ],
+  "main": "dist/spark-ui-umd.cjs",
+  "module": "dist/spark-ui.js",
+  "exports": {
+    ".": {
+      "import": "./dist/spark-ui.js",
+      "require": "./dist/spark-ui-umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

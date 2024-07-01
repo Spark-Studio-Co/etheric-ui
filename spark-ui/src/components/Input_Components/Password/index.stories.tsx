@@ -38,5 +38,7 @@ export const BorderTesting: Story = {
     color: "red",
     bottom: "12px",
     right: "12px",
+    placeholderColor: "#cc0000",
+    focusPlaceholderColor: "#12b322",
   },
 };

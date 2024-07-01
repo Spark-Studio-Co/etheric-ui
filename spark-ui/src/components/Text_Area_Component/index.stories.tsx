@@ -29,7 +29,7 @@ export const Testing: Story = {
     borderRadius: "5px",
     color: "black",
     focusBorder: "2px solid blue",
-    placeholderColor: "grey",
+    placeholderColor: "#f30202",
     width: "100%",
     height: "100px",
     xxsWidth: "90%",
@@ -98,5 +98,6 @@ export const Testing: Story = {
     fourXlBorderRadius: "10px",
     fiveXlBorderRadius: "11px",
     sixXlBorderRadius: "12px",
+    focusPlaceholderColor: "#fc09f8"
   },
 };

@@ -20,7 +20,6 @@ export const Icon_Text_Button: Story = {};
 export const Testing: Story = {
   args: {
     icon: faCoffee,
-    size: "2xl",
     text: "Click Me",
     backgroundColor: "#007bff",
     color: "#ffffff",

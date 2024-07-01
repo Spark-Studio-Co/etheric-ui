@@ -5,9 +5,6 @@ import { Header } from "./index";
 const meta: Meta<typeof Header> = {
   title: "Components/Header",
   component: Header,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
 };
 
@@ -33,16 +30,13 @@ export const Test: Story = {
     fontSize: "16px",
     fontWeight: "bold",
     fontFamily: "Arial, sans-serif",
-    height: "60px",
     textDecoration: "none",
     border: "none",
-    borderRadius: "5px",
     color: "#333",
     hoverBackgroundColor: "#cccccc",
     hoverColor: "#fff",
     hoverBorder: "1px solid #666",
     transition: "all 0.3s ease",
-    padding: "10px 15px",
     cursor: "pointer",
     logo: logo,
     xxsLogoWidth: "50px",
@@ -77,5 +71,9 @@ export const Test: Story = {
     fourXlLogoHeight: "95px",
     fiveXlLogoHeight: "100px",
     sixXlLogoHeight: "105px",
+    contactText: "Contact Us",
+    contactBackgroundColor: "orange",
+    threeXlContactPadding: "20px",
+    hoverContactBackgroundColor: "yellow",
   },
 };

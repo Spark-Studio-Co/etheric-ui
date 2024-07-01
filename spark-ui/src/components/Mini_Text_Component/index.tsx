@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "../useWindowSize";
 
 interface IMiniText extends React.HTMLAttributes<HTMLSpanElement> {
   text: string;
@@ -92,7 +93,7 @@ export const MiniText: React.FC<IMiniText> = ({
   ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { width: windowWidth } = useWindowSize();
 
   const getFontSize = () => {
     const breakpoint = getBreakpoint(windowWidth);
@@ -173,17 +174,6 @@ export const MiniText: React.FC<IMiniText> = ({
         return margin;
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <span

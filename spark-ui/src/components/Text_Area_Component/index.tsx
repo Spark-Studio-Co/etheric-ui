@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "../useWindowSize";
 
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -13,6 +14,7 @@ export interface TextAreaProps
   background?: string;
   border?: string;
   padding?: string;
+  focusPlaceholderColor?: string;
   borderRadius?: string;
   color?: string;
   id?: string;
@@ -129,6 +131,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   border,
   padding,
   borderRadius,
+  focusPlaceholderColor,
   color,
   focusBorder,
   placeholderColor,
@@ -231,268 +234,289 @@ export const TextArea: React.FC<TextAreaProps> = ({
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [placeholderStyles, setPlaceholderStyles] = useState("");
+  const { width: windowWidth } = useWindowSize();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
- // Include other dependencies as needed
-
-
-  const getResponsiveValue = (
-    xxsValue: string | undefined,
-    xsValue: string | undefined,
-    sValue: string | undefined,
-    mValue: string | undefined,
-    smValue: string | undefined,
-    lValue: string | undefined,
-    mdValue: string | undefined,
-    tabletValue: string | undefined,
-    tabletSmValue: string | undefined,
-    lgValue: string | undefined,
-    xlValue: string | undefined,
-    twoXlValue: string | undefined,
-    threeXlValue: string | undefined,
-    fourXlValue: string | undefined,
-    fiveXlValue: string | undefined,
-    sixXlValue: string | undefined,
-    defaultValue: string | undefined
-  ) => {
+  const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsValue || defaultValue;
+        return xxsWidth || width;
       case "xs":
-        return xsValue || defaultValue;
+        return xsWidth || width;
       case "s":
-        return sValue || defaultValue;
+        return sWidth || width;
       case "m":
-        return mValue || defaultValue;
+        return mWidth || width;
       case "sm":
-        return smValue || defaultValue;
+        return smWidth || width;
       case "l":
-        return lValue || defaultValue;
+        return lWidth || width;
       case "md":
-        return mdValue || defaultValue;
+        return mdWidth || width;
       case "tablet":
-        return tabletValue || defaultValue;
+        return tabletWidth || width;
       case "tablet_sm":
-        return tabletSmValue || defaultValue;
+        return tabletSmWidth || width;
       case "lg":
-        return lgValue || defaultValue;
+        return lgWidth || width;
       case "xl":
-        return xlValue || defaultValue;
+        return xlWidth || width;
       case "2xl":
-        return twoXlValue || defaultValue;
+        return twoXlWidth || width;
       case "3xl":
-        return threeXlValue || defaultValue;
+        return threeXlWidth || width;
       case "4xl":
-        return fourXlValue || defaultValue;
+        return fourXlWidth || width;
       case "5xl":
-        return fiveXlValue || defaultValue;
+        return fiveXlWidth || width;
       case "6xl":
-        return sixXlValue || defaultValue;
+        return sixXlWidth || width;
       default:
-        return defaultValue;
+        return width;
     }
   };
 
-  useEffect(() => {
-    const updateStyles = () => {
-      const newFontSize = getResponsiveValue(
-        xxsFontSize, xsFontSize, sFontSize, mFontSize, smFontSize,
-        lFontSize, mdFontSize, tabletFontSize, tabletSmFontSize,
-        lgFontSize, xlFontSize, twoXlFontSize, threeXlFontSize,
-        fourXlFontSize, fiveXlFontSize, sixXlFontSize, fontSize
-      );
-      
-      const updatedStyles = `
-        #${id}::placeholder {
-          color: ${placeholderColor};
-          font-size: ${newFontSize};
-        }
-      `;
-      setPlaceholderStyles(updatedStyles);
-    };
-  
-    updateStyles(); // Call initially and on resize
-    window.addEventListener("resize", updateStyles);
-    return () => {
-      window.removeEventListener("resize", updateStyles);
-    };
-  }, [
-    windowWidth, placeholderColor, id, xxsFontSize, xsFontSize, sFontSize,
-    mFontSize, smFontSize, lFontSize, mdFontSize, tabletFontSize,
-    tabletSmFontSize, lgFontSize, xlFontSize, twoXlFontSize, threeXlFontSize,
-    fourXlFontSize, fiveXlFontSize, sixXlFontSize, fontSize
-  ]);
+  const getHeight = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsHeight || height;
+      case "xs":
+        return xsHeight || height;
+      case "s":
+        return sHeight || height;
+      case "m":
+        return mHeight || height;
+      case "sm":
+        return smHeight || height;
+      case "l":
+        return lHeight || height;
+      case "md":
+        return mdHeight || height;
+      case "tablet":
+        return tabletHeight || height;
+      case "tablet_sm":
+        return tabletSmHeight || height;
+      case "lg":
+        return lgHeight || height;
+      case "xl":
+        return xlHeight || height;
+      case "2xl":
+        return twoXlHeight || height;
+      case "3xl":
+        return threeXlHeight || height;
+      case "4xl":
+        return fourXlHeight || height;
+      case "5xl":
+        return fiveXlHeight || height;
+      case "6xl":
+        return sixXlHeight || height;
+      default:
+        return height;
+    }
+  };
 
-  const getWidth = () =>
-    getResponsiveValue(
-      xxsWidth,
-      xsWidth,
-      sWidth,
-      mWidth,
-      smWidth,
-      lWidth,
-      mdWidth,
-      tabletWidth,
-      tabletSmWidth,
-      lgWidth,
-      xlWidth,
-      twoXlWidth,
-      threeXlWidth,
-      fourXlWidth,
-      fiveXlWidth,
-      sixXlWidth,
-      width
-    );
+  const getFontSize = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsFontSize || fontSize;
+      case "xs":
+        return xsFontSize || fontSize;
+      case "s":
+        return sFontSize || fontSize;
+      case "m":
+        return mFontSize || fontSize;
+      case "sm":
+        return smFontSize || fontSize;
+      case "l":
+        return lFontSize || fontSize;
+      case "md":
+        return mdFontSize || fontSize;
+      case "tablet":
+        return tabletFontSize || fontSize;
+      case "tablet_sm":
+        return tabletSmFontSize || fontSize;
+      case "lg":
+        return lgFontSize || fontSize;
+      case "xl":
+        return xlFontSize || fontSize;
+      case "2xl":
+        return twoXlFontSize || fontSize;
+      case "3xl":
+        return threeXlFontSize || fontSize;
+      case "4xl":
+        return fourXlFontSize || fontSize;
+      case "5xl":
+        return fiveXlFontSize || fontSize;
+      case "6xl":
+        return sixXlFontSize || fontSize;
+      default:
+        return fontSize;
+    }
+  };
 
-  const getHeight = () =>
-    getResponsiveValue(
-      xxsHeight,
-      xsHeight,
-      sHeight,
-      mHeight,
-      smHeight,
-      lHeight,
-      mdHeight,
-      tabletHeight,
-      tabletSmHeight,
-      lgHeight,
-      xlHeight,
-      twoXlHeight,
-      threeXlHeight,
-      fourXlHeight,
-      fiveXlHeight,
-      sixXlHeight,
-      height
-    );
+  const getBorderRadius = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsBorderRadius || borderRadius;
+      case "xs":
+        return xsBorderRadius || borderRadius;
+      case "s":
+        return sBorderRadius || borderRadius;
+      case "m":
+        return mBorderRadius || borderRadius;
+      case "sm":
+        return smBorderRadius || borderRadius;
+      case "l":
+        return lBorderRadius || borderRadius;
+      case "md":
+        return mdBorderRadius || borderRadius;
+      case "tablet":
+        return tabletBorderRadius || borderRadius;
+      case "tablet_sm":
+        return tabletSmBorderRadius || borderRadius;
+      case "lg":
+        return lgBorderRadius || borderRadius;
+      case "xl":
+        return xlBorderRadius || borderRadius;
+      case "2xl":
+        return twoXlBorderRadius || borderRadius;
+      case "3xl":
+        return threeXlBorderRadius || borderRadius;
+      case "4xl":
+        return fourXlBorderRadius || borderRadius;
+      case "5xl":
+        return fiveXlBorderRadius || borderRadius;
+      case "6xl":
+        return sixXlBorderRadius || borderRadius;
+      default:
+        return borderRadius;
+    }
+  };
 
-  const getFontSize = () =>
-    getResponsiveValue(
-      xxsFontSize,
-      xsFontSize,
-      sFontSize,
-      mFontSize,
-      smFontSize,
-      lFontSize,
-      mdFontSize,
-      tabletFontSize,
-      tabletSmFontSize,
-      lgFontSize,
-      xlFontSize,
-      twoXlFontSize,
-      threeXlFontSize,
-      fourXlFontSize,
-      fiveXlFontSize,
-      sixXlFontSize,
-      fontSize
-    );
+  const getMargin = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsMargin || margin;
+      case "xs":
+        return xsMargin || margin;
+      case "s":
+        return sMargin || margin;
+      case "m":
+        return mMargin || margin;
+      case "sm":
+        return smMargin || margin;
+      case "l":
+        return lMargin || margin;
+      case "md":
+        return mdMargin || margin;
+      case "tablet":
+        return tabletMargin || margin;
+      case "tablet_sm":
+        return tabletSmMargin || margin;
+      case "lg":
+        return lgMargin || margin;
+      case "xl":
+        return xlMargin || margin;
+      case "2xl":
+        return twoXlMargin || margin;
+      case "3xl":
+        return threeXlMargin || margin;
+      case "4xl":
+        return fourXlMargin || margin;
+      case "5xl":
+        return fiveXlMargin || margin;
+      case "6xl":
+        return sixXlMargin || margin;
+      default:
+        return margin;
+    }
+  };
 
-  const getMargin = () =>
-    getResponsiveValue(
-      xxsMargin,
-      xsMargin,
-      sMargin,
-      mMargin,
-      smMargin,
-      lMargin,
-      mdMargin,
-      tabletMargin,
-      tabletSmMargin,
-      lgMargin,
-      xlMargin,
-      twoXlMargin,
-      threeXlMargin,
-      fourXlMargin,
-      fiveXlMargin,
-      sixXlMargin,
-      margin
-    );
+  const getPadding = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsPadding || padding;
+      case "xs":
+        return xsPadding || padding;
+      case "s":
+        return sPadding || padding;
+      case "m":
+        return mPadding || padding;
+      case "sm":
+        return smPadding || padding;
+      case "l":
+        return lPadding || padding;
+      case "md":
+        return mdPadding || padding;
+      case "tablet":
+        return tabletPadding || padding;
+      case "tablet_sm":
+        return tabletSmPadding || padding;
+      case "lg":
+        return lgPadding || padding;
+      case "xl":
+        return xlPadding || padding;
+      case "2xl":
+        return twoXlPadding || padding;
+      case "3xl":
+        return threeXlPadding || padding;
+      case "4xl":
+        return fourXlPadding || padding;
+      case "5xl":
+        return fiveXlPadding || padding;
+      case "6xl":
+        return sixXlPadding || padding;
+      default:
+        return padding;
+    }
+  };
 
-  const getPadding = () =>
-    getResponsiveValue(
-      xxsPadding,
-      xsPadding,
-      sPadding,
-      mPadding,
-      smPadding,
-      lPadding,
-      mdPadding,
-      tabletPadding,
-      tabletSmPadding,
-      lgPadding,
-      xlPadding,
-      twoXlPadding,
-      threeXlPadding,
-      fourXlPadding,
-      fiveXlPadding,
-      sixXlPadding,
-      padding
-    );
+  const styles = `
+    .default-input::placeholder {
+      color: ${placeholderColor};
+      font-size: ${getFontSize()};
+    }
+    .default-input.focused::placeholder {
+      color: ${focusPlaceholderColor};
+    }
+  `;
 
-  const getBorderRadius = () =>
-    getResponsiveValue(
-      xxsBorderRadius,
-      xsBorderRadius,
-      sBorderRadius,
-      mBorderRadius,
-      smBorderRadius,
-      lBorderRadius,
-      mdBorderRadius,
-      tabletBorderRadius,
-      tabletSmBorderRadius,
-      lgBorderRadius,
-      xlBorderRadius,
-      twoXlBorderRadius,
-      threeXlBorderRadius,
-      fourXlBorderRadius,
-      fiveXlBorderRadius,
-      sixXlBorderRadius,
-      borderRadius
-    );
-
-
+  const styleSheet = document.createElement("style");
+  styleSheet.type = "text/css";
+  styleSheet.innerText = styles;
+  document.head.appendChild(styleSheet);
 
   return (
     <>
-    <style>
-      {placeholderStyles}
-    </style>
-    <textarea
-      id={id}
-      style={{
-        margin: getMargin(),
-        fontSize: getFontSize(),
-        fontFamily,
-        width: getWidth(),
-        height: getHeight(),
-        textAlign,
-        background,
-        border: isFocused ? focusBorder : border,
-        padding: getPadding(),
-        borderRadius: getBorderRadius(),
-        overflow: "hidden",
-        outline: "none",
-        color,
-      }}
-      placeholder={placeholder}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
-      required
-      {...rest}
-      className="custom-textarea"
-    />
+      <textarea
+        id={id}
+        className={`default-input ${isFocused ? "focused" : ""}`}
+        style={{
+          margin: getMargin(),
+          fontSize: getFontSize(),
+          fontFamily,
+          width: getWidth(),
+          height: getHeight(),
+          textAlign,
+          background,
+          border: isFocused ? focusBorder : border,
+          padding: getPadding(),
+          borderRadius: getBorderRadius(),
+          overflow: "hidden",
+          outline: "none",
+          color,
+        }}
+        placeholder={placeholder}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        required
+        {...rest}
+      />
     </>
   );
 };

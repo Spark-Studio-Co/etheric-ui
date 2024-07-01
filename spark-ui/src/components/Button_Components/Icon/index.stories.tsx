@@ -33,7 +33,7 @@ export const Testing: Story = {
     padding: "10px",
     transition: "all 0.3s ease",
     width: "150px",
-    size: "2x",
+
     iconHoverColor: "#ffffff",
     iconColor: "#ffffff",
     color: "#ffffff",

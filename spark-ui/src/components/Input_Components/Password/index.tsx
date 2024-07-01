@@ -1,8 +1,9 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import s from "./styles.module.scss";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "@/components/useWindowSize";
 
 interface IPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   fontSize?: string;
@@ -423,18 +424,8 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
   const [visible, setVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
@@ -886,16 +877,10 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
     }
   `;
 
-  useEffect(() => {
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
-
-    return () => {
-      document.head.removeChild(styleSheet);
-    };
-  }, [styles]);
+  const styleSheet = document.createElement("style");
+  styleSheet.type = "text/css";
+  styleSheet.innerText = styles;
+  document.head.appendChild(styleSheet);
 
   const inputClass = `default-input ${isFocused ? "focused" : ""} ${s.input} ${
     s[`input--${inputType}`]

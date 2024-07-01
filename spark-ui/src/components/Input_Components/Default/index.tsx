@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import s from "./styles.module.scss";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "@/components/useWindowSize";
 
 interface IDefaultInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -246,18 +247,8 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);

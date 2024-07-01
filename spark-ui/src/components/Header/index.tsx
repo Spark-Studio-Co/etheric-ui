@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import useWindowSize from "../useWindowSize";
 import { LinkButton } from "../Button_Components/Link";
 import { Logo } from "../Logo";
 import { getBreakpoint } from "@/utils/getBreakpoint";
@@ -12,6 +13,18 @@ interface Link {
   logo: string;
   links: LinkProps[];
   width?: string;
+  hoverContactBackgroundColor?: string;
+  contactBackgroundColor?: string;
+  contactFontWeight?: string;
+  contactFontFamily?: string;
+  contactTextDecoration?: string;
+  contactText: string;
+  contactHref: string;
+  contactHoverBorder?: string;
+  contactBorder?: string;
+  contactHoverColor?: string;
+  contactColor?: string;
+  contactTransition?: string;
   xxsLogoWidth?: string;
   xsLogoWidth?: string;
   sLogoWidth?: string;
@@ -82,6 +95,198 @@ interface Link {
   fourXlWidth?: string;
   fiveXlWidth?: string;
   sixXlWidth?: string;
+  xxsLinkWidth?: string;
+  xsLinkWidth?: string;
+  sLinkWidth?: string;
+  mLinkWidth?: string;
+  smLinkWidth?: string;
+  lLinkWidth?: string;
+  mdLinkWidth?: string;
+  tabletLinkWidth?: string;
+  tabletSmLinkWidth?: string;
+  lgLinkWidth?: string;
+  xlLinkWidth?: string;
+  twoXlLinkWidth?: string;
+  threeXlLinkWidth?: string;
+  fourXlLinkWidth?: string;
+  fiveXlLinkWidth?: string;
+  sixXlLinkWidth?: string;
+  xxsLinkHeight?: string;
+  xsLinkHeight?: string;
+  sLinkHeight?: string;
+  mLinkHeight?: string;
+  smLinkHeight?: string;
+  lLinkHeight?: string;
+  mdLinkHeight?: string;
+  tabletLinkHeight?: string;
+  tabletSmLinkHeight?: string;
+  lgLinkHeight?: string;
+  xlLinkHeight?: string;
+  twoXlLinkHeight?: string;
+  threeXlLinkHeight?: string;
+  fourXlLinkHeight?: string;
+  fiveXlLinkHeight?: string;
+  sixXlLinkHeight?: string;
+  xxsLinkFontSize?: string;
+  xsLinkFontSize?: string;
+  sLinkFontSize?: string;
+  mLinkFontSize?: string;
+  smLinkFontSize?: string;
+  lLinkFontSize?: string;
+  mdLinkFontSize?: string;
+  tabletLinkFontSize?: string;
+  tabletSmLinkFontSize?: string;
+  lgLinkFontSize?: string;
+  xlLinkFontSize?: string;
+  twoXlLinkFontSize?: string;
+  threeXlLinkFontSize?: string;
+  fourXlLinkFontSize?: string;
+  fiveXlLinkFontSize?: string;
+  sixXlLinkFontSize?: string;
+  xxsLinkMargin?: string;
+  xsLinkMargin?: string;
+  sLinkMargin?: string;
+  mLinkMargin?: string;
+  smLinkMargin?: string;
+  lLinkMargin?: string;
+  mdLinkMargin?: string;
+  tabletLinkMargin?: string;
+  tabletSmLinkMargin?: string;
+  lgLinkMargin?: string;
+  xlLinkMargin?: string;
+  twoXlLinkMargin?: string;
+  threeXlLinkMargin?: string;
+  fourXlLinkMargin?: string;
+  fiveXlLinkMargin?: string;
+  sixXlLinkMargin?: string;
+  xxsLinkBorderRadius?: string;
+  xsLinkBorderRadius?: string;
+  sLinkBorderRadius?: string;
+  mLinkBorderRadius?: string;
+  smLinkBorderRadius?: string;
+  lLinkBorderRadius?: string;
+  mdLinkBorderRadius?: string;
+  tabletLinkBorderRadius?: string;
+  tabletSmLinkBorderRadius?: string;
+  lgLinkBorderRadius?: string;
+  xlLinkBorderRadius?: string;
+  twoXlLinkBorderRadius?: string;
+  threeXlLinkBorderRadius?: string;
+  fourXlLinkBorderRadius?: string;
+  fiveXlLinkBorderRadius?: string;
+  sixXlLinkBorderRadius?: string;
+  xxsLinkPadding?: string;
+  xsLinkPadding?: string;
+  sLinkPadding?: string;
+  mLinkPadding?: string;
+  smLinkPadding?: string;
+  lLinkPadding?: string;
+  mdLinkPadding?: string;
+  tabletLinkPadding?: string;
+  tabletSmLinkPadding?: string;
+  lgLinkPadding?: string;
+  xlLinkPadding?: string;
+  twoXlLinkPadding?: string;
+  threeXlLinkPadding?: string;
+  fourXlLinkPadding?: string;
+  fiveXlLinkPadding?: string;
+  sixXlLinkPadding?: string;
+  xxsContactWidth?: string;
+  xsContactWidth?: string;
+  sContactWidth?: string;
+  mContactWidth?: string;
+  smContactWidth?: string;
+  lContactWidth?: string;
+  mdContactWidth?: string;
+  tabletContactWidth?: string;
+  tabletSmContactWidth?: string;
+  lgContactWidth?: string;
+  xlContactWidth?: string;
+  twoXlContactWidth?: string;
+  threeXlContactWidth?: string;
+  fourXlContactWidth?: string;
+  fiveXlContactWidth?: string;
+  sixXlContactWidth?: string;
+  xxsContactHeight?: string;
+  xsContactHeight?: string;
+  sContactHeight?: string;
+  mContactHeight?: string;
+  smContactHeight?: string;
+  lContactHeight?: string;
+  mdContactHeight?: string;
+  tabletContactHeight?: string;
+  tabletSmContactHeight?: string;
+  lgContactHeight?: string;
+  xlContactHeight?: string;
+  twoXlContactHeight?: string;
+  threeXlContactHeight?: string;
+  fourXlContactHeight?: string;
+  fiveXlContactHeight?: string;
+  sixXlContactHeight?: string;
+  xxsContactFontSize?: string;
+  xsContactFontSize?: string;
+  sContactFontSize?: string;
+  mContactFontSize?: string;
+  smContactFontSize?: string;
+  lContactFontSize?: string;
+  mdContactFontSize?: string;
+  tabletContactFontSize?: string;
+  tabletSmContactFontSize?: string;
+  lgContactFontSize?: string;
+  xlContactFontSize?: string;
+  twoXlContactFontSize?: string;
+  threeXlContactFontSize?: string;
+  fourXlContactFontSize?: string;
+  fiveXlContactFontSize?: string;
+  sixXlContactFontSize?: string;
+  xxsContactMargin?: string;
+  xsContactMargin?: string;
+  sContactMargin?: string;
+  mContactMargin?: string;
+  smContactMargin?: string;
+  lContactMargin?: string;
+  mdContactMargin?: string;
+  tabletContactMargin?: string;
+  tabletSmContactMargin?: string;
+  lgContactMargin?: string;
+  xlContactMargin?: string;
+  twoXlContactMargin?: string;
+  threeXlContactMargin?: string;
+  fourXlContactMargin?: string;
+  fiveXlContactMargin?: string;
+  sixXlContactMargin?: string;
+  xxsContactBorderRadius?: string;
+  xsContactBorderRadius?: string;
+  sContactBorderRadius?: string;
+  mContactBorderRadius?: string;
+  smContactBorderRadius?: string;
+  lContactBorderRadius?: string;
+  mdContactBorderRadius?: string;
+  tabletContactBorderRadius?: string;
+  tabletSmContactBorderRadius?: string;
+  lgContactBorderRadius?: string;
+  xlContactBorderRadius?: string;
+  twoXlContactBorderRadius?: string;
+  threeXlContactBorderRadius?: string;
+  fourXlContactBorderRadius?: string;
+  fiveXlContactBorderRadius?: string;
+  sixXlContactBorderRadius?: string;
+  xxsContactPadding?: string;
+  xsContactPadding?: string;
+  sContactPadding?: string;
+  mContactPadding?: string;
+  smContactPadding?: string;
+  lContactPadding?: string;
+  mdContactPadding?: string;
+  tabletContactPadding?: string;
+  tabletSmContactPadding?: string;
+  lgContactPadding?: string;
+  xlContactPadding?: string;
+  twoXlContactPadding?: string;
+  threeXlContactPadding?: string;
+  fourXlContactPadding?: string;
+  fiveXlContactPadding?: string;
+  sixXlContactPadding?: string;
   xxsHeight?: string;
   xsHeight?: string;
   sHeight?: string;
@@ -216,6 +421,18 @@ interface Link {
 export const Header: React.FC<Link> = ({
   links,
   width,
+  contactBackgroundColor,
+  contactBorder,
+  contactColor,
+  contactText,
+  contactFontFamily,
+  contactFontWeight,
+  contactHoverBorder,
+  contactHoverColor,
+  hoverContactBackgroundColor,
+  contactHref,
+  contactTextDecoration,
+  contactTransition,
   margin,
   widthContent,
   gap,
@@ -283,102 +500,6 @@ export const Header: React.FC<Link> = ({
   padding,
   hoverBorder,
   transition,
-  xxsWidth,
-  xsWidth,
-  sWidth,
-  mWidth,
-  smWidth,
-  lWidth,
-  mdWidth,
-  tabletWidth,
-  tabletSmWidth,
-  lgWidth,
-  xlWidth,
-  twoXlWidth,
-  threeXlWidth,
-  fourXlWidth,
-  fiveXlWidth,
-  sixXlWidth,
-  xxsHeight,
-  xsHeight,
-  sHeight,
-  mHeight,
-  smHeight,
-  lHeight,
-  mdHeight,
-  tabletHeight,
-  tabletSmHeight,
-  lgHeight,
-  xlHeight,
-  twoXlHeight,
-  threeXlHeight,
-  fourXlHeight,
-  fiveXlHeight,
-  sixXlHeight,
-  xxsFontSize,
-  xsFontSize,
-  sFontSize,
-  mFontSize,
-  smFontSize,
-  lFontSize,
-  mdFontSize,
-  tabletFontSize,
-  tabletSmFontSize,
-  lgFontSize,
-  xlFontSize,
-  twoXlFontSize,
-  threeXlFontSize,
-  fourXlFontSize,
-  fiveXlFontSize,
-  sixXlFontSize,
-  xxsMargin,
-  xsMargin,
-  sMargin,
-  mMargin,
-  smMargin,
-  lMargin,
-  mdMargin,
-  tabletMargin,
-  tabletSmMargin,
-  lgMargin,
-  xlMargin,
-  twoXlMargin,
-  threeXlMargin,
-  fourXlMargin,
-  fiveXlMargin,
-  sixXlMargin,
-  xxsBorderRadius,
-  xsBorderRadius,
-  sBorderRadius,
-  mBorderRadius,
-  smBorderRadius,
-  lBorderRadius,
-  mdBorderRadius,
-  tabletBorderRadius,
-  tabletSmBorderRadius,
-  lgBorderRadius,
-  xlBorderRadius,
-  twoXlBorderRadius,
-  threeXlBorderRadius,
-  fourXlBorderRadius,
-  fiveXlBorderRadius,
-  sixXlBorderRadius,
-  xxsPadding,
-  xsPadding,
-  sPadding,
-  mPadding,
-  smPadding,
-  lPadding,
-  mdPadding,
-  tabletPadding,
-  tabletSmPadding,
-  lgPadding,
-  xlPadding,
-  twoXlPadding,
-  threeXlPadding,
-  fourXlPadding,
-  fiveXlPadding,
-  sixXlPadding,
   xxsHeaderWidth,
   xsHeaderWidth,
   sHeaderWidth,
@@ -412,11 +533,204 @@ export const Header: React.FC<Link> = ({
   fiveXlContentWidth,
   sixXlContentWidth,
   logo,
+  xxsLinkWidth,
+  xsLinkWidth,
+  sLinkWidth,
+  mLinkWidth,
+  smLinkWidth,
+  lLinkWidth,
+  mdLinkWidth,
+  tabletLinkWidth,
+  tabletSmLinkWidth,
+  lgLinkWidth,
+  xlLinkWidth,
+  twoXlLinkWidth,
+  threeXlLinkWidth,
+  fourXlLinkWidth,
+  fiveXlLinkWidth,
+  sixXlLinkWidth,
+  xxsLinkHeight,
+  xsLinkHeight,
+  sLinkHeight,
+  mLinkHeight,
+  smLinkHeight,
+  lLinkHeight,
+  mdLinkHeight,
+  tabletLinkHeight,
+  tabletSmLinkHeight,
+  lgLinkHeight,
+  xlLinkHeight,
+  twoXlLinkHeight,
+  threeXlLinkHeight,
+  fourXlLinkHeight,
+  fiveXlLinkHeight,
+  sixXlLinkHeight,
+  xxsLinkFontSize,
+  xsLinkFontSize,
+  sLinkFontSize,
+  mLinkFontSize,
+  smLinkFontSize,
+  lLinkFontSize,
+  mdLinkFontSize,
+  tabletLinkFontSize,
+  tabletSmLinkFontSize,
+  lgLinkFontSize,
+  xlLinkFontSize,
+  twoXlLinkFontSize,
+  threeXlLinkFontSize,
+  fourXlLinkFontSize,
+  fiveXlLinkFontSize,
+  sixXlLinkFontSize,
+  xxsLinkMargin,
+  xsLinkMargin,
+  sLinkMargin,
+  mLinkMargin,
+  smLinkMargin,
+  lLinkMargin,
+  mdLinkMargin,
+  tabletLinkMargin,
+  tabletSmLinkMargin,
+  lgLinkMargin,
+  xlLinkMargin,
+  twoXlLinkMargin,
+  threeXlLinkMargin,
+  fourXlLinkMargin,
+  fiveXlLinkMargin,
+  sixXlLinkMargin,
+  xxsLinkBorderRadius,
+  xsLinkBorderRadius,
+  sLinkBorderRadius,
+  mLinkBorderRadius,
+  smLinkBorderRadius,
+  lLinkBorderRadius,
+  mdLinkBorderRadius,
+  tabletLinkBorderRadius,
+  tabletSmLinkBorderRadius,
+  lgLinkBorderRadius,
+  xlLinkBorderRadius,
+  twoXlLinkBorderRadius,
+  threeXlLinkBorderRadius,
+  fourXlLinkBorderRadius,
+  fiveXlLinkBorderRadius,
+  sixXlLinkBorderRadius,
+  xxsLinkPadding,
+  xsLinkPadding,
+  sLinkPadding,
+  mLinkPadding,
+  smLinkPadding,
+  lLinkPadding,
+  mdLinkPadding,
+  tabletLinkPadding,
+  tabletSmLinkPadding,
+  lgLinkPadding,
+  xlLinkPadding,
+  twoXlLinkPadding,
+  threeXlLinkPadding,
+  fourXlLinkPadding,
+  fiveXlLinkPadding,
+  sixXlLinkPadding,
+  xxsContactWidth,
+  xsContactWidth,
+  sContactWidth,
+  mContactWidth,
+  smContactWidth,
+  lContactWidth,
+  mdContactWidth,
+  tabletContactWidth,
+  tabletSmContactWidth,
+  lgContactWidth,
+  xlContactWidth,
+  twoXlContactWidth,
+  threeXlContactWidth,
+  fourXlContactWidth,
+  fiveXlContactWidth,
+  sixXlContactWidth,
+  xxsContactHeight,
+  xsContactHeight,
+  sContactHeight,
+  mContactHeight,
+  smContactHeight,
+  lContactHeight,
+  mdContactHeight,
+  tabletContactHeight,
+  tabletSmContactHeight,
+  lgContactHeight,
+  xlContactHeight,
+  twoXlContactHeight,
+  threeXlContactHeight,
+  fourXlContactHeight,
+  fiveXlContactHeight,
+  sixXlContactHeight,
+  xxsContactFontSize,
+  xsContactFontSize,
+  sContactFontSize,
+  mContactFontSize,
+  smContactFontSize,
+  lContactFontSize,
+  mdContactFontSize,
+  tabletContactFontSize,
+  tabletSmContactFontSize,
+  lgContactFontSize,
+  xlContactFontSize,
+  twoXlContactFontSize,
+  threeXlContactFontSize,
+  fourXlContactFontSize,
+  fiveXlContactFontSize,
+  sixXlContactFontSize,
+  xxsContactMargin,
+  xsContactMargin,
+  sContactMargin,
+  mContactMargin,
+  smContactMargin,
+  lContactMargin,
+  mdContactMargin,
+  tabletContactMargin,
+  tabletSmContactMargin,
+  lgContactMargin,
+  xlContactMargin,
+  twoXlContactMargin,
+  threeXlContactMargin,
+  fourXlContactMargin,
+  fiveXlContactMargin,
+  sixXlContactMargin,
+  xxsContactBorderRadius,
+  xsContactBorderRadius,
+  sContactBorderRadius,
+  mContactBorderRadius,
+  smContactBorderRadius,
+  lContactBorderRadius,
+  mdContactBorderRadius,
+  tabletContactBorderRadius,
+  tabletSmContactBorderRadius,
+  lgContactBorderRadius,
+  xlContactBorderRadius,
+  twoXlContactBorderRadius,
+  threeXlContactBorderRadius,
+  fourXlContactBorderRadius,
+  fiveXlContactBorderRadius,
+  sixXlContactBorderRadius,
+  xxsContactPadding,
+  xsContactPadding,
+  sContactPadding,
+  mContactPadding,
+  smContactPadding,
+  lContactPadding,
+  mdContactPadding,
+  tabletContactPadding,
+  tabletSmContactPadding,
+  lgContactPadding,
+  xlContactPadding,
+  twoXlContactPadding,
+  threeXlContactPadding,
+  fourXlContactPadding,
+  fiveXlContactPadding,
+  sixXlContactPadding,
 }) => {
   const [hoverStates, setHoverStates] = React.useState<boolean[]>(
     new Array(links.length).fill(false)
   );
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isHovered, setIsHovered] = useState(false);
+  const { width: windowWidth } = useWindowSize();
 
   const handleMouseEnter = (index: number) => {
     const updatedStates = [...hoverStates];
@@ -424,23 +738,11 @@ export const Header: React.FC<Link> = ({
     setHoverStates(updatedStates);
   };
 
-  // Function to handle mouse leave
   const handleMouseLeave = (index: number) => {
     const updatedStates = [...hoverStates];
     updatedStates[index] = false;
     setHoverStates(updatedStates);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const getLogoWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
@@ -642,241 +944,481 @@ export const Header: React.FC<Link> = ({
     }
   };
 
-  const getWidth = () => {
+  const getLinkWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsWidth || width;
+        return xxsLinkWidth || width;
       case "xs":
-        return xsWidth || width;
+        return xsLinkWidth || width;
       case "s":
-        return sWidth || width;
+        return sLinkWidth || width;
       case "m":
-        return mWidth || width;
+        return mLinkWidth || width;
       case "sm":
-        return smWidth || width;
+        return smLinkWidth || width;
       case "l":
-        return lWidth || width;
+        return lLinkWidth || width;
       case "md":
-        return mdWidth || width;
+        return mdLinkWidth || width;
       case "tablet":
-        return tabletWidth || width;
+        return tabletLinkWidth || width;
       case "tablet_sm":
-        return tabletSmWidth || width;
+        return tabletSmLinkWidth || width;
       case "lg":
-        return lgWidth || width;
+        return lgLinkWidth || width;
       case "xl":
-        return xlWidth || width;
+        return xlLinkWidth || width;
       case "2xl":
-        return twoXlWidth || width;
+        return twoXlLinkWidth || width;
       case "3xl":
-        return threeXlWidth || width;
+        return threeXlLinkWidth || width;
       case "4xl":
-        return fourXlWidth || width;
+        return fourXlLinkWidth || width;
       case "5xl":
-        return fiveXlWidth || width;
+        return fiveXlLinkWidth || width;
       case "6xl":
-        return sixXlWidth || width;
+        return sixXlLinkWidth || width;
       default:
         return width;
     }
   };
 
-  const getHeight = () => {
+  const getContactWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsHeight || height;
+        return xxsContactWidth || width;
       case "xs":
-        return xsHeight || height;
+        return xsContactWidth || width;
       case "s":
-        return sHeight || height;
+        return sContactWidth || width;
       case "m":
-        return mHeight || height;
+        return mContactWidth || width;
       case "sm":
-        return smHeight || height;
+        return smContactWidth || width;
       case "l":
-        return lHeight || height;
+        return lContactWidth || width;
       case "md":
-        return mdHeight || height;
+        return mdContactWidth || width;
       case "tablet":
-        return tabletHeight || height;
+        return tabletContactWidth || width;
       case "tablet_sm":
-        return tabletSmHeight || height;
+        return tabletSmContactWidth || width;
       case "lg":
-        return lgHeight || height;
+        return lgContactWidth || width;
       case "xl":
-        return xlHeight || height;
+        return xlContactWidth || width;
       case "2xl":
-        return twoXlHeight || height;
+        return twoXlContactWidth || width;
       case "3xl":
-        return threeXlHeight || height;
+        return threeXlContactWidth || width;
       case "4xl":
-        return fourXlHeight || height;
+        return fourXlContactWidth || width;
       case "5xl":
-        return fiveXlHeight || height;
+        return fiveXlContactWidth || width;
       case "6xl":
-        return sixXlHeight || height;
+        return sixXlContactWidth || width;
+      default:
+        return width;
+    }
+  };
+
+  const getLinkHeight = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLinkHeight || height;
+      case "xs":
+        return xsLinkHeight || height;
+      case "s":
+        return sLinkHeight || height;
+      case "m":
+        return mLinkHeight || height;
+      case "sm":
+        return smLinkHeight || height;
+      case "l":
+        return lLinkHeight || height;
+      case "md":
+        return mdLinkHeight || height;
+      case "tablet":
+        return tabletLinkHeight || height;
+      case "tablet_sm":
+        return tabletSmLinkHeight || height;
+      case "lg":
+        return lgLinkHeight || height;
+      case "xl":
+        return xlLinkHeight || height;
+      case "2xl":
+        return twoXlLinkHeight || height;
+      case "3xl":
+        return threeXlLinkHeight || height;
+      case "4xl":
+        return fourXlLinkHeight || height;
+      case "5xl":
+        return fiveXlLinkHeight || height;
+      case "6xl":
+        return sixXlLinkHeight || height;
       default:
         return height;
     }
   };
 
-  const getFontSize = () => {
+  const getContactHeight = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsFontSize || fontSize;
+        return xxsContactHeight || height;
       case "xs":
-        return xsFontSize || fontSize;
+        return xsContactHeight || height;
       case "s":
-        return sFontSize || fontSize;
+        return sContactHeight || height;
       case "m":
-        return mFontSize || fontSize;
+        return mContactHeight || height;
       case "sm":
-        return smFontSize || fontSize;
+        return smContactHeight || height;
       case "l":
-        return lFontSize || fontSize;
+        return lContactHeight || height;
       case "md":
-        return mdFontSize || fontSize;
+        return mdContactHeight || height;
       case "tablet":
-        return tabletFontSize || fontSize;
+        return tabletContactHeight || height;
       case "tablet_sm":
-        return tabletSmFontSize || fontSize;
+        return tabletSmContactHeight || height;
       case "lg":
-        return lgFontSize || fontSize;
+        return lgContactHeight || height;
       case "xl":
-        return xlFontSize || fontSize;
+        return xlContactHeight || height;
       case "2xl":
-        return twoXlFontSize || fontSize;
+        return twoXlContactHeight || height;
       case "3xl":
-        return threeXlFontSize || fontSize;
+        return threeXlContactHeight || height;
       case "4xl":
-        return fourXlFontSize || fontSize;
+        return fourXlContactHeight || height;
       case "5xl":
-        return fiveXlFontSize || fontSize;
+        return fiveXlContactHeight || height;
       case "6xl":
-        return sixXlFontSize || fontSize;
+        return sixXlContactHeight || height;
+      default:
+        return height;
+    }
+  };
+
+  const getLinkFontSize = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLinkFontSize || fontSize;
+      case "xs":
+        return xsLinkFontSize || fontSize;
+      case "s":
+        return sLinkFontSize || fontSize;
+      case "m":
+        return mLinkFontSize || fontSize;
+      case "sm":
+        return smLinkFontSize || fontSize;
+      case "l":
+        return lLinkFontSize || fontSize;
+      case "md":
+        return mdLinkFontSize || fontSize;
+      case "tablet":
+        return tabletLinkFontSize || fontSize;
+      case "tablet_sm":
+        return tabletSmLinkFontSize || fontSize;
+      case "lg":
+        return lgLinkFontSize || fontSize;
+      case "xl":
+        return xlLinkFontSize || fontSize;
+      case "2xl":
+        return twoXlLinkFontSize || fontSize;
+      case "3xl":
+        return threeXlLinkFontSize || fontSize;
+      case "4xl":
+        return fourXlLinkFontSize || fontSize;
+      case "5xl":
+        return fiveXlLinkFontSize || fontSize;
+      case "6xl":
+        return sixXlLinkFontSize || fontSize;
       default:
         return fontSize;
     }
   };
 
-  const getBorderRadius = () => {
+  const getContactFontSize = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsBorderRadius || borderRadius;
+        return xxsContactFontSize || fontSize;
       case "xs":
-        return xsBorderRadius || borderRadius;
+        return xsContactFontSize || fontSize;
       case "s":
-        return sBorderRadius || borderRadius;
+        return sContactFontSize || fontSize;
       case "m":
-        return mBorderRadius || borderRadius;
+        return mContactFontSize || fontSize;
       case "sm":
-        return smBorderRadius || borderRadius;
+        return smContactFontSize || fontSize;
       case "l":
-        return lBorderRadius || borderRadius;
+        return lContactFontSize || fontSize;
       case "md":
-        return mdBorderRadius || borderRadius;
+        return mdContactFontSize || fontSize;
       case "tablet":
-        return tabletBorderRadius || borderRadius;
+        return tabletContactFontSize || fontSize;
       case "tablet_sm":
-        return tabletSmBorderRadius || borderRadius;
+        return tabletSmContactFontSize || fontSize;
       case "lg":
-        return lgBorderRadius || borderRadius;
+        return lgContactFontSize || fontSize;
       case "xl":
-        return xlBorderRadius || borderRadius;
+        return xlContactFontSize || fontSize;
       case "2xl":
-        return twoXlBorderRadius || borderRadius;
+        return twoXlContactFontSize || fontSize;
       case "3xl":
-        return threeXlBorderRadius || borderRadius;
+        return threeXlContactFontSize || fontSize;
       case "4xl":
-        return fourXlBorderRadius || borderRadius;
+        return fourXlContactFontSize || fontSize;
       case "5xl":
-        return fiveXlBorderRadius || borderRadius;
+        return fiveXlContactFontSize || fontSize;
       case "6xl":
-        return sixXlBorderRadius || borderRadius;
+        return sixXlContactFontSize || fontSize;
+      default:
+        return fontSize;
+    }
+  };
+
+  const getLinkBorderRadius = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLinkBorderRadius || borderRadius;
+      case "xs":
+        return xsLinkBorderRadius || borderRadius;
+      case "s":
+        return sLinkBorderRadius || borderRadius;
+      case "m":
+        return mLinkBorderRadius || borderRadius;
+      case "sm":
+        return smLinkBorderRadius || borderRadius;
+      case "l":
+        return lLinkBorderRadius || borderRadius;
+      case "md":
+        return mdLinkBorderRadius || borderRadius;
+      case "tablet":
+        return tabletLinkBorderRadius || borderRadius;
+      case "tablet_sm":
+        return tabletSmLinkBorderRadius || borderRadius;
+      case "lg":
+        return lgLinkBorderRadius || borderRadius;
+      case "xl":
+        return xlLinkBorderRadius || borderRadius;
+      case "2xl":
+        return twoXlLinkBorderRadius || borderRadius;
+      case "3xl":
+        return threeXlLinkBorderRadius || borderRadius;
+      case "4xl":
+        return fourXlLinkBorderRadius || borderRadius;
+      case "5xl":
+        return fiveXlLinkBorderRadius || borderRadius;
+      case "6xl":
+        return sixXlLinkBorderRadius || borderRadius;
       default:
         return borderRadius;
     }
   };
 
-  const getMargin = () => {
+  const getContactBorderRadius = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsMargin || margin;
+        return xxsContactBorderRadius || borderRadius;
       case "xs":
-        return xsMargin || margin;
+        return xsContactBorderRadius || borderRadius;
       case "s":
-        return sMargin || margin;
+        return sContactBorderRadius || borderRadius;
       case "m":
-        return mMargin || margin;
+        return mContactBorderRadius || borderRadius;
       case "sm":
-        return smMargin || margin;
+        return smContactBorderRadius || borderRadius;
       case "l":
-        return lMargin || margin;
+        return lContactBorderRadius || borderRadius;
       case "md":
-        return mdMargin || margin;
+        return mdContactBorderRadius || borderRadius;
       case "tablet":
-        return tabletMargin || margin;
+        return tabletContactBorderRadius || borderRadius;
       case "tablet_sm":
-        return tabletSmMargin || margin;
+        return tabletSmContactBorderRadius || borderRadius;
       case "lg":
-        return lgMargin || margin;
+        return lgContactBorderRadius || borderRadius;
       case "xl":
-        return xlMargin || margin;
+        return xlContactBorderRadius || borderRadius;
       case "2xl":
-        return twoXlMargin || margin;
+        return twoXlContactBorderRadius || borderRadius;
       case "3xl":
-        return threeXlMargin || margin;
+        return threeXlContactBorderRadius || borderRadius;
       case "4xl":
-        return fourXlMargin || margin;
+        return fourXlContactBorderRadius || borderRadius;
       case "5xl":
-        return fiveXlMargin || margin;
+        return fiveXlContactBorderRadius || borderRadius;
       case "6xl":
-        return sixXlMargin || margin;
+        return sixXlContactBorderRadius || borderRadius;
+      default:
+        return borderRadius;
+    }
+  };
+
+  const getLinkMargin = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLinkMargin || margin;
+      case "xs":
+        return xsLinkMargin || margin;
+      case "s":
+        return sLinkMargin || margin;
+      case "m":
+        return mLinkMargin || margin;
+      case "sm":
+        return smLinkMargin || margin;
+      case "l":
+        return lLinkMargin || margin;
+      case "md":
+        return mdLinkMargin || margin;
+      case "tablet":
+        return tabletLinkMargin || margin;
+      case "tablet_sm":
+        return tabletSmLinkMargin || margin;
+      case "lg":
+        return lgLinkMargin || margin;
+      case "xl":
+        return xlLinkMargin || margin;
+      case "2xl":
+        return twoXlLinkMargin || margin;
+      case "3xl":
+        return threeXlLinkMargin || margin;
+      case "4xl":
+        return fourXlLinkMargin || margin;
+      case "5xl":
+        return fiveXlLinkMargin || margin;
+      case "6xl":
+        return sixXlLinkMargin || margin;
       default:
         return margin;
     }
   };
 
-  const getPadding = () => {
+  const getContactMargin = () => {
     const breakpoint = getBreakpoint(windowWidth);
     switch (breakpoint) {
       case "xxs":
-        return xxsPadding || padding;
+        return xxsContactMargin || margin;
       case "xs":
-        return xsPadding || padding;
+        return xsContactMargin || margin;
       case "s":
-        return sPadding || padding;
+        return sContactMargin || margin;
       case "m":
-        return mPadding || padding;
+        return mContactMargin || margin;
       case "sm":
-        return smPadding || padding;
+        return smContactMargin || margin;
       case "l":
-        return lPadding || padding;
+        return lContactMargin || margin;
       case "md":
-        return mdPadding || padding;
+        return mdContactMargin || margin;
       case "tablet":
-        return tabletPadding || padding;
+        return tabletContactMargin || margin;
       case "tablet_sm":
-        return tabletSmPadding || padding;
+        return tabletSmContactMargin || margin;
       case "lg":
-        return lgPadding || padding;
+        return lgContactMargin || margin;
       case "xl":
-        return xlPadding || padding;
+        return xlContactMargin || margin;
       case "2xl":
-        return twoXlPadding || padding;
+        return twoXlContactMargin || margin;
       case "3xl":
-        return threeXlPadding || padding;
+        return threeXlContactMargin || margin;
       case "4xl":
-        return fourXlPadding || padding;
+        return fourXlContactMargin || margin;
       case "5xl":
-        return fiveXlPadding || padding;
+        return fiveXlContactMargin || margin;
       case "6xl":
-        return sixXlPadding || padding;
+        return sixXlContactMargin || margin;
+      default:
+        return margin;
+    }
+  };
+
+  const getLinkPadding = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLinkPadding || padding;
+      case "xs":
+        return xsLinkPadding || padding;
+      case "s":
+        return sLinkPadding || padding;
+      case "m":
+        return mLinkPadding || padding;
+      case "sm":
+        return smLinkPadding || padding;
+      case "l":
+        return lLinkPadding || padding;
+      case "md":
+        return mdLinkPadding || padding;
+      case "tablet":
+        return tabletLinkPadding || padding;
+      case "tablet_sm":
+        return tabletSmLinkPadding || padding;
+      case "lg":
+        return lgLinkPadding || padding;
+      case "xl":
+        return xlLinkPadding || padding;
+      case "2xl":
+        return twoXlLinkPadding || padding;
+      case "3xl":
+        return threeXlLinkPadding || padding;
+      case "4xl":
+        return fourXlLinkPadding || padding;
+      case "5xl":
+        return fiveXlLinkPadding || padding;
+      case "6xl":
+        return sixXlLinkPadding || padding;
+      default:
+        return padding;
+    }
+  };
+
+  const getContactPadding = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsContactPadding || padding;
+      case "xs":
+        return xsContactPadding || padding;
+      case "s":
+        return sContactPadding || padding;
+      case "m":
+        return mContactPadding || padding;
+      case "sm":
+        return smContactPadding || padding;
+      case "l":
+        return lContactPadding || padding;
+      case "md":
+        return mdContactPadding || padding;
+      case "tablet":
+        return tabletContactPadding || padding;
+      case "tablet_sm":
+        return tabletSmContactPadding || padding;
+      case "lg":
+        return lgContactPadding || padding;
+      case "xl":
+        return xlContactPadding || padding;
+      case "2xl":
+        return twoXlContactPadding || padding;
+      case "3xl":
+        return threeXlContactPadding || padding;
+      case "4xl":
+        return fourXlContactPadding || padding;
+      case "5xl":
+        return fiveXlContactPadding || padding;
+      case "6xl":
+        return sixXlContactPadding || padding;
       default:
         return padding;
     }
@@ -898,6 +1440,7 @@ export const Header: React.FC<Link> = ({
           width: getContentWidth(),
           margin: "auto",
           display: "flex",
+          flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
         }}
@@ -914,19 +1457,19 @@ export const Header: React.FC<Link> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: getMargin(),
+                margin: getLinkMargin(),
                 backgroundColor: hoverStates[index]
                   ? hoverBackgroundColor
                   : backgroundColor,
-                fontSize: getFontSize(),
+                fontSize: getLinkFontSize(),
                 fontWeight: fontWeight,
-                padding: getPadding(),
+                padding: getLinkPadding(),
                 fontFamily: fontFamily,
-                width: getWidth(),
-                height: getHeight(),
+                width: getLinkWidth(),
+                height: getLinkHeight(),
                 textDecoration: textDecoration,
                 border: hoverStates[index] ? hoverBorder : border,
-                borderRadius: getBorderRadius(),
+                borderRadius: getLinkBorderRadius(),
                 color: hoverStates[index] ? hoverColor : color,
                 cursor: "pointer",
                 outline: "none",
@@ -935,10 +1478,39 @@ export const Header: React.FC<Link> = ({
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
               role="button"
-              target="_blank"
             />
           ))}
         </nav>
+        <LinkButton
+          href={contactHref}
+          text={contactText}
+          style={{
+            scrollBehavior: "smooth",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: getContactMargin(),
+            backgroundColor: isHovered
+              ? hoverContactBackgroundColor
+              : contactBackgroundColor,
+            fontSize: getContactFontSize(),
+            fontWeight: contactFontWeight,
+            padding: getContactPadding(),
+            fontFamily: contactFontFamily,
+            width: getContactWidth(),
+            height: getContactHeight(),
+            textDecoration: contactTextDecoration,
+            border: isHovered ? contactHoverBorder : contactBorder,
+            borderRadius: getContactBorderRadius(),
+            color: isHovered ? contactHoverColor : contactColor,
+            cursor: "pointer",
+            outline: "none",
+            transition: contactTransition,
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          role="button"
+        />
       </div>
     </header>
   );

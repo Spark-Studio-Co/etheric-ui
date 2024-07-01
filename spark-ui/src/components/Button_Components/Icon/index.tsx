@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
+import useWindowSize from "@/components/useWindowSize";
 
 interface IIconButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: IconDefinition;
@@ -240,18 +241,7 @@ export const IconButton: React.FC<IIconButton> = ({
   ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);

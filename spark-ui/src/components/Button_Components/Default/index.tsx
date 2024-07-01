@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
+import useWindowSize from "@/components/useWindowSize";
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   margin?: string;
@@ -239,18 +240,7 @@ export const Button: React.FC<IButtonProps> = ({
   ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
