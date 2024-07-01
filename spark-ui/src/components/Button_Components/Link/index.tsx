@@ -6,6 +6,7 @@ interface IButtonLinkProps
   href: string;
   margin?: string;
   backgroundColor?: string;
+  target?: string;
   fontSize?: string;
   fontWeight?: string;
   fontFamily?: string;
@@ -142,6 +143,7 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
   hoverColor,
   padding,
   hoverBorder,
+  target,
   cursor,
   transition,
   xxsWidth,
@@ -501,6 +503,7 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
       id={id}
       onClick={onClick}
       href={href}
+      target={target}
       style={{
         scrollBehavior: "smooth",
         display: "flex",

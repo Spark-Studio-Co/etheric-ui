@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LinkButton } from "../Button_Components/Link";
+import { Logo } from "../Logo";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 
 interface LinkProps {
@@ -8,13 +9,46 @@ interface LinkProps {
 }
 
 interface Link {
+  logo: string;
   links: LinkProps[];
   width?: string;
+  xxsLogoWidth?: string;
+  xsLogoWidth?: string;
+  sLogoWidth?: string;
+  mLogoWidth?: string;
+  smLogoWidth?: string;
+  lLogoWidth?: string;
+  mdLogoWidth?: string;
+  tabletLogoWidth?: string;
+  tabletSmLogoWidth?: string;
+  lgLogoWidth?: string;
+  xlLogoWidth?: string;
+  twoXlLogoWidth?: string;
+  threeXlLogoWidth?: string;
+  fourXlLogoWidth?: string;
+  fiveXlLogoWidth?: string;
+  sixXlLogoWidth?: string;
+  xxsLogoHeight?: string;
+  xsLogoHeight?: string;
+  sLogoHeight?: string;
+  mLogoHeight?: string;
+  smLogoHeight?: string;
+  lLogoHeight?: string;
+  mdLogoHeight?: string;
+  tabletLogoHeight?: string;
+  tabletSmLogoHeight?: string;
+  lgLogoHeight?: string;
+  xlLogoHeight?: string;
+  twoXlLogoHeight?: string;
+  threeXlLogoHeight?: string;
+  fourXlLogoHeight?: string;
+  fiveXlLogoHeight?: string;
+  sixXlLogoHeight?: string;
+  widthHeader?: string;
+  marginHeader?: string;
   margin?: string;
   widthContent?: string;
   gap?: string;
-  href: string;
-  text: string;
   backgroundColor?: string;
   fontSize?: string;
   fontWeight?: string;
@@ -94,6 +128,54 @@ interface Link {
   twoXlMargin?: string;
   threeXlMargin?: string;
   fourXlMargin?: string;
+  xxsHeaderWidth?: string;
+  xsHeaderWidth?: string;
+  sHeaderWidth?: string;
+  mHeaderWidth?: string;
+  smHeaderWidth?: string;
+  lHeaderWidth?: string;
+  mdHeaderWidth?: string;
+  tabletHeaderWidth?: string;
+  tabletSmHeaderWidth?: string;
+  lgHeaderWidth?: string;
+  xlHeaderWidth?: string;
+  twoXlHeaderWidth?: string;
+  threeXlHeaderWidth?: string;
+  fourXlHeaderWidth?: string;
+  fiveXlHeaderWidth?: string;
+  sixXlHeaderWidth?: string;
+  xxsContentWidth?: string;
+  xsContentWidth?: string;
+  sContentWidth?: string;
+  mContentWidth?: string;
+  smContentWidth?: string;
+  lContentWidth?: string;
+  mdContentWidth?: string;
+  tabletContentWidth?: string;
+  tabletSmContentWidth?: string;
+  lgContentWidth?: string;
+  xlContentWidth?: string;
+  twoXlContentWidth?: string;
+  threeXlContentWidth?: string;
+  fourXlContentWidth?: string;
+  fiveXlContentWidth?: string;
+  sixXlContentWidth?: string;
+  xxsHeaderMargin?: string;
+  xsHeaderMargin?: string;
+  sHeaderMargin?: string;
+  mHeaderMargin?: string;
+  smHeaderMargin?: string;
+  lHeaderMargin?: string;
+  mdHeaderMargin?: string;
+  tabletHeaderMargin?: string;
+  tabletSmHeaderMargin?: string;
+  lgHeaderMargin?: string;
+  xlHeaderMargin?: string;
+  twoXlHeaderMargin?: string;
+  threeXlHeaderMargin?: string;
+  fourXlHeaderMargin?: string;
+  fiveXlHeaderMargin?: string;
+  sixXlHeaderMargin?: string;
   fiveXlMargin?: string;
   sixXlMargin?: string;
   xxsPadding?: string;
@@ -146,6 +228,55 @@ export const Header: React.FC<Link> = ({
   textDecoration,
   border,
   borderRadius,
+  xxsLogoWidth,
+  xsLogoWidth,
+  sLogoWidth,
+  mLogoWidth,
+  smLogoWidth,
+  lLogoWidth,
+  mdLogoWidth,
+  tabletLogoWidth,
+  tabletSmLogoWidth,
+  lgLogoWidth,
+  xlLogoWidth,
+  twoXlLogoWidth,
+  threeXlLogoWidth,
+  fourXlLogoWidth,
+  fiveXlLogoWidth,
+  sixXlLogoWidth,
+  xxsLogoHeight,
+  xsLogoHeight,
+  sLogoHeight,
+  mLogoHeight,
+  smLogoHeight,
+  lLogoHeight,
+  mdLogoHeight,
+  tabletLogoHeight,
+  tabletSmLogoHeight,
+  lgLogoHeight,
+  xlLogoHeight,
+  twoXlLogoHeight,
+  threeXlLogoHeight,
+  fourXlLogoHeight,
+  fiveXlLogoHeight,
+  sixXlLogoHeight,
+  marginHeader,
+  xxsHeaderMargin,
+  xsHeaderMargin,
+  sHeaderMargin,
+  mHeaderMargin,
+  smHeaderMargin,
+  mdHeaderMargin,
+  lgHeaderMargin,
+  xlHeaderMargin,
+  twoXlHeaderMargin,
+  threeXlHeaderMargin,
+  fourXlHeaderMargin,
+  fiveXlHeaderMargin,
+  sixXlHeaderMargin,
+  lHeaderMargin,
+  tabletHeaderMargin,
+  tabletSmHeaderMargin,
   color,
   hoverBackgroundColor,
   hoverColor,
@@ -248,9 +379,57 @@ export const Header: React.FC<Link> = ({
   fourXlPadding,
   fiveXlPadding,
   sixXlPadding,
+  xxsHeaderWidth,
+  xsHeaderWidth,
+  sHeaderWidth,
+  mHeaderWidth,
+  smHeaderWidth,
+  lHeaderWidth,
+  mdHeaderWidth,
+  tabletHeaderWidth,
+  tabletSmHeaderWidth,
+  lgHeaderWidth,
+  xlHeaderWidth,
+  twoXlHeaderWidth,
+  threeXlHeaderWidth,
+  fourXlHeaderWidth,
+  fiveXlHeaderWidth,
+  sixXlHeaderWidth,
+  xxsContentWidth,
+  xsContentWidth,
+  sContentWidth,
+  mContentWidth,
+  smContentWidth,
+  lContentWidth,
+  mdContentWidth,
+  tabletContentWidth,
+  tabletSmContentWidth,
+  lgContentWidth,
+  xlContentWidth,
+  twoXlContentWidth,
+  threeXlContentWidth,
+  fourXlContentWidth,
+  fiveXlContentWidth,
+  sixXlContentWidth,
+  logo,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoverStates, setHoverStates] = React.useState<boolean[]>(
+    new Array(links.length).fill(false)
+  );
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleMouseEnter = (index: number) => {
+    const updatedStates = [...hoverStates];
+    updatedStates[index] = true;
+    setHoverStates(updatedStates);
+  };
+
+  // Function to handle mouse leave
+  const handleMouseLeave = (index: number) => {
+    const updatedStates = [...hoverStates];
+    updatedStates[index] = false;
+    setHoverStates(updatedStates);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -262,6 +441,206 @@ export const Header: React.FC<Link> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const getLogoWidth = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLogoWidth || width;
+      case "xs":
+        return xsLogoWidth || width;
+      case "s":
+        return sLogoWidth || width;
+      case "m":
+        return mLogoWidth || width;
+      case "sm":
+        return smLogoWidth || width;
+      case "l":
+        return lLogoWidth || width;
+      case "md":
+        return mdLogoWidth || width;
+      case "tablet":
+        return tabletLogoWidth || width;
+      case "tabletSm":
+        return tabletSmLogoWidth || width;
+      case "lg":
+        return lgLogoWidth || width;
+      case "xl":
+        return xlLogoWidth || width;
+      case "2xl":
+        return twoXlLogoWidth || width;
+      case "3xl":
+        return threeXlLogoWidth || width;
+      case "4xl":
+        return fourXlLogoWidth || width;
+      case "5xl":
+        return fiveXlLogoWidth || width;
+      case "6xl":
+        return sixXlLogoWidth || width;
+      default:
+        return width;
+    }
+  };
+
+  const getLogoHeight = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsLogoHeight || height;
+      case "xs":
+        return xsLogoHeight || height;
+      case "s":
+        return sLogoHeight || height;
+      case "m":
+        return mLogoHeight || height;
+      case "sm":
+        return smLogoHeight || height;
+      case "l":
+        return lLogoHeight || height;
+      case "md":
+        return mdLogoHeight || height;
+      case "tablet":
+        return tabletLogoHeight || height;
+      case "tabletSm":
+        return tabletSmLogoHeight || height;
+      case "lg":
+        return lgLogoHeight || height;
+      case "xl":
+        return xlLogoHeight || height;
+      case "2xl":
+        return twoXlLogoHeight || height;
+      case "3xl":
+        return threeXlLogoHeight || height;
+      case "4xl":
+        return fourXlLogoHeight || height;
+      case "5xl":
+        return fiveXlLogoHeight || height;
+      case "6xl":
+        return sixXlLogoHeight || height;
+      default:
+        return height;
+    }
+  };
+
+  const getHeaderWidth = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsHeaderWidth || width;
+      case "xs":
+        return xsHeaderWidth || width;
+      case "s":
+        return sHeaderWidth || width;
+      case "m":
+        return mHeaderWidth || width;
+      case "sm":
+        return smHeaderWidth || width;
+      case "l":
+        return lHeaderWidth || width;
+      case "md":
+        return mdHeaderWidth || width;
+      case "tablet":
+        return tabletHeaderWidth || width;
+      case "tablet_sm":
+        return tabletSmHeaderWidth || width;
+      case "lg":
+        return lgHeaderWidth || width;
+      case "xl":
+        return xlHeaderWidth || width;
+      case "2xl":
+        return twoXlHeaderWidth || width;
+      case "3xl":
+        return threeXlHeaderWidth || width;
+      case "4xl":
+        return fourXlHeaderWidth || width;
+      case "5xl":
+        return fiveXlHeaderWidth || width;
+      case "6xl":
+        return sixXlHeaderWidth || width;
+      default:
+        return width;
+    }
+  };
+
+  const getContentWidth = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsContentWidth || widthContent;
+      case "xs":
+        return xsContentWidth || widthContent;
+      case "s":
+        return sContentWidth || widthContent;
+      case "m":
+        return mContentWidth || widthContent;
+      case "sm":
+        return smContentWidth || widthContent;
+      case "l":
+        return lContentWidth || widthContent;
+      case "md":
+        return mdContentWidth || widthContent;
+      case "tablet":
+        return tabletContentWidth || widthContent;
+      case "tablet_sm":
+        return tabletSmContentWidth || widthContent;
+      case "lg":
+        return lgContentWidth || widthContent;
+      case "xl":
+        return xlContentWidth || widthContent;
+      case "2xl":
+        return twoXlContentWidth || widthContent;
+      case "3xl":
+        return threeXlContentWidth || widthContent;
+      case "4xl":
+        return fourXlContentWidth || widthContent;
+      case "5xl":
+        return fiveXlContentWidth || widthContent;
+      case "6xl":
+        return sixXlContentWidth || widthContent;
+      default:
+        return widthContent;
+    }
+  };
+
+  const getHeaderMargin = () => {
+    const breakpoint = getBreakpoint(windowWidth);
+    switch (breakpoint) {
+      case "xxs":
+        return xxsHeaderMargin || marginHeader;
+      case "xs":
+        return xsHeaderMargin || marginHeader;
+      case "s":
+        return sHeaderMargin || marginHeader;
+      case "m":
+        return mHeaderMargin || marginHeader;
+      case "sm":
+        return smHeaderMargin || marginHeader;
+      case "l":
+        return lHeaderMargin || marginHeader;
+      case "md":
+        return mdHeaderMargin || marginHeader;
+      case "tablet":
+        return tabletHeaderMargin || marginHeader;
+      case "tablet_sm":
+        return tabletSmHeaderMargin || marginHeader;
+      case "lg":
+        return lgHeaderMargin || marginHeader;
+      case "xl":
+        return xlHeaderMargin || marginHeader;
+      case "2xl":
+        return twoXlHeaderMargin || marginHeader;
+      case "3xl":
+        return threeXlHeaderMargin || marginHeader;
+      case "4xl":
+        return fourXlHeaderMargin || marginHeader;
+      case "5xl":
+        return fiveXlHeaderMargin || marginHeader;
+      case "6xl":
+        return sixXlHeaderMargin || marginHeader;
+      default:
+        return marginHeader; // Default to the general header margin if no specific breakpoint margin is set
+    }
+  };
 
   const getWidth = () => {
     const breakpoint = getBreakpoint(windowWidth);
@@ -507,53 +886,54 @@ export const Header: React.FC<Link> = ({
     <header
       id={id}
       style={{
-        width,
+        width: getHeaderWidth(),
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
-        margin,
+        margin: getHeaderMargin(),
       }}
     >
       <div
         style={{
-          width: widthContent,
+          width: getContentWidth(),
           margin: "auto",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
+        <Logo logo={logo} width={getLogoWidth()} height={getLogoHeight()} />
         <nav style={{ display: "flex", justifyContent: "center", gap }}>
-          {links.map((link) => (
+          {links.map((link, index) => (
             <LinkButton
               href={link.href}
               text={link.text}
-              key={link.href}
+              key={index}
               style={{
                 scrollBehavior: "smooth",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 margin: getMargin(),
-                backgroundColor: isHovered
+                backgroundColor: hoverStates[index]
                   ? hoverBackgroundColor
                   : backgroundColor,
                 fontSize: getFontSize(),
-                fontWeight,
+                fontWeight: fontWeight,
                 padding: getPadding(),
-                fontFamily,
+                fontFamily: fontFamily,
                 width: getWidth(),
                 height: getHeight(),
-                textDecoration,
-                border: isHovered ? hoverBorder : border,
+                textDecoration: textDecoration,
+                border: hoverStates[index] ? hoverBorder : border,
                 borderRadius: getBorderRadius(),
-                color: isHovered ? hoverColor : color,
+                color: hoverStates[index] ? hoverColor : color,
                 cursor: "pointer",
                 outline: "none",
-                transition,
+                transition: transition,
               }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={() => handleMouseLeave(index)}
               role="button"
               target="_blank"
             />
