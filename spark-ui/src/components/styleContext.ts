@@ -8,6 +8,7 @@ interface StyleTypes {
   navlinkbutton: React.CSSProperties;
   defaultbutton: React.CSSProperties;
   iconbutton: React.CSSProperties;
+  defaultinput: React.CSSProperties;
   mergeStyles?: (customStyles: Partial<StyleTypes>) => StyleTypes;
 }
 
@@ -53,6 +54,10 @@ const defaultStyles: StyleTypes = {
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
+    outline: "none",
+  },
+  defaultinput: {
+    cursor: "text",
     outline: "none",
   },
   mergeStyles: (customStyles) => {
