@@ -23,7 +23,6 @@ const responsiveSettings = {
     padding: "4px",
     width: "100px",
     height: "20px",
-    borderRadius: "3px",
   },
   xs: {
     fontSize: "12px",
@@ -31,7 +30,6 @@ const responsiveSettings = {
     padding: "6px",
     width: "120px",
     height: "22px",
-    borderRadius: "4px",
   },
   s: {
     fontSize: "14px",
@@ -39,7 +37,6 @@ const responsiveSettings = {
     padding: "8px",
     width: "140px",
     height: "24px",
-    borderRadius: "5px",
   },
   m: {
     fontSize: "16px",
@@ -47,7 +44,6 @@ const responsiveSettings = {
     padding: "10px",
     width: "160px",
     height: "26px",
-    borderRadius: "6px",
   },
   sm: {
     fontSize: "18px",
@@ -55,7 +51,6 @@ const responsiveSettings = {
     padding: "12px",
     width: "180px",
     height: "28px",
-    borderRadius: "7px",
   },
   l: {
     fontSize: "20px",
@@ -63,7 +58,6 @@ const responsiveSettings = {
     padding: "14px",
     width: "200px",
     height: "30px",
-    borderRadius: "8px",
   },
   md: {
     fontSize: "22px",
@@ -71,7 +65,6 @@ const responsiveSettings = {
     padding: "16px",
     width: "220px",
     height: "32px",
-    borderRadius: "9px",
   },
   tablet: {
     fontSize: "24px",
@@ -79,7 +72,6 @@ const responsiveSettings = {
     padding: "18px",
     width: "240px",
     height: "34px",
-    borderRadius: "10px",
   },
   tabletSm: {
     fontSize: "26px",
@@ -87,7 +79,6 @@ const responsiveSettings = {
     padding: "20px",
     width: "260px",
     height: "36px",
-    borderRadius: "11px",
   },
   lg: {
     fontSize: "28px",
@@ -95,7 +86,6 @@ const responsiveSettings = {
     padding: "22px",
     width: "280px",
     height: "38px",
-    borderRadius: "12px",
   },
   xl: {
     fontSize: "30px",
@@ -103,7 +93,6 @@ const responsiveSettings = {
     padding: "24px",
     width: "300px",
     height: "40px",
-    borderRadius: "13px",
   },
   twoXl: {
     fontSize: "32px",
@@ -111,7 +100,6 @@ const responsiveSettings = {
     padding: "26px",
     width: "320px",
     height: "42px",
-    borderRadius: "14px",
   },
   threeXl: {
     fontSize: "34px",
@@ -119,7 +107,6 @@ const responsiveSettings = {
     padding: "28px",
     width: "340px",
     height: "44px",
-    borderRadius: "15px",
   },
   fourXl: {
     fontSize: "36px",
@@ -127,7 +114,6 @@ const responsiveSettings = {
     padding: "30px",
     width: "360px",
     height: "46px",
-    borderRadius: "16px",
   },
   fiveXl: {
     fontSize: "38px",
@@ -135,7 +121,6 @@ const responsiveSettings = {
     padding: "32px",
     width: "380px",
     height: "48px",
-    borderRadius: "17px",
   },
   sixXl: {
     fontSize: "40px",
@@ -143,25 +128,23 @@ const responsiveSettings = {
     padding: "34px",
     width: "400px",
     height: "50px",
-    borderRadius: "18px",
   },
 };
 
 export const ResponsiveInput: Story = {
   args: {
     placeholder: "Enter text",
-    backgroundColor: "#ffffff",
-    fontWeight: "500",
-    color: "#333333",
-    border: "1px solid #cccccc",
-    focusBorder: "1px solid blue",
+    id: "password",
+    backgroundColor: "#f0f0f0",
+    fontWeight: "bold",
+    width: "100%",
+    height: "40px",
+    focusBackgroundColor: "#ffffff",
     transition: "all 0.3s ease",
-    focusBackgroundColor: "#e6f7ff",
-    focusColor: "#0057b7",
-    placeholderColor: "#aaaaaa",
-    focusPlaceholderColor: "#0057b7",
-    borderBottomColor: "#cccccc",
-    focusBorderBottomColor: "blue",
+    color: "red",
+    border: "2px solid black",
+    placeholderColor: "red",
+    focusPlaceholderColor: "#12b322",
     responsive: responsiveSettings,
   },
 };

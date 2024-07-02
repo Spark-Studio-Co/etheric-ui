@@ -29,7 +29,7 @@ interface IButtonLinkProps
   transition?: string;
   text: string;
   id?: string;
-  responsive?: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Record<DeviceSize, ResponsiveProperties>;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
