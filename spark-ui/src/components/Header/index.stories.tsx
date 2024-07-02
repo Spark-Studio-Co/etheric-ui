@@ -114,6 +114,11 @@ const responsive = {
     fontSize: "36px",
     linkFontSize: "36px",
     contactFontSize: "36px",
+    contactPadding: "10px",
+    contactMargin: "10px",
+    contactwidth: "50px",
+    contactHeight: "30px",
+    contactBorderRadius: "10px",
   },
   fourXl: {
     width: "180px",

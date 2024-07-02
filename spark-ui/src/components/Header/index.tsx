@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useWindowSize from "../useWindowSize";
-import { LinkButton } from "../Button_Components/Link";
 import { Logo } from "../Logo";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import { useStyle } from "../styleContext";
@@ -28,6 +27,7 @@ interface ResponsiveProperties {
   headerWidth?: string;
   contentWidth?: string;
   headerMargin?: string;
+  gap?: string;
 }
 
 interface LinkProps {
@@ -84,7 +84,6 @@ export const Header: React.FC<Link> = ({
   color,
   contactTextDecoration,
   contactTransition,
-  gap,
   id,
   backgroundColor,
   fontWeight,
@@ -132,7 +131,6 @@ export const Header: React.FC<Link> = ({
       textDecoration: textDecoration,
       transition: transition,
     },
-    nav: { gap },
   });
 
   const { width: windowWidth } = useWindowSize();
@@ -169,11 +167,12 @@ export const Header: React.FC<Link> = ({
         }}
       >
         <Logo logo={logo} width={getLogoWidth()} height={getLogoHeight()} />
-        <nav style={{ ...styles.nav }}>
+        <nav
+          style={{ ...styles.nav, gap: getResponsiveProperty("gap", "20px") }}
+        >
           {links.map((link, index) => (
-            <LinkButton
+            <a
               href={link.href}
-              text={link.text}
               key={index}
               style={{
                 ...styles.navlinkbutton,
@@ -192,12 +191,13 @@ export const Header: React.FC<Link> = ({
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
               role="button"
-            />
+            >
+              {link.text}
+            </a>
           ))}
         </nav>
-        <LinkButton
+        <a
           href={contactHref}
-          text={contactText}
           style={{
             ...styles.contactlinkbutton,
             padding: getResponsiveProperty("contactPadding", "10px 20px"),
@@ -210,7 +210,9 @@ export const Header: React.FC<Link> = ({
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           role="button"
-        />
+        >
+          {contactText}
+        </a>
       </div>
     </header>
   );
