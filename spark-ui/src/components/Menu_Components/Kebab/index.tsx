@@ -1,7 +1,8 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "@/components/useWindowSize";
 
 interface KebabMenuProps {
   items: string[];
@@ -630,23 +631,11 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
   fourXlOptionWidth,
   fiveXlOptionWidth,
   sixXlOptionWidth,
-  onClick,
 }) => {
   const [isKebabOpen, setKebabOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredOption, setHoveredOption] = useState<number | null>(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { width: windowWidth } = useWindowSize();
 
   const getResponsiveValue = (
     xxsValue: string | undefined,

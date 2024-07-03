@@ -6,18 +6,16 @@ import { DeviceSize } from "@/types/deviceSize";
 interface ResponsiveProperties {
   width?: string;
   height?: string;
-  margin?: string;
 }
 
-interface IHorizontalSeparatorProps {
-  background?: string;
+interface ILogoProps {
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
+  logo: string;
+  width?: string;
+  height?: string;
 }
 
-export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({
-  background = "black",
-  responsive,
-}) => {
+export const Logo: React.FC<ILogoProps> = ({ logo, responsive }) => {
   const { width: windowWidth } = useWindowSize();
 
   const getResponsiveProperty = (
@@ -28,21 +26,16 @@ export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({
     return responsive[breakpoint]?.[property] || defaultValue;
   };
 
-  const getMargin = () => getResponsiveProperty("margin", "5px");
-
-  const getWidth = () => getResponsiveProperty("width", "20px");
-
-  const getHeight = () => getResponsiveProperty("width", "20px");
-
   return (
-    <hr
-      style={{
-        margin: getMargin(),
-        width: getWidth(),
-        height: getHeight(),
-        background,
-        border: "none",
-      }}
-    />
+    <a href="/">
+      <img
+        src={logo}
+        alt="Logo"
+        style={{
+          width: getResponsiveProperty("width", "35px"),
+          height: getResponsiveProperty("height", "35px"),
+        }}
+      />
+    </a>
   );
 };

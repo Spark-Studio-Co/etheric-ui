@@ -1,3 +1,4 @@
+import { DeviceSize } from "@/types/deviceSize";
 import { breakpoints } from "../components/breakpoints";
 
 export const getBreakpoint = (width: number): string => {
@@ -10,5 +11,5 @@ export const getBreakpoint = (width: number): string => {
       return name;
     }
   }
-  return sortedBreakpoints[sortedBreakpoints.length - 1][0];
+  return sortedBreakpoints[sortedBreakpoints.length - 1][0] as DeviceSize;
 };

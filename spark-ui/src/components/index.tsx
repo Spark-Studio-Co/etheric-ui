@@ -8,3 +8,6 @@ export * from "./Separator_Components/index";
 export * from "./Error_Component/index";
 export * from "./Mini_Text_Component/index";
 export * from "./Text_Area_Component/index";
+export * from "./Header/index";
+export * from "./Logo/index";
+export * from "./Button_Components/Icon/index";

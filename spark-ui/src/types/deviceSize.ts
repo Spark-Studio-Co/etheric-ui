@@ -1,0 +1,17 @@
+export type DeviceSize =
+  | "xxs"
+  | "xs"
+  | "s"
+  | "m"
+  | "sm"
+  | "l"
+  | "md"
+  | "tablet"
+  | "tabletSm"
+  | "lg"
+  | "xl"
+  | "twoXl"
+  | "threeXl"
+  | "fourXl"
+  | "fiveXl"
+  | "sixXl";

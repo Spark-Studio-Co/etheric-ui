@@ -1,28 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { getBreakpoint } from "@/utils/getBreakpoint";
+import useWindowSize from "../useWindowSize";
+import { DeviceSize } from "@/types/deviceSize";
+
+interface ResponsiveProperties {
+  width?: string;
+  height?: string;
+  fontSize?: string;
+  margin?: string;
+  padding?: string;
+  borderRadius?: string;
+}
 
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  margin?: string;
   placeholder: string;
-  fontSize?: string;
   fontFamily?: string;
   width?: string;
   height?: string;
   textAlign?: any;
   background?: string;
   border?: string;
-  padding?: string;
-  borderRadius?: string;
+  focusPlaceholderColor?: string;
   color?: string;
   id?: string;
   focusBorder?: string;
   placeholderColor?: string;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
 }
 
 export const TextArea: React.FC<TextAreaProps> = ({
-  margin,
   placeholder,
-  fontSize,
   fontFamily,
   width,
   height,
@@ -30,54 +38,77 @@ export const TextArea: React.FC<TextAreaProps> = ({
   background,
   id,
   border,
-  padding,
-  borderRadius,
+  focusPlaceholderColor,
   color,
   focusBorder,
   placeholderColor,
+  responsive,
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const { width: windowWidth } = useWindowSize();
 
-  useEffect(() => {
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = `
-      .custom-textarea::placeholder {
-        color: ${placeholderColor};
-      }
-    `;
-    document.head.appendChild(styleSheet);
+  const getResponsiveProperty = (
+    property: keyof ResponsiveProperties,
+    defaultValue: string
+  ): string => {
+    const breakpoint: DeviceSize = getBreakpoint(windowWidth) as DeviceSize;
+    return responsive[breakpoint]?.[property] || defaultValue;
+  };
 
-    return () => {
-      document.head.removeChild(styleSheet);
-    };
-  }, [placeholderColor]);
+  const getMargin = () => getResponsiveProperty("margin", "5px");
+
+  const getFontSize = () => getResponsiveProperty("fontSize", "16px");
+
+  const getPadding = () => getResponsiveProperty("padding", "5px");
+
+  const getWidth = () => getResponsiveProperty("width", "20px");
+
+  const getHeight = () => getResponsiveProperty("width", "20px");
+
+  const getBorderRadius = () => getResponsiveProperty("borderRadius", "20px");
+
+  const styles = `
+    .default-input::placeholder {
+      color: ${placeholderColor};
+      font-size: ${getFontSize()};
+    }
+    .default-input.focused::placeholder {
+      color: ${focusPlaceholderColor};
+    }
+  `;
+
+  const styleSheet = document.createElement("style");
+  styleSheet.type = "text/css";
+  styleSheet.innerText = styles;
+  document.head.appendChild(styleSheet);
 
   return (
-    <textarea
-      id={id}
-      style={{
-        margin,
-        fontSize,
-        fontFamily,
-        width,
-        height,
-        textAlign,
-        background,
-        border: isFocused ? focusBorder : border,
-        padding,
-        borderRadius,
-        overflow: "hidden",
-        outline: "none",
-        color,
-      }}
-      placeholder={placeholder}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
-      required
-      {...rest}
-      className="custom-textarea"
-    />
+    <>
+      <textarea
+        id={id}
+        className={`default-input ${isFocused ? "focused" : ""}`}
+        style={{
+          margin: getMargin(),
+          fontSize: getFontSize(),
+          fontFamily,
+          width: getWidth(),
+          height: getHeight(),
+          textAlign,
+          background,
+          border: isFocused ? focusBorder : border,
+          padding: getPadding(),
+          borderRadius: getBorderRadius(),
+          overflow: "hidden",
+          outline: "none",
+          color,
+        }}
+        placeholder={placeholder}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        required
+        {...rest}
+      />
+    </>
   );
 };
