@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useWindowSize from "../useWindowSize";
-import { Logo } from "../Logo";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import { useStyle } from "../styleContext";
 import { DeviceSize } from "@/types/deviceSize";
@@ -166,7 +165,16 @@ export const Header: React.FC<Link> = ({
           ...styles.content,
         }}
       >
-        <Logo logo={logo} width={getLogoWidth()} height={getLogoHeight()} />
+        <a href="/">
+          <img
+            src={logo}
+            alt="Logo"
+            style={{
+              width: getLogoWidth(),
+              height: getLogoHeight(),
+            }}
+          />
+        </a>
         <nav
           style={{ ...styles.nav, gap: getResponsiveProperty("gap", "20px") }}
         >
