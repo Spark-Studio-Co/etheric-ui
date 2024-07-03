@@ -9,7 +9,7 @@ interface ResponsiveProperties {
 }
 
 interface IMiniText extends React.HTMLAttributes<HTMLSpanElement> {
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   text: string;
   fontFamily?: string;
   fontWeight?: string;

@@ -11,7 +11,7 @@ interface ResponsiveProperties {
 
 interface IHorizontalSeparatorProps {
   background?: string;
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
 }
 
 export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({

@@ -28,7 +28,7 @@ interface IIconButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconHoverColor?: string;
   iconColor?: string;
   color?: string;
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
 }
 
 export const IconButton: React.FC<IIconButton> = ({

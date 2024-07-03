@@ -32,8 +32,8 @@ interface IIconTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   iconColor?: string;
   iconHoverColor?: string;
-  responsive: Record<DeviceSize, ResponsiveProperties>;
   id?: string;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 

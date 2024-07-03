@@ -38,7 +38,7 @@ interface LinkProps {
 interface Link {
   logo: string;
   links: LinkProps[];
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   hoverContactBackgroundColor?: string;
   contactBackgroundColor?: string;
   contactFontWeight?: string;

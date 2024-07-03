@@ -21,8 +21,8 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   textDecoration?: string;
   border?: string;
   color?: string;
-  responsive: Record<DeviceSize, ResponsiveProperties>;
   hoverBackgroundColor?: string;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   hoverColor?: string;
   hoverBorder?: string;
   transition?: string;

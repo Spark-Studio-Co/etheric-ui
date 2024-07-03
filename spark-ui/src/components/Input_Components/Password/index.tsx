@@ -21,7 +21,7 @@ interface ResponsiveProperties {
 }
 
 interface IPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   color?: string;
   placeholder?: string;
   backgroundColor?: string;

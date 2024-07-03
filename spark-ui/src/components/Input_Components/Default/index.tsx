@@ -15,7 +15,7 @@ interface ResponsiveProperties {
 
 interface IDefaultInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   backgroundColor?: string;
   fontWeight?: string;
   fontFamily?: string;

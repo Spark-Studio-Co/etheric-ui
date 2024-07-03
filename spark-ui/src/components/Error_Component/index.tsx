@@ -10,8 +10,8 @@ interface ResponsiveProperties {
 }
 
 interface IMessage {
-  responsive: Record<DeviceSize, ResponsiveProperties>;
   message: string;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   color?: string;
   fontWeight?: string;
   animation?: string;

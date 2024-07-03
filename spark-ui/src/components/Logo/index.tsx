@@ -9,7 +9,7 @@ interface ResponsiveProperties {
 }
 
 interface ILogoProps {
-  responsive: Record<DeviceSize, ResponsiveProperties>;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   logo: string;
   width?: string;
   height?: string;
