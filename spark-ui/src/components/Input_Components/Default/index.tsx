@@ -24,6 +24,7 @@ interface IDefaultInputProps
   focusColor?: string;
   focusBorder?: string;
   transition?: string;
+  focusBorderBottom?: string;
   placeholderColor?: string;
   focusPlaceholderColor?: string;
   borderBottom?: string;
@@ -45,6 +46,7 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
   inputType,
   borderBottom,
   placeholderColor,
+  focusBorderBottom,
   focusPlaceholderColor,
   responsive,
   ...rest
@@ -60,41 +62,45 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
     return responsive[breakpoint]?.[property] || defaultValue;
   };
 
-  const dynamicPlaceholderStyle = `
-    #${id}::placeholder { color: ${placeholderColor}; }
-    #${id}:focus::placeholder { color: ${focusPlaceholderColor || placeholderColor}; }
-  `;
+  const inputStyle: React.CSSProperties = {
+    margin: getResponsiveProperty("margin", "5px"),
+    padding: getResponsiveProperty("padding", "5px"),
+    backgroundColor: isFocused ? focusBackgroundColor : backgroundColor,
+    fontSize: getResponsiveProperty("fontSize", "16px"),
+    fontWeight: fontWeight,
+    fontFamily: fontFamily,
+    width: getResponsiveProperty("width", "100%"),
+    height: getResponsiveProperty("height", "auto"),
+    borderRadius: getResponsiveProperty("borderRadius", "5px"),
+    color: color,
+    transition: transition,
+    outline: "none",
+    border:
+      inputType !== "borderBottom"
+        ? isFocused
+          ? focusBorder
+          : border
+        : "none",
+    borderBottom:
+      inputType === "borderBottom"
+        ? isFocused
+          ? focusBorderBottom
+          : borderBottom
+        : border,
+  };
 
   return (
     <>
-      <style>{dynamicPlaceholderStyle}</style>
+      <style>
+        {`#${id}::placeholder { color: ${placeholderColor}; }`}
+        {`#${id}:focus::placeholder { color: ${focusPlaceholderColor || placeholderColor}; }`}
+      </style>
       <input
         type="text"
         id={id}
         placeholder={placeholder}
         className={`default-input ${isFocused ? "focused" : ""} ${s.input} ${inputType === "borderBottom" ? s.borderBottom : ""}`}
-        style={{
-          margin: getResponsiveProperty("margin", "5px"),
-          padding: getResponsiveProperty("padding", "5px"),
-          backgroundColor: isFocused ? focusBackgroundColor : backgroundColor,
-          fontSize: getResponsiveProperty("fontSize", "16px"),
-          fontWeight: fontWeight,
-          fontFamily: fontFamily,
-          width: getResponsiveProperty("width", "100%"),
-          height: getResponsiveProperty("height", "auto"),
-          borderRadius: getResponsiveProperty("borderRadius", "5px"),
-          border:
-            isFocused && inputType !== "borderBottom" ? focusBorder : border,
-          borderBottom:
-            inputType === "borderBottom"
-              ? isFocused
-                ? focusBorder
-                : borderBottom
-              : "none",
-          color: color,
-          transition: transition,
-          outline: "none",
-        }}
+        style={inputStyle}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         {...rest}

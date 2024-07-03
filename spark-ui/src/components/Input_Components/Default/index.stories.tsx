@@ -117,7 +117,7 @@ const responsiveSettings = {
   },
   fiveXl: {
     fontSize: "38px",
-    margin: "16px",
+    margin: "16px ",
     padding: "32px",
     width: "380px",
     height: "48px",
@@ -135,11 +135,9 @@ export const ResponsiveInput: Story = {
   args: {
     placeholder: "Enter text",
     id: "password",
-    backgroundColor: "#f0f0f0",
     fontWeight: "bold",
     width: "100%",
     height: "40px",
-    focusBackgroundColor: "#ffffff",
     transition: "all 0.3s ease",
     color: "red",
     border: "2px solid black",
