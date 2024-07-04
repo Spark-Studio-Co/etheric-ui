@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import s from "./styles.module.scss";
@@ -13,7 +13,7 @@ interface ResponsiveProperties {
   width?: string;
   height?: string;
   borderRadius?: string;
-  iconFontSize?: string; // Make sure this is included
+  iconFontSize?: string;
   top?: string;
   bottom?: string;
   left?: string;
@@ -23,6 +23,9 @@ interface ResponsiveProperties {
 interface IPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   color?: string;
+  value?: string;
+  name?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   backgroundColor?: string;
   fontWeight?: string;
@@ -51,6 +54,9 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
   fontFamily,
   border,
   focusBackgroundColor,
+  name,
+  value,
+  onChange,
   focusColor,
   focusBorder,
   transition,
@@ -126,6 +132,9 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
         className={`default-input ${isFocused ? "focused" : ""} ${s.input} ${inputType === "borderBottom" ? s.borderBottom : ""}`}
         style={inputStyle}
         onFocus={() => setIsFocused(true)}
+        onChange={onChange}
+        value={value}
+        name={name}
         onBlur={() => setIsFocused(false)}
         {...rest}
       />

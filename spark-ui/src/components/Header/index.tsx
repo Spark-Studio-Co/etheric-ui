@@ -50,6 +50,7 @@ interface Link {
   contactHoverColor?: string;
   contactColor?: string;
   contactTransition?: string;
+  logoHref?: string;
   gap?: string;
   backgroundColor?: string;
   fontSize?: string;
@@ -74,6 +75,7 @@ export const Header: React.FC<Link> = ({
   contactBorder,
   contactColor,
   contactText,
+  logoHref,
   contactFontFamily,
   contactFontWeight,
   contactHoverBorder,
@@ -165,7 +167,7 @@ export const Header: React.FC<Link> = ({
           ...styles.content,
         }}
       >
-        <a href="/">
+        <a href={logoHref} style={{ scrollBehavior: "smooth" }}>
           <img
             src={logo}
             alt="Logo"

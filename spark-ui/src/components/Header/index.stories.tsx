@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./index";
 import logo from "../Logo/logo-402d9f18.svg";
 
-// Meta data for the story
 const meta: Meta<typeof Header> = {
   title: "Components/Header",
   component: Header,

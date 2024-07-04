@@ -97,12 +97,7 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
         height: getHeight(),
         borderRadius: getBorderRadius(),
       }}
-      onClick={(event) => {
-        if (onClick) {
-          event.preventDefault();
-          onClick(event);
-        }
-      }}
+      onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       {...rest}
