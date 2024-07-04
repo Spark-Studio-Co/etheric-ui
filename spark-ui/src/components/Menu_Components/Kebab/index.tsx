@@ -35,7 +35,6 @@ interface KebabMenuProps {
   items: string[];
   icon: IconDefinition;
   buttonBackgroundColor?: string;
-  optionTextDecoration?: string;
   containerBackgroundColor?: string;
   buttonColor?: string;
   buttonBorder?: string;
@@ -62,7 +61,6 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
   responsive,
   buttonBackgroundColor,
   optionFontFamily,
-  optionTextDecoration,
   buttonBorder,
   color,
   transition,
@@ -140,9 +138,9 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
           width: getWidth(),
           height: getHeight(),
           borderRadius: getBorderRadius(),
-          border: buttonBorder || "none", // Default fallback
-          color: buttonColor || "black", // Default fallback
-          transition: transition || "none", // Default fallback
+          border: buttonBorder || "none",
+          color: buttonColor || "black",
+          transition: transition || "none",
           margin: getMargin(),
         }}
         onMouseEnter={() => setIsHovered(true)}
@@ -184,7 +182,6 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
                 padding: getOptionPadding(),
                 margin: getOptionMargin(),
                 transition,
-                textDecoration: optionTextDecoration,
                 fontSize: getOptionFontSize(),
                 fontFamily: optionFontFamily,
                 color: hoveredOption === index ? optionHoverColor : color,
