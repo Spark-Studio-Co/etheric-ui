@@ -8,18 +8,80 @@ interface ResponsiveProperties {
   footerWidth?: string;
   footerMargin?: string;
   containerWidth?: string;
-  containerMarginTop?: string;
+  containerMargin?: string;
   logoWidth?: string;
   logoHeight?: string;
   gapNavigation?: string;
+  linkWidth?: string;
+  linkHeight?: string;
+  linkFontSize?: string;
+  linkMargin?: string;
+  linkBorderRadius?: string;
+  linkPadding?: string;
+  buttonWidth?: string;
+  buttonHeight?: string;
+  logoStudioWidth?: string;
+  logoStudioHeight?: string;
+  logoStudioMargin?: string;
+  buttonFontSize?: string;
+  buttonMargin?: string;
+  buttonBorderRadius?: string;
+  buttonPadding?: string;
+  separatorMargin?: string;
+  separatorHeight?: string;
+}
+
+interface LinkProps {
+  text: string;
+  href: string;
 }
 
 interface IFooterProps {
   backgroundColorFooter?: string;
-  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
-  logoHref?: string;
-  logo?: string;
   transitionNavigation?: string;
+  logoStudioHref?: string;
+  logo: string;
+  links: LinkProps[];
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
+  buttonBackgroundColor?: string;
+  buttonFontWeight?: string;
+  buttonFontFamily?: string;
+  buttonTextDecoration?: string;
+  buttonText: string;
+  buttonHref: string;
+  buttonHoverBorder?: string;
+  buttonBorder?: string;
+  buttonHoverColor?: string;
+  buttonColor?: string;
+  buttonTransition?: string;
+  logoHref?: string;
+  gap?: string;
+  hoverButtonBackgroundColor?: string;
+  backgroundColor?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  fontFamily?: string;
+  separatorBackgroundColor?: string;
+  textDecoration?: string;
+  border?: string;
+  color?: string;
+  hoverBackgroundColor?: string;
+  hoverColor?: string;
+  hoverBorder?: string;
+  transition?: string;
+  padding?: string;
+  cursor?: string;
+  id?: string;
+  linkFontWeight?: string;
+  linkFontFamily?: string;
+  linkTextDecoration?: string;
+  linkTransition?: string;
+  linkBorder?: string;
+  linkHoverBackgroundColor?: string;
+  linkHoverColor?: string;
+  linkHoverBorder?: string;
+  linkColor?: string;
+  linkBackgroundColor?: string;
 }
 
 export const Footer: React.FC<IFooterProps> = ({
@@ -27,7 +89,32 @@ export const Footer: React.FC<IFooterProps> = ({
   responsive,
   logoHref,
   logo,
+  separatorBackgroundColor,
   transitionNavigation,
+  links,
+  buttonBackgroundColor,
+  buttonBorder,
+  buttonColor,
+  buttonText,
+  buttonFontFamily,
+  buttonFontWeight,
+  buttonHoverBorder,
+  logoStudioHref,
+  buttonHoverColor,
+  buttonHref,
+  linkColor,
+  buttonTextDecoration,
+  buttonTransition,
+  linkBackgroundColor,
+  linkFontWeight,
+  linkFontFamily,
+  linkTextDecoration,
+  hoverButtonBackgroundColor,
+  linkBorder,
+  linkHoverBackgroundColor,
+  linkHoverColor,
+  linkHoverBorder,
+  linkTransition,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
@@ -50,21 +137,21 @@ export const Footer: React.FC<IFooterProps> = ({
 
   const styles = useStyle({
     contactlinkbutton: {
-      color: isHovered ? contactHoverColor : contactColor,
-      transition: contactTransition,
-      textDecoration: contactTextDecoration,
-      border: isHovered ? contactHoverBorder : contactBorder,
+      color: isHovered ? buttonHoverColor : buttonColor,
+      transition: buttonTransition,
+      textDecoration: buttonTextDecoration,
+      border: isHovered ? buttonHoverBorder : buttonBorder,
       backgroundColor: isHovered
-        ? hoverContactBackgroundColor
-        : contactBackgroundColor,
-      fontWeight: contactFontWeight,
-      fontFamily: contactFontFamily,
+        ? hoverButtonBackgroundColor
+        : buttonBackgroundColor,
+      fontWeight: buttonFontWeight,
+      fontFamily: buttonFontFamily,
     },
     navlinkbutton: {
-      fontWeight: fontWeight,
-      fontFamily: fontFamily,
-      textDecoration: textDecoration,
-      transition: transition,
+      fontWeight: linkFontWeight,
+      fontFamily: linkFontFamily,
+      textDecoration: linkTextDecoration,
+      transition: linkTransition,
     },
   });
 
@@ -79,8 +166,8 @@ export const Footer: React.FC<IFooterProps> = ({
   const getLogoWidth = () => getResponsiveProperty("logoWidth", "auto");
   const getLogoHeight = () => getResponsiveProperty("logoWidth", "auto");
 
-  const getContainerMarginTop = () =>
-    getResponsiveProperty("containerMarginTop", "32px");
+  const getContainerMargin = () =>
+    getResponsiveProperty("containerMargin", "32px");
   const getContainerWidth = () =>
     getResponsiveProperty("containerWidth", "65%");
 
@@ -102,8 +189,7 @@ export const Footer: React.FC<IFooterProps> = ({
       <div
         style={{
           width: getContainerWidth(),
-          marginTop: getContainerMarginTop(),
-          margin: "auto",
+          margin: getContainerMargin(),
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -135,15 +221,15 @@ export const Footer: React.FC<IFooterProps> = ({
                 ...styles.navlinkbutton,
                 margin: getResponsiveProperty("linkMargin", "0 10px"),
                 backgroundColor: hoverStates[index]
-                  ? hoverBackgroundColor
-                  : backgroundColor,
+                  ? linkHoverBackgroundColor
+                  : linkBackgroundColor,
                 fontSize: getResponsiveProperty("linkFontSize", "16px"),
                 padding: getResponsiveProperty("linkPadding", "10px 20px"),
                 width: getResponsiveProperty("linkWidth", "auto"),
                 height: getResponsiveProperty("linkHeight", "auto"),
-                border: hoverStates[index] ? hoverBorder : border,
+                border: hoverStates[index] ? linkHoverBorder : linkBorder,
                 borderRadius: getResponsiveProperty("linkBorderRadius", "5px"),
-                color: hoverStates[index] ? hoverColor : color,
+                color: hoverStates[index] ? linkHoverColor : linkColor,
               }}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
@@ -152,11 +238,53 @@ export const Footer: React.FC<IFooterProps> = ({
               {link.text}
             </a>
           ))}
-          <Button buttonType="outline-white" text="Авторизация" />
+          <a
+            href={buttonHref}
+            style={{
+              ...styles.contactlinkbutton,
+              padding: getResponsiveProperty("buttonPadding", "10px 20px"),
+              fontSize: getResponsiveProperty("buttonFontSize", "16px"),
+              margin: getResponsiveProperty("buttonMargin", "0 10px"),
+              width: getResponsiveProperty("buttonWidth", "auto"),
+              height: getResponsiveProperty("buttonHeight", "auto"),
+              borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            role="button"
+          >
+            {buttonText}
+          </a>
         </nav>
       </div>
-      <hr className={styles.footer__hr} />
-      <span className={styles.footer__reserved}>© All rights reserved.</span>
+      <hr
+        style={{
+          margin: getResponsiveProperty("separatorMargin", "10px"),
+          width: "100%",
+          height: getResponsiveProperty("separatorHeight", "2px"),
+          background: separatorBackgroundColor,
+          border: "none",
+        }}
+      />
+      <a
+        href={logoStudioHref}
+        style={{
+          scrollBehavior: "smooth",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            width: getResponsiveProperty("logoStudioWidth", "50px"),
+            height: getResponsiveProperty("logoStudioHeight", "50px"),
+            margin: getResponsiveProperty("logoStudioMargin", "auto"),
+          }}
+        />
+      </a>
     </footer>
   );
 };
