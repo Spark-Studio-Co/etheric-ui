@@ -11,3 +11,5 @@ export * from "./Text_Area_Component/index";
 export * from "./Header/index";
 export * from "./Logo/index";
 export * from "./Button_Components/Icon/index";
+export * from "./Logo/index";
+export * from "./Text_Area_Component/index";

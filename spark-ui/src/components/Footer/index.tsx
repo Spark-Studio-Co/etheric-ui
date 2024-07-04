@@ -1,103 +1,37 @@
 import React, { useState } from "react";
 import useWindowSize from "../useWindowSize";
 import { getBreakpoint } from "@/utils/getBreakpoint";
-import { useStyle } from "../styleContext";
+import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
 
 interface ResponsiveProperties {
-  width?: string;
-  height?: string;
-  fontSize?: string;
-  margin?: string;
-  padding?: string;
-  borderRadius?: string;
-  linkWidth?: string;
-  linkHeight?: string;
-  linkFontSize?: string;
-  linkMargin?: string;
-  linkBorderRadius?: string;
-  linkPadding?: string;
-  contactWidth?: string;
-  contactHeight?: string;
-  contactFontSize?: string;
-  contactMargin?: string;
-  contactBorderRadius?: string;
-  contactPadding?: string;
-  headerWidth?: string;
-  contentWidth?: string;
-  headerMargin?: string;
-  gap?: string;
+  footerWidth?: string;
+  footerMargin?: string;
+  containerWidth?: string;
+  containerMarginTop?: string;
+  logoWidth?: string;
+  logoHeight?: string;
+  gapNavigation?: string;
 }
 
-interface LinkProps {
-  text: string;
-  href: string;
-}
-
-interface Link {
-  logo: string;
-  links: LinkProps[];
+interface IFooterProps {
+  backgroundColorFooter?: string;
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
-  hoverContactBackgroundColor?: string;
-  contactBackgroundColor?: string;
-  contactFontWeight?: string;
-  contactFontFamily?: string;
-  contactTextDecoration?: string;
-  contactText: string;
-  contactHref: string;
-  contactHoverBorder?: string;
-  contactBorder?: string;
-  contactHoverColor?: string;
-  contactColor?: string;
-  contactTransition?: string;
   logoHref?: string;
-  gap?: string;
-  backgroundColor?: string;
-  fontSize?: string;
-  fontWeight?: string;
-  fontFamily?: string;
-  textDecoration?: string;
-  border?: string;
-  color?: string;
-  hoverBackgroundColor?: string;
-  hoverColor?: string;
-  hoverBorder?: string;
-  transition?: string;
-  padding?: string;
-  cursor?: string;
-  id?: string;
+  logo?: string;
+  transitionNavigation?: string;
 }
 
-export const Header: React.FC<Link> = ({
-  links,
+export const Footer: React.FC<IFooterProps> = ({
+  backgroundColorFooter,
   responsive,
-  contactBackgroundColor,
-  contactBorder,
-  contactColor,
-  contactText,
   logoHref,
-  contactFontFamily,
-  contactFontWeight,
-  contactHoverBorder,
-  contactHoverColor,
-  hoverContactBackgroundColor,
-  contactHref,
-  color,
-  contactTextDecoration,
-  contactTransition,
-  id,
-  backgroundColor,
-  fontWeight,
-  fontFamily,
-  textDecoration,
-  border,
-  hoverBackgroundColor,
-  hoverColor,
-  hoverBorder,
-  transition,
   logo,
+  transitionNavigation,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { width: windowWidth } = useWindowSize();
+
   const [hoverStates, setHoverStates] = React.useState<boolean[]>(
     new Array(links.length).fill(false)
   );
@@ -134,8 +68,6 @@ export const Header: React.FC<Link> = ({
     },
   });
 
-  const { width: windowWidth } = useWindowSize();
-
   const getResponsiveProperty = (
     property: keyof ResponsiveProperties,
     defaultValue: string
@@ -144,27 +76,37 @@ export const Header: React.FC<Link> = ({
     return responsive[breakpoint]?.[property] || defaultValue;
   };
 
-  const getLogoWidth = () => getResponsiveProperty("width", "auto");
-  const getLogoHeight = () => getResponsiveProperty("height", "auto");
+  const getLogoWidth = () => getResponsiveProperty("logoWidth", "auto");
+  const getLogoHeight = () => getResponsiveProperty("logoWidth", "auto");
 
-  const getHeaderWidth = () => getResponsiveProperty("headerWidth", "100%");
-  const getHeaderMargin = () => getResponsiveProperty("headerMargin", "0 auto");
+  const getContainerMarginTop = () =>
+    getResponsiveProperty("containerMarginTop", "32px");
+  const getContainerWidth = () =>
+    getResponsiveProperty("containerWidth", "65%");
 
-  const getContentWidth = () => getResponsiveProperty("contentWidth", "100%");
+  const getNavigationGap = () => getResponsiveProperty("gapNavigation", "16px");
+
+  const getFooterMargin = () => getResponsiveProperty("footerMargin", "5px");
+  const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
 
   return (
-    <header
-      id={id}
+    <footer
       style={{
-        width: getHeaderWidth(),
-        ...styles.header,
-        margin: getHeaderMargin(),
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: backgroundColorFooter,
+        margin: getFooterMargin(),
+        width: getFooterWidth(),
       }}
     >
       <div
         style={{
-          width: getContentWidth(),
-          ...styles.content,
+          width: getContainerWidth(),
+          marginTop: getContainerMarginTop(),
+          margin: "auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <a href={logoHref} style={{ scrollBehavior: "smooth" }}>
@@ -178,7 +120,12 @@ export const Header: React.FC<Link> = ({
           />
         </a>
         <nav
-          style={{ ...styles.nav, gap: getResponsiveProperty("gap", "20px") }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            transition: transitionNavigation,
+            gap: getNavigationGap(),
+          }}
         >
           {links.map((link, index) => (
             <a
@@ -205,25 +152,11 @@ export const Header: React.FC<Link> = ({
               {link.text}
             </a>
           ))}
+          <Button buttonType="outline-white" text="Авторизация" />
         </nav>
-        <a
-          href={contactHref}
-          style={{
-            ...styles.contactlinkbutton,
-            padding: getResponsiveProperty("contactPadding", "10px 20px"),
-            fontSize: getResponsiveProperty("contactFontSize", "16px"),
-            margin: getResponsiveProperty("contactMargin", "0 10px"),
-            width: getResponsiveProperty("contactWidth", "auto"),
-            height: getResponsiveProperty("contactHeight", "auto"),
-            borderRadius: getResponsiveProperty("contactBorderRadius", "5px"),
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          role="button"
-        >
-          {contactText}
-        </a>
       </div>
-    </header>
+      <hr className={styles.footer__hr} />
+      <span className={styles.footer__reserved}>© All rights reserved.</span>
+    </footer>
   );
 };
