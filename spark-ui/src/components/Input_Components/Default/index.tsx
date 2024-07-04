@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import s from "./styles.module.scss";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import useWindowSize from "@/components/useWindowSize";
@@ -20,7 +20,10 @@ interface IDefaultInputProps
   fontWeight?: string;
   fontFamily?: string;
   border?: string;
+  value?: string;
+  name?: string;
   focusBackgroundColor?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   focusColor?: string;
   focusBorder?: string;
   transition?: string;
@@ -36,18 +39,21 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
   id,
   backgroundColor,
   fontWeight,
+  value,
   fontFamily,
   border,
   color,
   focusBackgroundColor,
   focusColor,
   focusBorder,
+  name,
   transition,
   inputType,
   borderBottom,
   placeholderColor,
   focusBorderBottom,
   focusPlaceholderColor,
+  onChange,
   responsive,
   ...rest
 }) => {
@@ -102,7 +108,10 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
         className={`default-input ${isFocused ? "focused" : ""} ${s.input} ${inputType === "borderBottom" ? s.borderBottom : ""}`}
         style={inputStyle}
         onFocus={() => setIsFocused(true)}
+        value={value}
+        name={name}
         onBlur={() => setIsFocused(false)}
+        onChange={onChange}
         {...rest}
       />
     </>
