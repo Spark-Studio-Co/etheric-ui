@@ -1,10 +1,10 @@
-import { Footer } from "./index";
-import logo from "../../components/Logo/logo-402d9f18.svg";
+import { FooterBasic } from "./index";
+import logo from "../../Logo/logo-402d9f18.svg";
 import { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof Footer> = {
-  title: "Components/Footer",
-  component: Footer,
+const meta: Meta<typeof FooterBasic> = {
+  title: "Footer_Components/FooterBasic",
+  component: FooterBasic,
   parameters: {
     layout: "fullscreen",
   },

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useWindowSize from "../useWindowSize";
+import useWindowSize from "../../useWindowSize";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
@@ -81,10 +81,11 @@ interface IFooterProps {
   linkHoverColor?: string;
   linkHoverBorder?: string;
   linkColor?: string;
+  logoStudio?: string;
   linkBackgroundColor?: string;
 }
 
-export const Footer: React.FC<IFooterProps> = ({
+export const FooterBasic: React.FC<IFooterProps> = ({
   backgroundColorFooter,
   responsive,
   logoHref,
@@ -95,6 +96,7 @@ export const Footer: React.FC<IFooterProps> = ({
   buttonBackgroundColor,
   buttonBorder,
   buttonColor,
+  logoStudio,
   buttonText,
   buttonFontFamily,
   buttonFontWeight,
@@ -276,7 +278,7 @@ export const Footer: React.FC<IFooterProps> = ({
         }}
       >
         <img
-          src={logo}
+          src={logoStudio}
           alt="Logo"
           style={{
             width: getResponsiveProperty("logoStudioWidth", "50px"),
