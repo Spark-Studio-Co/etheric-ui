@@ -19,8 +19,6 @@ interface ResponsiveProperties {
   linkBorderRadius?: string;
   linkPadding?: string;
   buttonWidth?: string;
-  companyMargin?: string;
-  companyFontSize?: string;
   buttonHeight?: string;
   logoStudioWidth?: string;
   logoStudioHeight?: string;
@@ -29,9 +27,6 @@ interface ResponsiveProperties {
   buttonMargin?: string;
   buttonBorderRadius?: string;
   buttonPadding?: string;
-  separatorWidth?: string;
-  separatorMargin?: string;
-  separatorHeight?: string;
 }
 
 interface LinkProps {
@@ -52,15 +47,11 @@ interface IFooterProps {
   buttonTextDecoration?: string;
   buttonText: string;
   buttonHref: string;
-  companyTextAlign?: any;
-  companyFontFamily?: string;
   buttonHoverBorder?: string;
   buttonBorder?: string;
   buttonHoverColor?: string;
   buttonColor?: string;
   buttonTransition?: string;
-  companyName?: string;
-  companyColor?: string;
   logoHref?: string;
   gap?: string;
   hoverButtonBackgroundColor?: string;
@@ -68,7 +59,6 @@ interface IFooterProps {
   fontSize?: string;
   fontWeight?: string;
   fontFamily?: string;
-  separatorBackgroundColor?: string;
   textDecoration?: string;
   border?: string;
   color?: string;
@@ -92,12 +82,11 @@ interface IFooterProps {
   linkBackgroundColor?: string;
 }
 
-export const FooterCentered: React.FC<IFooterProps> = ({
+export const FooterNoSeparator: React.FC<IFooterProps> = ({
   backgroundColorFooter,
   responsive,
   logoHref,
   logo,
-  separatorBackgroundColor,
   transitionNavigation,
   links,
   buttonBackgroundColor,
@@ -108,10 +97,6 @@ export const FooterCentered: React.FC<IFooterProps> = ({
   buttonFontFamily,
   buttonFontWeight,
   buttonHoverBorder,
-  companyColor,
-  companyFontFamily,
-  companyName,
-  companyTextAlign,
   logoStudioHref,
   buttonHoverColor,
   buttonHref,
@@ -282,37 +267,7 @@ export const FooterCentered: React.FC<IFooterProps> = ({
             {buttonText}
           </a>
         </div>
-        <div
-          style={{
-            margin: "auto",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <hr
-            style={{
-              margin: getResponsiveProperty("separatorMargin", "10px"),
-              width: getResponsiveProperty("separatorWidth", "80%"),
-              height: getResponsiveProperty("separatorHeight", "2px"),
-              background: separatorBackgroundColor,
-              border: "none",
-            }}
-          />
-        </div>
       </div>
-      <span
-        style={{
-          color: companyColor,
-          textAlign: companyTextAlign,
-          fontFamily: companyFontFamily,
-          fontSize: getResponsiveProperty("companyFontSize", "16px"),
-          margin: getResponsiveProperty("companyMargin", "10px 0 10px"),
-        }}
-      >
-        {companyName}
-      </span>
       <a
         href={logoStudioHref}
         style={{

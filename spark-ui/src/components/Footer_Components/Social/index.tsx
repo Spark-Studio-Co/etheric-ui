@@ -201,7 +201,7 @@ export const FooterSocial: React.FC<IFooterProps> = ({
 
   const getNavigationGap = () => getResponsiveProperty("gapNavigation", "16px");
 
-  const getFooterMargin = () => getResponsiveProperty("footerMargin", "5px");
+  const getFooterMargin = () => getResponsiveProperty("footerMargin", "auto");
   const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
   return (
     <footer
