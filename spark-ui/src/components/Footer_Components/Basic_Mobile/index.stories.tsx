@@ -3,7 +3,7 @@ import { FooterBasicMobile } from "./index";
 import logo from "../../Logo/logo-402d9f18.svg";
 
 const meta: Meta<typeof FooterBasicMobile> = {
-  title: "Components/FooterBasicMobile",
+  title: "Footer_Components/FooterBasicMobile",
   component: FooterBasicMobile,
   parameters: {
     layout: "fullscreen",
