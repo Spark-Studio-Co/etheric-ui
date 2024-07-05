@@ -16,6 +16,8 @@ interface ResponsiveProperties {
   linkHeight?: string;
   linkFontSize?: string;
   linkMargin?: string;
+  allRightsFontSize?: string;
+  allRightsMargin?: string;
   linkBorderRadius?: string;
   linkPadding?: string;
   buttonWidth?: string;
@@ -174,6 +176,9 @@ export const FooterNoSeparator: React.FC<IFooterProps> = ({
   const getFooterMargin = () => getResponsiveProperty("footerMargin", "auto");
   const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
 
+  const allRightsFontSize = getResponsiveProperty("allRightsFontSize", "12px");
+  const allRightsMargin = getResponsiveProperty("allRightsMargin", "20px auto");
+
   return (
     <footer
       style={{
@@ -268,25 +273,36 @@ export const FooterNoSeparator: React.FC<IFooterProps> = ({
           </a>
         </div>
       </div>
-      <a
-        href={logoStudioHref}
-        style={{
-          scrollBehavior: "smooth",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src={logoStudio}
-          alt="Logo"
+      {logoStudio ? (
+        <a
+          href={logoStudioHref}
           style={{
-            width: getResponsiveProperty("logoStudioWidth", "50px"),
-            height: getResponsiveProperty("logoStudioHeight", "50px"),
-            margin: getResponsiveProperty("logoStudioMargin", "auto"),
+            scrollBehavior: "smooth",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        />
-      </a>
+        >
+          <img
+            src={logoStudio}
+            alt="Logo"
+            style={{
+              width: getResponsiveProperty("logoStudioWidth", "50px"),
+              height: getResponsiveProperty("logoStudioHeight", "50px"),
+              margin: getResponsiveProperty("logoStudioMargin", "auto"),
+            }}
+          />
+        </a>
+      ) : (
+        <span
+          style={{
+            fontSize: allRightsFontSize,
+            margin: allRightsMargin,
+          }}
+        >
+          © All rights reserved.
+        </span>
+      )}
     </footer>
   );
 };
