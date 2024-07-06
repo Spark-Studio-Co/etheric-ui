@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import useWindowSize from "../useWindowSize";
+import useWindowSize from "../../useWindowSize";
 import { getBreakpoint } from "@/utils/getBreakpoint";
-import { useStyle } from "../styleContext";
+import { useStyle } from "../../styleContext";
 import { DeviceSize } from "@/types/deviceSize";
 
 interface ResponsiveProperties {
@@ -68,7 +68,7 @@ interface Link {
   id?: string;
 }
 
-export const Header: React.FC<Link> = ({
+export const HeaderBasic: React.FC<Link> = ({
   links,
   responsive,
   contactBackgroundColor,

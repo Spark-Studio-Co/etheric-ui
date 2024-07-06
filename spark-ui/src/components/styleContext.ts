@@ -44,6 +44,7 @@ const defaultStyles: StyleTypes = {
   nav: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
   },
   defaultbutton: {
     cursor: "pointer",

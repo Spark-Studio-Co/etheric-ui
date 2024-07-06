@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Header } from "./index";
-import logo from "../Logo/logo-402d9f18.svg";
+import { HeaderBasic } from "./index";
+import logo from "../../Logo/logo-402d9f18.svg";
 
-const meta: Meta<typeof Header> = {
-  title: "Components/Header",
-  component: Header,
+const meta: Meta<typeof HeaderBasic> = {
+  title: "Header_Components/HeaderBasic",
+  component: HeaderBasic,
   tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Header>;
+type Story = StoryObj<typeof HeaderBasic>;
 
 // Define the links array
 const links = [
