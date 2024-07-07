@@ -13,8 +13,23 @@ interface ResponsiveProperties {
   buttonFontSize?: string;
   burgerLineHeight?: string;
   buttonMargin?: string;
+  phonePadding?: string;
+  phoneFontSize?: string;
+  phoneMargin?: string;
+  phoneWidth?: string;
+  phoneHeight?: string;
+  phoneBorderRadius?: string;
+  emailPadding?: string;
+  emailFontSize?: string;
+  emailMargin?: string;
+  emailWidth?: string;
+  emailHeight?: string;
+  emailBorderRadius?: string;
   navigationGap?: string;
   navigationPadding?: string;
+  topLineTop?: string;
+  bottomLineTop?: string;
+  burgerLineWidth?: string;
   linkMargin?: string;
   linkPadding?: string;
   linkWidth?: string;
@@ -26,6 +41,7 @@ interface ResponsiveProperties {
   burgerContainerMargin?: string;
   containerWidth?: string;
   linkBorderRadius?: string;
+  navigationTop?: string;
   linkFontSize?: string;
   containerMargin?: string;
 }
@@ -48,6 +64,29 @@ interface Link {
   linkTextDecoration?: string;
   linkTransition?: string;
   logo?: string;
+  phoneHref: string;
+  phoneHoverColor?: string;
+  phoneColor?: string;
+  phoneTransition?: string;
+  phoneTextDecoration?: string;
+  phoneHoverBorder?: string;
+  phoneBorder?: string;
+  emailHref: string;
+  emailHoverColor?: string;
+  emailColor?: string;
+  emailTransition?: string;
+  emailTextDecoration?: string;
+  emailHoverBorder?: string;
+  emailBorder?: string;
+  hoverEmailBackgroundColor?: string;
+  emailBackgroundColor?: string;
+  emailFontWeight?: string;
+  emailFontFamily?: string;
+  hoverPhoneBackgroundColor?: string;
+  phoneBackgroundColor?: string;
+  phoneFontWeight?: string;
+  phoneFontFamily?: string;
+  phoneText: string;
   links: LinkProps[];
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   hoverButtonBackgroundColor?: string;
@@ -62,6 +101,7 @@ interface Link {
   headerPosition?: any;
   buttonBorder?: string;
   buttonHoverColor?: string;
+  emailText?: string;
   buttonColor?: string;
   buttonTransition?: string;
   logoHref?: string;
@@ -77,8 +117,32 @@ export const HeaderMobile: React.FC<Link> = ({
   responsive,
   buttonHref,
   menuBackground,
+  emailText,
   buttonText,
+  phoneHref,
+  phoneText,
+  phoneBackgroundColor,
+  emailHref,
+  emailBackgroundColor,
+  emailBorder,
+  emailColor,
+  emailFontFamily,
+  emailFontWeight,
+  emailHoverBorder,
+  emailHoverColor,
+  emailTextDecoration,
+  emailTransition,
+  hoverEmailBackgroundColor,
+  phoneBorder,
+  phoneColor,
+  phoneFontFamily,
+  phoneFontWeight,
   buttonBackgroundColor,
+  phoneHoverBorder,
+  phoneHoverColor,
+  phoneTextDecoration,
+  phoneTransition,
+  hoverPhoneBackgroundColor,
   buttonBorder,
   headerPosition,
   linkFontFamily,
@@ -173,7 +237,7 @@ export const HeaderMobile: React.FC<Link> = ({
     >
       <div
         style={{
-          margin: getResponsiveProperty("containerMargin", "auto"),
+          margin: "auto",
           width: getContainerWidth(),
           display: "flex",
           flexDirection: "row",
@@ -192,61 +256,71 @@ export const HeaderMobile: React.FC<Link> = ({
           />
         </a>
         {isBurgerMenu ? (
-          <div
-            style={{
-              cursor: "pointer",
-              height: getResponsiveProperty("burgerContainerHeight", "20px"),
-              width: getResponsiveProperty("burgerContainerWidth", "20px"),
-              margin: getResponsiveProperty("burgerContainerMargin", "auto"),
-              overflow: "visible",
-              position: "relative",
-              zIndex: "9999",
-            }}
-            onClick={() => handleBurgerClick()}
-          >
-            <span
+          <>
+            <div
               style={{
-                background: burgerLineColor,
-                display: "block",
-                height: getResponsiveProperty("burgerLineHeight", "2px"),
-                position: "absolute",
-                transition: "0.3s ease-in-out",
-                width: "27px",
-                top: isActive ? "0px" : "-8px", // Toggle position based on active state
-                transform: isActive ? "rotate(45deg)" : "none",
+                cursor: "pointer",
+                height: getResponsiveProperty("burgerContainerHeight", "20px"),
+                width: getResponsiveProperty("burgerContainerWidth", "20px"),
+                margin: getResponsiveProperty("burgerContainerMargin", "auto"),
+                overflow: "visible",
+                position: "relative",
+                zIndex: "9999",
               }}
-            ></span>
-            <span
-              style={{
-                background: burgerLineColor,
-                display: "block",
-                height: getResponsiveProperty("burgerLineHeight", "2px"),
-                position: "absolute",
-                transition: "0.3s ease-in-out",
-                width: "27px",
-                opacity: isActive ? 0 : 1,
-                top: "0px",
-              }}
-            ></span>
-            <span
-              style={{
-                background: burgerLineColor,
-                display: "block",
-                height: getResponsiveProperty("burgerLineHeight", "2px"),
-                position: "absolute",
-                transition: "0.3s ease-in-out",
-                width: "27px",
-                top: isActive ? "0px" : "8px",
-                transform: isActive ? "rotate(-45deg)" : "none",
-              }}
-            ></span>
+              onClick={() => handleBurgerClick()}
+            >
+              <span
+                style={{
+                  background: burgerLineColor,
+                  display: "block",
+                  height: getResponsiveProperty("burgerLineHeight", "2px"),
+                  position: "absolute",
+                  transition: "0.3s ease-in-out",
+                  width: getResponsiveProperty("burgerLineWidth", "27px"),
+                  top: isActive
+                    ? "0px"
+                    : getResponsiveProperty("topLineTop", "-8px"),
+                  transform: isActive ? "rotate(45deg)" : "none",
+                }}
+              ></span>
+              <span
+                style={{
+                  background: burgerLineColor,
+                  display: "block",
+                  height: getResponsiveProperty("burgerLineHeight", "2px"),
+                  position: "absolute",
+                  transition: "0.3s ease-in-out",
+                  width: getResponsiveProperty("burgerLineWidth", "27px"),
+                  opacity: isActive ? 0 : 1,
+                  top: "0px",
+                }}
+              ></span>
+              <span
+                style={{
+                  background: burgerLineColor,
+                  display: "block",
+                  height: getResponsiveProperty("burgerLineHeight", "2px"),
+                  position: "absolute",
+                  transition: "0.3s ease-in-out",
+                  width: getResponsiveProperty("burgerLineWidth", "27px"),
+                  top: isActive
+                    ? "0px"
+                    : getResponsiveProperty("bottomLineTop", "8px"),
+                  transform: isActive ? "rotate(-45deg)" : "none",
+                }}
+              ></span>
+            </div>
             {isOpen && (
               <div
                 style={{
-                  position: "absolute",
                   background: menuBackground,
                   width: "100%",
                   height: "100vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  position: "fixed",
+                  left: "0",
+                  top: "0",
                   boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
                   zIndex: "1000",
                   overflow: "hidden",
@@ -254,10 +328,13 @@ export const HeaderMobile: React.FC<Link> = ({
               >
                 <nav
                   style={{
+                    position: "absolute",
                     gap: getResponsiveProperty("navigationGap", "20px"),
+                    top: getResponsiveProperty("navigationTop", "150px"),
                     display: "flex",
                     flexDirection: "column",
-                    padding: getResponsiveProperty("navigationPadding", "20px"),
+                    width: "100%",
+                    padding: getResponsiveProperty("navigationPadding", "50px"),
                   }}
                 >
                   {links.map((link, index) => (
@@ -266,11 +343,11 @@ export const HeaderMobile: React.FC<Link> = ({
                       key={index}
                       style={{
                         ...styles.navlinkbutton,
-                        margin: getResponsiveProperty("linkMargin", "0 10px"),
+                        margin: getResponsiveProperty("linkMargin", "0"),
                         backgroundColor: hoverStates[index]
                           ? linkHoverBackgroundColor
                           : linkBackgroundColor,
-                        fontSize: getResponsiveProperty("linkFontSize", "16px"),
+                        fontSize: getResponsiveProperty("linkFontSize", "20px"),
                         padding: getResponsiveProperty(
                           "linkPadding",
                           "10px 20px"
@@ -294,9 +371,73 @@ export const HeaderMobile: React.FC<Link> = ({
                     </a>
                   ))}
                 </nav>
+                <div>
+                  <a
+                    href={phoneHref}
+                    style={{
+                      padding: getResponsiveProperty(
+                        "phonePadding",
+                        "10px 20px"
+                      ),
+                      fontSize: getResponsiveProperty("phoneFontSize", "16px"),
+                      margin: getResponsiveProperty("phoneMargin", "0 10px"),
+                      width: getResponsiveProperty("phoneWidth", "auto"),
+                      height: getResponsiveProperty("phoneHeight", "auto"),
+                      borderRadius: getResponsiveProperty(
+                        "phoneBorderRadius",
+                        "5px"
+                      ),
+                      color: isHovered ? phoneHoverColor : phoneColor,
+                      transition: phoneTransition,
+                      textDecoration: phoneTextDecoration,
+                      border: isHovered ? phoneHoverBorder : phoneBorder,
+                      backgroundColor: isHovered
+                        ? hoverPhoneBackgroundColor
+                        : phoneBackgroundColor,
+                      fontWeight: phoneFontWeight,
+                      fontFamily: phoneFontFamily,
+                    }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    role="button"
+                  >
+                    {phoneText}
+                  </a>
+                  <a
+                    href={emailHref}
+                    style={{
+                      padding: getResponsiveProperty(
+                        "emailPadding",
+                        "10px 20px"
+                      ),
+                      fontSize: getResponsiveProperty("emailFontSize", "16px"),
+                      margin: getResponsiveProperty("emailMargin", "0 10px"),
+                      width: getResponsiveProperty("emailWidth", "auto"),
+                      height: getResponsiveProperty("emailHeight", "auto"),
+                      borderRadius: getResponsiveProperty(
+                        "emailBorderRadius",
+                        "5px"
+                      ),
+                      color: isHovered ? emailHoverColor : emailColor,
+                      transition: emailTransition,
+                      textDecoration: emailTextDecoration,
+                      border: isHovered ? emailHoverBorder : emailBorder,
+                      backgroundColor: isHovered
+                        ? hoverEmailBackgroundColor
+                        : emailBackgroundColor,
+                      fontWeight: emailFontWeight,
+                      fontFamily: emailFontFamily,
+                    }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    role="button"
+                  >
+                    {emailText}
+                  </a>
+                </div>
               </div>
             )}
-          </div>
+          </>
         ) : (
           <a
             href={buttonHref}

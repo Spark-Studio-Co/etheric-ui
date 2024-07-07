@@ -45,6 +45,16 @@ export const DefaultHeaderMobile: Story = {
       xs: {
         logoHeight: "120px",
         logoWidth: "80px",
+        containerWidth: "85%",
+        burgerLineWidth: "35px",
+        bottomLineTop: "10px",
+        topLineTop: "-10px",
+        burgerContainerMargin: "0",
+        containerMargin: "10px auto",
+      },
+      s: {
+        logoHeight: "120px",
+        logoWidth: "80px",
         containerWidth: "90%",
         burgerContainerMargin: "0",
         containerMargin: "10px auto",
