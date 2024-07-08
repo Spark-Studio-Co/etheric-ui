@@ -347,6 +347,7 @@ export const HeaderMobile: React.FC<Link> = ({
                     href={phoneHref}
                     className={animateLinks ? "link-enter" : "link-exit"}
                     style={{
+                      animationDelay: "0.5s",
                       padding: getResponsiveProperty(
                         "phonePadding",
                         "10px 20px"
@@ -366,6 +367,7 @@ export const HeaderMobile: React.FC<Link> = ({
                       fontWeight: phoneFontWeight,
                       fontFamily: phoneFontFamily,
                     }}
+                    onClick={handleLinkClick}
                     role="button"
                   >
                     {phoneText}
@@ -374,6 +376,7 @@ export const HeaderMobile: React.FC<Link> = ({
                     href={emailHref}
                     className={animateLinks ? "link-enter" : "link-exit"}
                     style={{
+                      animationDelay: "0.6s",
                       padding: getResponsiveProperty(
                         "emailPadding",
                         "10px 20px"
@@ -393,6 +396,7 @@ export const HeaderMobile: React.FC<Link> = ({
                       fontWeight: emailFontWeight,
                       fontFamily: emailFontFamily,
                     }}
+                    onClick={handleLinkClick}
                     role="button"
                   >
                     {emailText}

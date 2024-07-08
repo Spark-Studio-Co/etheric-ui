@@ -1,6 +1,6 @@
 @keyframes slideIn {
   from {
-    transform: translateX(100%);
+    transform: translateX(500%);
   }
   to {
     transform: translateX(0%);
@@ -8,5 +8,7 @@
 }
 
 .link-enter {
-  animation: slideIn 0.5s forwards;
+  animation: slideIn 0.1s forwards;
+  /* Initial position before the animation starts */
+  transform: translateX(500%);
 }

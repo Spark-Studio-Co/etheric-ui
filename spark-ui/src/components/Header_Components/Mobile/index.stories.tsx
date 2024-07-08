@@ -36,7 +36,7 @@ export const DefaultHeaderMobile: Story = {
     phoneColor: "red",
     emailText: "Email",
     emailColor: "blue",
-    menuPosition: "center",
+    menuPosition: "start",
     animateLinks: true,
     responsive: {
       xxs: {
