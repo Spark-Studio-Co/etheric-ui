@@ -1,0 +1,14 @@
+@keyframes slideIn {
+  from {
+    transform: translateX(500%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.link-enter {
+  animation: slideIn 0.1s forwards;
+  /* Initial position before the animation starts */
+  transform: translateX(500%);
+}

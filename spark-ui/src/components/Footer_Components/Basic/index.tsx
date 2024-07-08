@@ -17,6 +17,8 @@ interface ResponsiveProperties {
   linkFontSize?: string;
   linkMargin?: string;
   linkBorderRadius?: string;
+  allRightsFontSize?: string;
+  allRightsMargin?: string;
   linkPadding?: string;
   buttonWidth?: string;
   buttonHeight?: string;
@@ -175,8 +177,11 @@ export const FooterBasic: React.FC<IFooterProps> = ({
 
   const getNavigationGap = () => getResponsiveProperty("gapNavigation", "16px");
 
-  const getFooterMargin = () => getResponsiveProperty("footerMargin", "5px");
+  const getFooterMargin = () => getResponsiveProperty("footerMargin", "auto");
   const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
+
+  const allRightsFontSize = getResponsiveProperty("allRightsFontSize", "12px");
+  const allRightsMargin = getResponsiveProperty("allRightsMargin", "20px auto");
 
   return (
     <footer
@@ -211,6 +216,7 @@ export const FooterBasic: React.FC<IFooterProps> = ({
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             transition: transitionNavigation,
             gap: getNavigationGap(),
           }}
@@ -261,32 +267,47 @@ export const FooterBasic: React.FC<IFooterProps> = ({
       </div>
       <hr
         style={{
-          margin: getResponsiveProperty("separatorMargin", "10px"),
+          margin: getResponsiveProperty("separatorMargin", "auto"),
           width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           height: getResponsiveProperty("separatorHeight", "2px"),
           background: separatorBackgroundColor,
           border: "none",
         }}
       />
-      <a
-        href={logoStudioHref}
-        style={{
-          scrollBehavior: "smooth",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src={logoStudio}
-          alt="Logo"
+      {logoStudio ? (
+        <a
+          href={logoStudioHref}
           style={{
-            width: getResponsiveProperty("logoStudioWidth", "50px"),
-            height: getResponsiveProperty("logoStudioHeight", "50px"),
-            margin: getResponsiveProperty("logoStudioMargin", "auto"),
+            scrollBehavior: "smooth",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
           }}
-        />
-      </a>
+        >
+          <img
+            src={logoStudio}
+            alt="Logo"
+            style={{
+              width: getResponsiveProperty("logoStudioWidth", "50px"),
+              height: getResponsiveProperty("logoStudioHeight", "50px"),
+              margin: getResponsiveProperty("logoStudioMargin", "auto"),
+            }}
+          />
+        </a>
+      ) : (
+        <span
+          style={{
+            fontSize: allRightsFontSize,
+            margin: allRightsMargin,
+          }}
+        >
+          © All rights reserved.
+        </span>
+      )}
     </footer>
   );
 };

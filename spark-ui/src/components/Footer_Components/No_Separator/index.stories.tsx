@@ -1,9 +1,9 @@
-import { FooterCentered } from "./index";
+import { FooterNoSeparator } from "./index";
 import { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof FooterCentered> = {
-  title: "Footer_Components/FooterCentered",
-  component: FooterCentered,
+const meta: Meta<typeof FooterNoSeparator> = {
+  title: "Footer_Components/FooterNoSeparator",
+  component: FooterNoSeparator,
   parameters: {
     layout: "fullscreen",
   },
@@ -150,11 +150,6 @@ const responsiveSettings = {
     buttonMargin: "20px",
     buttonBorderRadius: "7px",
     buttonPadding: "16px",
-    separatorMargin: "10px auto",
-    logoStudioWidth: "90px",
-    logoStudioHeight: "90px",
-    logoStudioMargin: "25px 0 0 90px",
-    companyMargin: "25px 0 25px ",
   },
 };
 
@@ -173,8 +168,6 @@ export const DefaultFooter: Story = {
     buttonBackgroundColor: "blue",
     buttonFontWeight: "bold",
     buttonFontFamily: "Arial, sans-serif",
-    companyName: "Spark Studio",
-    companyTextAlign: "center",
     buttonTextDecoration: "none",
     buttonText: "Call to Action",
     buttonHref: "#",
@@ -188,6 +181,5 @@ export const DefaultFooter: Story = {
     linkTextDecoration: "none",
     logoHref: "#",
     hoverButtonBackgroundColor: "darkblue",
-    separatorBackgroundColor: "red",
   },
 };

@@ -3,8 +3,8 @@ import useWindowSize from "../../useWindowSize";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 interface ResponsiveProperties {
   footerWidth?: string;
@@ -12,15 +12,13 @@ interface ResponsiveProperties {
   containerWidth?: string;
   containerMargin?: string;
   logoWidth?: string;
+  logoMargin?: string;
   logoHeight?: string;
   gapNavigation?: string;
   linkWidth?: string;
-  iconsContainerWidth?: string;
-  iconsContainerMargin?: string;
+  linkHeight?: string;
   allRightsFontSize?: string;
   allRightsMargin?: string;
-  iconsContainerGap?: string;
-  linkHeight?: string;
   linkFontSize?: string;
   linkMargin?: string;
   linkBorderRadius?: string;
@@ -28,14 +26,18 @@ interface ResponsiveProperties {
   buttonWidth?: string;
   buttonHeight?: string;
   logoStudioWidth?: string;
+  iconWidth?: string;
+  iconHeight?: string;
+  iconsContainerWidth?: string;
+  iconsContainerMargin?: string;
+  iconsContainerGap?: string;
   logoStudioHeight?: string;
   logoStudioMargin?: string;
   buttonFontSize?: string;
   buttonMargin?: string;
   buttonBorderRadius?: string;
   buttonPadding?: string;
-  iconWidth?: string;
-  iconHeight?: string;
+  navigationMargin?: string;
 }
 
 interface LinkProps {
@@ -43,24 +45,24 @@ interface LinkProps {
   href: string;
 }
 
-interface IIconProps {
-  iconHref?: string;
+interface IconProps {
   icon: IconDefinition;
+  iconHref: string;
 }
 
 interface IFooterProps {
   backgroundColorFooter?: string;
   transitionNavigation?: string;
-  iconColor?: string;
-  iconHoverColor?: string;
+  icons: IconProps[];
   logoStudioHref?: string;
   logo: string;
-  icons: IIconProps[];
   links: LinkProps[];
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   buttonBackgroundColor?: string;
   buttonFontWeight?: string;
   buttonFontFamily?: string;
+  iconColor?: string;
+  iconHoverColor?: string;
   buttonTextDecoration?: string;
   buttonText: string;
   buttonHref: string;
@@ -70,8 +72,10 @@ interface IFooterProps {
   buttonColor?: string;
   buttonTransition?: string;
   logoHref?: string;
+  gap?: string;
   hoverButtonBackgroundColor?: string;
   backgroundColor?: string;
+  fontSize?: string;
   fontWeight?: string;
   fontFamily?: string;
   textDecoration?: string;
@@ -81,6 +85,7 @@ interface IFooterProps {
   hoverColor?: string;
   hoverBorder?: string;
   transition?: string;
+  padding?: string;
   cursor?: string;
   id?: string;
   linkFontWeight?: string;
@@ -89,34 +94,34 @@ interface IFooterProps {
   linkTransition?: string;
   linkBorder?: string;
   linkHoverBackgroundColor?: string;
-  logoStudio?: string;
   linkHoverColor?: string;
   linkHoverBorder?: string;
   linkColor?: string;
+  logoStudio?: string;
   linkBackgroundColor?: string;
 }
 
-export const FooterSocial: React.FC<IFooterProps> = ({
+export const FooterSocialMobile: React.FC<IFooterProps> = ({
   backgroundColorFooter,
   responsive,
   logoHref,
-  icons,
   logo,
   transitionNavigation,
-  logoStudio,
   links,
+  iconColor,
+  iconHoverColor,
   buttonBackgroundColor,
   buttonBorder,
   buttonColor,
+  logoStudio,
   buttonText,
   buttonFontFamily,
   buttonFontWeight,
-  iconColor,
-  iconHoverColor,
   buttonHoverBorder,
   logoStudioHref,
   buttonHoverColor,
   buttonHref,
+  icons,
   linkColor,
   buttonTextDecoration,
   buttonTransition,
@@ -134,23 +139,24 @@ export const FooterSocial: React.FC<IFooterProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
 
-  const [linkHoverStates, setLinkHoverStates] = useState<boolean[]>(
+  const [hoverStates, setHoverStates] = React.useState<boolean[]>(
     new Array(links.length).fill(false)
   );
+
   const [iconHoverStates, setIconHoverStates] = useState<boolean[]>(
     new Array(icons.length).fill(false)
   );
 
-  const handleLinkMouseEnter = (index: number) => {
-    const updatedStates = [...linkHoverStates];
+  const handleMouseEnter = (index: number) => {
+    const updatedStates = [...hoverStates];
     updatedStates[index] = true;
-    setLinkHoverStates(updatedStates);
+    setHoverStates(updatedStates);
   };
 
-  const handleLinkMouseLeave = (index: number) => {
-    const updatedStates = [...linkHoverStates];
+  const handleMouseLeave = (index: number) => {
+    const updatedStates = [...hoverStates];
     updatedStates[index] = false;
-    setLinkHoverStates(updatedStates);
+    setHoverStates(updatedStates);
   };
 
   const handleIconMouseEnter = (index: number) => {
@@ -196,101 +202,94 @@ export const FooterSocial: React.FC<IFooterProps> = ({
   const getLogoWidth = () => getResponsiveProperty("logoWidth", "auto");
   const getLogoHeight = () => getResponsiveProperty("logoWidth", "auto");
 
-  const getContainerMargin = () =>
-    getResponsiveProperty("containerMargin", "32px");
-  const getContainerWidth = () =>
-    getResponsiveProperty("containerWidth", "65%");
-
   const getNavigationGap = () => getResponsiveProperty("gapNavigation", "16px");
+  const getNavigationMargin = () =>
+    getResponsiveProperty("navigationMargin", "20px");
+
+  const getLogoMargin = () => getResponsiveProperty("logoMargin", "20px");
 
   const getFooterMargin = () => getResponsiveProperty("footerMargin", "auto");
   const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
 
   const allRightsFontSize = getResponsiveProperty("allRightsFontSize", "12px");
   const allRightsMargin = getResponsiveProperty("allRightsMargin", "20px auto");
+
   return (
     <footer
       style={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: backgroundColorFooter,
         alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: backgroundColorFooter,
         margin: getFooterMargin(),
         width: getFooterWidth(),
       }}
     >
-      <div
+      <a href={logoHref} style={{ scrollBehavior: "smooth" }}>
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            margin: getLogoMargin(),
+            width: getLogoWidth(),
+            height: getLogoHeight(),
+          }}
+        />
+      </a>
+      <nav
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          width: getContainerWidth(),
-          margin: getContainerMargin(),
+          justifyContent: "center",
+          flexDirection: "column",
+          margin: getNavigationMargin(),
+          transition: transitionNavigation,
+          gap: getNavigationGap(),
         }}
       >
-        <a href={logoHref} style={{ scrollBehavior: "smooth" }}>
-          <img
-            src={logo}
-            alt="Logo"
+        {links.map((link, index) => (
+          <a
+            href={link.href}
+            key={index}
             style={{
-              width: getLogoWidth(),
-              height: getLogoHeight(),
+              ...styles.navlinkbutton,
+              margin: getResponsiveProperty("linkMargin", "0 10px"),
+              backgroundColor: hoverStates[index]
+                ? linkHoverBackgroundColor
+                : linkBackgroundColor,
+              fontSize: getResponsiveProperty("linkFontSize", "16px"),
+              padding: getResponsiveProperty("linkPadding", "10px 20px"),
+              width: getResponsiveProperty("linkWidth", "auto"),
+              height: getResponsiveProperty("linkHeight", "auto"),
+              border: hoverStates[index] ? linkHoverBorder : linkBorder,
+              borderRadius: getResponsiveProperty("linkBorderRadius", "5px"),
+              color: hoverStates[index] ? linkHoverColor : linkColor,
             }}
-          />
-        </a>
-        <nav
-          style={{
-            display: "flex",
-            alignItems: "center",
-            transition: transitionNavigation,
-            gap: getNavigationGap(),
-          }}
-        >
-          {links.map((link, index) => (
-            <a
-              href={link.href}
-              key={index}
-              style={{
-                ...styles.navlinkbutton,
-                margin: getResponsiveProperty("linkMargin", "0 10px"),
-                backgroundColor: linkHoverStates[index]
-                  ? linkHoverBackgroundColor
-                  : linkBackgroundColor,
-                fontSize: getResponsiveProperty("linkFontSize", "16px"),
-                padding: getResponsiveProperty("linkPadding", "10px 20px"),
-                width: getResponsiveProperty("linkWidth", "auto"),
-                height: getResponsiveProperty("linkHeight", "auto"),
-                border: linkHoverStates[index] ? linkHoverBorder : linkBorder,
-                borderRadius: getResponsiveProperty("linkBorderRadius", "5px"),
-                color: linkHoverStates[index] ? linkHoverColor : linkColor,
-              }}
-              onMouseEnter={() => handleLinkMouseEnter(index)}
-              onMouseLeave={() => handleLinkMouseLeave(index)}
-              role="button"
-            >
-              {link.text}
-            </a>
-          ))}
-        </nav>
-        <a
-          href={buttonHref}
-          style={{
-            ...styles.contactlinkbutton,
-            padding: getResponsiveProperty("buttonPadding", "10px 20px"),
-            fontSize: getResponsiveProperty("buttonFontSize", "16px"),
-            margin: getResponsiveProperty("buttonMargin", "0 10px"),
-            width: getResponsiveProperty("buttonWidth", "auto"),
-            height: getResponsiveProperty("buttonHeight", "auto"),
-            borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          role="button"
-        >
-          {buttonText}
-        </a>
-      </div>
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+            role="button"
+          >
+            {link.text}
+          </a>
+        ))}
+      </nav>
+      <a
+        href={buttonHref}
+        style={{
+          ...styles.contactlinkbutton,
+          padding: getResponsiveProperty("buttonPadding", "10px 20px"),
+          fontSize: getResponsiveProperty("buttonFontSize", "16px"),
+          margin: getResponsiveProperty("buttonMargin", "0 10px"),
+          width: getResponsiveProperty("buttonWidth", "auto"),
+          height: getResponsiveProperty("buttonHeight", "auto"),
+          borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        role="button"
+      >
+        {buttonText}
+      </a>
       <div
         style={{
           display: "flex",
@@ -335,6 +334,7 @@ export const FooterSocial: React.FC<IFooterProps> = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            cursor: "pointer",
           }}
         >
           <img
