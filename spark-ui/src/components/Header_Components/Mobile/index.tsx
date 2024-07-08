@@ -3,6 +3,7 @@ import useWindowSize from "../../useWindowSize";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import { useStyle } from "../../styleContext";
 import { DeviceSize } from "@/types/deviceSize";
+import "./animation.scss";
 
 interface ResponsiveProperties {
   logoWidth?: string;
@@ -56,6 +57,7 @@ interface Link {
   linkHoverBackgroundColor?: string;
   linkBackgroundColor?: string;
   linkHoverBorder?: string;
+  menuPosition?: string;
   linkBorder?: string;
   linkHoverColor?: string;
   linkColor?: string;
@@ -108,6 +110,7 @@ interface Link {
   headerZindex?: string;
   menuBackground?: string;
   headerTop?: string;
+  animateLinks?: boolean;
 }
 
 export const HeaderMobile: React.FC<Link> = ({
@@ -128,80 +131,52 @@ export const HeaderMobile: React.FC<Link> = ({
   emailColor,
   emailFontFamily,
   emailFontWeight,
-  emailHoverBorder,
-  emailHoverColor,
   emailTextDecoration,
-  emailTransition,
-  hoverEmailBackgroundColor,
   phoneBorder,
   phoneColor,
   phoneFontFamily,
   phoneFontWeight,
   buttonBackgroundColor,
-  phoneHoverBorder,
-  phoneHoverColor,
   phoneTextDecoration,
-  phoneTransition,
-  hoverPhoneBackgroundColor,
+  animateLinks,
   buttonBorder,
   headerPosition,
   linkFontFamily,
   linkFontWeight,
   linkTextDecoration,
-  linkTransition,
   headerTop,
+  menuPosition,
   headerZindex,
   buttonColor,
-  buttonHoverColor,
   linkBackgroundColor,
   linkBorder,
   linkColor,
-  linkHoverBackgroundColor,
-  linkHoverBorder,
-  linkHoverColor,
   isBurgerMenu,
-  hoverButtonBackgroundColor,
-  buttonHoverBorder,
-  buttonTransition,
   burgerLineColor,
   buttonTextDecoration,
   buttonFontFamily,
   buttonFontWeight,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [hoverStates, setHoverStates] = React.useState<boolean[]>(
-    new Array(links.length).fill(false)
-  );
-
-  const handleMouseEnter = (index: number) => {
-    const updatedStates = [...hoverStates];
-    updatedStates[index] = true;
-    setHoverStates(updatedStates);
-  };
-
-  const handleMouseLeave = (index: number) => {
-    const updatedStates = [...hoverStates];
-    updatedStates[index] = false;
-    setHoverStates(updatedStates);
-  };
 
   const handleBurgerClick = () => {
-    setIsActive(!isActive);
     setIsOpen(!isOpen);
+    setIsActive(!isActive);
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    setIsActive(false);
   };
 
   const styles = useStyle({
     contactlinkbutton: {
-      color: isHovered ? buttonHoverColor : buttonColor,
-      transition: buttonTransition,
+      color: buttonColor,
       textDecoration: buttonTextDecoration,
-      border: isHovered ? buttonHoverBorder : buttonBorder,
-      backgroundColor: isHovered
-        ? hoverButtonBackgroundColor
-        : buttonBackgroundColor,
+      border: buttonBorder,
+      backgroundColor: buttonBackgroundColor,
       fontWeight: buttonFontWeight,
       fontFamily: buttonFontFamily,
     },
@@ -209,7 +184,6 @@ export const HeaderMobile: React.FC<Link> = ({
       fontWeight: linkFontWeight,
       fontFamily: linkFontFamily,
       textDecoration: linkTextDecoration,
-      transition: linkTransition,
     },
   });
 
@@ -225,6 +199,8 @@ export const HeaderMobile: React.FC<Link> = ({
   const getLogoHeight = () => getResponsiveProperty("logoHeight", "auto");
   const getContainerWidth = () =>
     getResponsiveProperty("containerWidth", "90%");
+
+  const baseDelay = 0.1;
 
   return (
     <header
@@ -317,7 +293,6 @@ export const HeaderMobile: React.FC<Link> = ({
                   width: "100%",
                   height: "100vh",
                   display: "flex",
-                  justifyContent: "center",
                   position: "fixed",
                   left: "0",
                   top: "0",
@@ -329,24 +304,25 @@ export const HeaderMobile: React.FC<Link> = ({
                 <nav
                   style={{
                     position: "absolute",
+                    alignItems: menuPosition,
                     gap: getResponsiveProperty("navigationGap", "20px"),
                     top: getResponsiveProperty("navigationTop", "150px"),
                     display: "flex",
                     flexDirection: "column",
                     width: "100%",
-                    padding: getResponsiveProperty("navigationPadding", "50px"),
+                    padding: getResponsiveProperty("navigationPadding", "0"),
                   }}
                 >
                   {links.map((link, index) => (
                     <a
                       href={link.href}
                       key={index}
+                      className={animateLinks ? "link-enter" : "link-exit"}
                       style={{
                         ...styles.navlinkbutton,
+                        animationDelay: `${baseDelay * index}s`,
                         margin: getResponsiveProperty("linkMargin", "0"),
-                        backgroundColor: hoverStates[index]
-                          ? linkHoverBackgroundColor
-                          : linkBackgroundColor,
+                        backgroundColor: linkBackgroundColor,
                         fontSize: getResponsiveProperty("linkFontSize", "20px"),
                         padding: getResponsiveProperty(
                           "linkPadding",
@@ -354,87 +330,74 @@ export const HeaderMobile: React.FC<Link> = ({
                         ),
                         width: getResponsiveProperty("linkWidth", "auto"),
                         height: getResponsiveProperty("linkHeight", "auto"),
-                        border: hoverStates[index]
-                          ? linkHoverBorder
-                          : linkBorder,
+                        border: linkBorder,
                         borderRadius: getResponsiveProperty(
                           "linkBorderRadius",
                           "5px"
                         ),
-                        color: hoverStates[index] ? linkHoverColor : linkColor,
+                        color: linkColor,
                       }}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                      onMouseLeave={() => handleMouseLeave(index)}
+                      onClick={handleLinkClick}
                       role="button"
                     >
                       {link.text}
                     </a>
                   ))}
-                </nav>
-                <div>
                   <a
                     href={phoneHref}
+                    className={animateLinks ? "link-enter" : "link-exit"}
                     style={{
                       padding: getResponsiveProperty(
                         "phonePadding",
                         "10px 20px"
                       ),
                       fontSize: getResponsiveProperty("phoneFontSize", "16px"),
-                      margin: getResponsiveProperty("phoneMargin", "0 10px"),
+                      margin: getResponsiveProperty("phoneMargin", "0"),
                       width: getResponsiveProperty("phoneWidth", "auto"),
                       height: getResponsiveProperty("phoneHeight", "auto"),
                       borderRadius: getResponsiveProperty(
                         "phoneBorderRadius",
                         "5px"
                       ),
-                      color: isHovered ? phoneHoverColor : phoneColor,
-                      transition: phoneTransition,
+                      color: phoneColor,
                       textDecoration: phoneTextDecoration,
-                      border: isHovered ? phoneHoverBorder : phoneBorder,
-                      backgroundColor: isHovered
-                        ? hoverPhoneBackgroundColor
-                        : phoneBackgroundColor,
+                      border: phoneBorder,
+                      backgroundColor: phoneBackgroundColor,
                       fontWeight: phoneFontWeight,
                       fontFamily: phoneFontFamily,
                     }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
                     role="button"
                   >
                     {phoneText}
                   </a>
                   <a
                     href={emailHref}
+                    className={animateLinks ? "link-enter" : "link-exit"}
                     style={{
                       padding: getResponsiveProperty(
                         "emailPadding",
                         "10px 20px"
                       ),
                       fontSize: getResponsiveProperty("emailFontSize", "16px"),
-                      margin: getResponsiveProperty("emailMargin", "0 10px"),
+                      margin: getResponsiveProperty("emailMargin", "0"),
                       width: getResponsiveProperty("emailWidth", "auto"),
                       height: getResponsiveProperty("emailHeight", "auto"),
                       borderRadius: getResponsiveProperty(
                         "emailBorderRadius",
                         "5px"
                       ),
-                      color: isHovered ? emailHoverColor : emailColor,
-                      transition: emailTransition,
+                      color: emailColor,
                       textDecoration: emailTextDecoration,
-                      border: isHovered ? emailHoverBorder : emailBorder,
-                      backgroundColor: isHovered
-                        ? hoverEmailBackgroundColor
-                        : emailBackgroundColor,
+                      border: emailBorder,
+                      backgroundColor: emailBackgroundColor,
                       fontWeight: emailFontWeight,
                       fontFamily: emailFontFamily,
                     }}
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
                     role="button"
                   >
                     {emailText}
                   </a>
-                </div>
+                </nav>
               </div>
             )}
           </>
@@ -450,8 +413,6 @@ export const HeaderMobile: React.FC<Link> = ({
               height: getResponsiveProperty("buttonHeight", "auto"),
               borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
             }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             role="button"
           >
             {buttonText}

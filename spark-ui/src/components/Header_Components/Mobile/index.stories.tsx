@@ -32,6 +32,12 @@ export const DefaultHeaderMobile: Story = {
     buttonFontWeight: "bold",
     isBurgerMenu: true,
     burgerLineColor: "red",
+    phoneText: "Phone",
+    phoneColor: "red",
+    emailText: "Email",
+    emailColor: "blue",
+    menuPosition: "center",
+    animateLinks: true,
     responsive: {
       xxs: {
         logoWidth: "100px",
