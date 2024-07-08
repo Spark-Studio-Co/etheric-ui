@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ErrorTab } from "./index";
 
 const meta: Meta<typeof ErrorTab> = {
-  title: "Components/ErrorTab",
+  title: "Error_Components/ErrorTab",
   component: ErrorTab,
   parameters: {
     layout: "centered",

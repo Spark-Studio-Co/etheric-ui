@@ -1,7 +1,7 @@
 import React from "react";
 import { getBreakpoint } from "@/utils/getBreakpoint";
-import useWindowSize from "../useWindowSize";
-import { useStyle } from "../styleContext";
+import useWindowSize from "@/components/useWindowSize";
+import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
 
 interface ResponsiveProperties {
@@ -18,7 +18,7 @@ interface IMessage {
   id?: string;
 }
 
-export const ErrorDisplay: React.FC<IMessage> = ({
+export const ErrorText: React.FC<IMessage> = ({
   responsive,
   message,
   color,

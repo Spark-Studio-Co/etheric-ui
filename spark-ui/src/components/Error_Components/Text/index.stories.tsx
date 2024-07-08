@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ErrorDisplay } from "./index";
+import { ErrorText } from "./index";
 
-const meta: Meta<typeof ErrorDisplay> = {
-  title: "Error/ErrorDisplay",
-  component: ErrorDisplay,
+const meta: Meta<typeof ErrorText> = {
+  title: "Error_Components/ErrorText",
+  component: ErrorText,
   parameters: {
     layout: "centered",
   },
