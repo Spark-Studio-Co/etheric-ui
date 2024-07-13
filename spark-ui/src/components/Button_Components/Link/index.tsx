@@ -14,7 +14,8 @@ interface ResponsiveProperties {
 }
 
 interface IButtonLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    React.CSSProperties {
   href: string;
   backgroundColor?: string;
   target?: string;
@@ -65,6 +66,7 @@ export const LinkButton: React.FC<IButtonLinkProps> = ({
       fontFamily,
       backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
       display: "inline-block",
+      ...rest,
     },
   });
 

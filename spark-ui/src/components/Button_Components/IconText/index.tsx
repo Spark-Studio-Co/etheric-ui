@@ -17,7 +17,9 @@ interface ResponsiveProperties {
   gap?: string;
 }
 
-interface IIconTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IIconTextProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    React.CSSProperties {
   icon: IconDefinition;
   backgroundColor?: string;
   fontWeight?: string;
@@ -88,7 +90,7 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
 
   const getWidth = () => getResponsiveProperty("width", "20px");
 
-  const getHeight = () => getResponsiveProperty("width", "20px");
+  const getHeight = () => getResponsiveProperty("height", "20px");
 
   const getBorderRadius = () => getResponsiveProperty("borderRadius", "20px");
 

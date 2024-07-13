@@ -15,7 +15,9 @@ interface ResponsiveProperties {
   borderRadius?: string;
 }
 
-interface IIconButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IIconButton
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    React.CSSProperties {
   icon: IconDefinition;
   id?: string;
   onClick?: () => void;
@@ -56,6 +58,7 @@ export const IconButton: React.FC<IIconButton> = ({
       border: isHovered ? hoverBorder : border,
       backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
       color: isHovered ? iconHoverColor : iconColor || color,
+      ...rest,
     },
   });
 

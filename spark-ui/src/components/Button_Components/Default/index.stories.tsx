@@ -14,103 +14,118 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const responsive = {
-  xxs: {
-    width: "50px",
-    height: "30px",
-    fontSize: "12px",
-  },
-  xs: {
-    width: "60px",
-    height: "35px",
-    fontSize: "14px",
-  },
-  s: {
-    width: "70px",
-    height: "40px",
-    fontSize: "16px",
-  },
-  m: {
-    width: "80px",
-    height: "45px",
-    fontSize: "18px",
-  },
-  sm: {
-    width: "90px",
-    height: "50px",
-    fontSize: "20px",
-  },
-  l: {
-    width: "100px",
-    height: "55px",
-    fontSize: "22px",
-  },
-  md: {
-    width: "110px",
-    height: "60px",
-    fontSize: "24px",
-  },
-  tablet: {
-    width: "120px",
-    height: "65px",
-    fontSize: "26px",
-  },
-  tabletSm: {
-    width: "130px",
-    height: "70px",
-    fontSize: "28px",
-  },
-  lg: {
-    width: "140px",
-    height: "75px",
-    fontSize: "30px",
-  },
-  xl: {
-    width: "150px",
-    height: "80px",
-    fontSize: "32px",
-  },
-  twoXl: {
-    width: "160px",
-    height: "85px",
-    fontSize: "34px",
-  },
-  threeXl: {
-    width: "50px",
-    height: "30px",
-    fontSize: "36px",
-  },
-  fourXl: {
-    width: "180px",
-    height: "95px",
-    fontSize: "38px",
-  },
-  fiveXl: {
-    width: "190px",
-    height: "100px",
-    fontSize: "40px",
-  },
-  sixXl: {
-    width: "200px",
-    height: "105px",
-    fontSize: "42px",
-  },
-};
+// const responsive = {
+//   xxs: {
+//     width: "clamp(125px, 250 / 390 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 390 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 390 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   xs: {
+//     width: "clamp(125px, 250 / 480 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 480 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 480 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   s: {
+//     width: "clamp(125px, 250 / 575 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 575 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 575 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   m: {
+//     width: "clamp(125px, 250 / 720 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 720 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 720 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   sm: {
+//     width: "clamp(125px, 250 / 860 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 860 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 860 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   l: {
+//     width: "clamp(125px, 250 / 992 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 992 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 992 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   md: {
+//     width: "clamp(125px, 250 / 1100 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1100 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1100 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   tablet: {
+//     width: "clamp(125px, 250 / 1024 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1024 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1024 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   tablet_sm: {
+//     width: "clamp(125px, 250 / 1200 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1200 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1200 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   lg: {
+//     width: "clamp(125px, 250 / 1360 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1360 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1360 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   xl: {
+//     width: "clamp(125px, 250 / 1520 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1520 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1520 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   twoXl: {
+//     width: "clamp(125px, 250 / 1680 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1680 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1680 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   threeXl: {
+//     width: "clamp(125px, 250 / 1920 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 1920 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 1920 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   fourXl: {
+//     width: "clamp(125px, 250 / 2560 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 2560 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 2560 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   fiveXl: {
+//     width: "clamp(125px, 250 / 3840 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 3840 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 3840 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+//   sixXl: {
+//     width: "clamp(125px, 250 / 5120 * 100vw, 500px)",
+//     height: "clamp(25px, 50 / 5120 * 100vw, 100px)",
+//     fontSize: "clamp(6px, 12 / 5120 * 100vw, 24px)",
+//     borderRadius: "0px",
+//   },
+// };
 
 export const Default_Button: Story = {
   args: {
     text: "Default Button",
-    responsive: responsive,
-    backgroundColor: "#0cefef",
-    fontSize: "20px",
+    // responsive: responsive,
+    backgroundColor: "#845EC2",
+    cursor: "pointer",
     fontWeight: "700",
     fontFamily: "Helvetica",
-    textDecoration: "underline",
-    border: "4px solid red",
-    color: "#3d9a26",
-    hoverBackgroundColor: "#f71515",
-    hoverColor: "#2b79d3",
-    hoverBorder: "8px solid grey",
+    textDecoration: "none",
+    border: "none",
+    color: "white",
+    hoverBackgroundColor: "#4B4453",
+    hoverColor: "white",
     transition: "0.3s ease-in-out",
     onClick: () => console.log("Button clicked!"),
   },
