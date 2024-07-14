@@ -4,26 +4,26 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 // https://vitejs.dev/config/
 export default defineConfig({
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "./src"),
-        },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
-    build: {
-        lib: {
-            entry: path.resolve(__dirname, "./src/components/index.tsx"),
-            name: "spark-ui",
-            fileName: "spark-ui",
-        },
-        rollupOptions: {
-            external: ["react", "react-dom"],
-            output: {
-                globals: {
-                    react: "React",
-                    "react-dom": "ReactDOM",
-                },
-            },
-        },
+  },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, "./src/components/index.tsx"),
+      name: "etheric-ui",
+      fileName: "etheric-ui",
     },
-    plugins: [react(), dts({ rollupTypes: true })],
+    rollupOptions: {
+      external: ["react", "react-dom"],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
+    },
+  },
+  plugins: [react(), dts({ rollupTypes: true })],
 });
