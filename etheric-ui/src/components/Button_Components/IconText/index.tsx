@@ -17,9 +17,10 @@ interface ResponsiveProperties {
   gap?: string;
 }
 
-interface IIconTextProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    React.CSSProperties {
+type CombinedAttributes = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  React.CSSProperties;
+
+interface IIconTextProps extends CombinedAttributes {
   icon: IconDefinition;
   backgroundColor?: string;
   fontWeight?: string;

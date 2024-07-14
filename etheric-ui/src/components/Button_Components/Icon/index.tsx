@@ -15,9 +15,10 @@ interface ResponsiveProperties {
   borderRadius?: string;
 }
 
-interface IIconButton
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    React.CSSProperties {
+type CombinedAttributes = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  React.CSSProperties;
+
+interface IIconButton extends CombinedAttributes {
   icon: IconDefinition;
   id?: string;
   onClick?: () => void;

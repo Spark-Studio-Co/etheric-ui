@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { AnchorHTMLAttributes, useState } from "react";
 import useWindowSize from "../../useWindowSize";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
 import { useStyle } from "@/components/styleContext";
@@ -13,9 +13,10 @@ interface ResponsiveProperties {
   borderRadius?: string;
 }
 
-interface IButtonLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    React.CSSProperties {
+type CombinedAttributes = AnchorHTMLAttributes<HTMLAnchorElement> &
+  React.CSSProperties;
+
+interface IButtonLinkProps extends CombinedAttributes {
   href: string;
   backgroundColor?: string;
   target?: string;

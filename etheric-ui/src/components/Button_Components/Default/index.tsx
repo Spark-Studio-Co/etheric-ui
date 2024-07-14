@@ -3,7 +3,10 @@ import { getBreakpoint } from "../../../utils/getBreakpoint";
 import useWindowSize from "@/components/useWindowSize";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
-import { defaultResponsiveStyles, defaultButtonStyles } from "./defaultStyles";
+import {
+  defaultButtonResponsiveStyles,
+  defaultButtonStyles,
+} from "./defaultStyles";
 
 interface ResponsiveProperties {
   width?: string;
@@ -14,9 +17,10 @@ interface ResponsiveProperties {
   borderRadius?: string;
 }
 
-interface IButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    React.CSSProperties {
+type CombinedAttributes = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  React.CSSProperties;
+
+interface IButtonProps extends CombinedAttributes {
   backgroundColor?: string;
   fontSize?: string;
   fontWeight?: string;
@@ -57,7 +61,7 @@ export const Button: React.FC<IButtonProps> = ({
   const breakpoint: DeviceSize = getBreakpoint(windowWidth) as DeviceSize;
 
   const responsiveStyles =
-    responsive[breakpoint] || defaultResponsiveStyles[breakpoint];
+    responsive[breakpoint] || defaultButtonResponsiveStyles[breakpoint];
 
   const styles = useStyle({
     defaultbutton: {
