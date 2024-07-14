@@ -1,4 +1,7 @@
-export const defaultResponsiveStyles: Record<string, React.CSSProperties> = {
+export const defaultButtonResponsiveStyles: Record<
+  string,
+  React.CSSProperties
+> = {
   xxs: {
     width: "clamp(125px, 250 / 390 * 100vw, 500px)",
     height: "clamp(25px, 50 / 390 * 100vw, 100px)",

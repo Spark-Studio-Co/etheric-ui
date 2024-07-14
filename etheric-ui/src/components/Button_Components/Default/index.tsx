@@ -6,7 +6,7 @@ import { DeviceSize } from "@/types/deviceSize";
 import {
   defaultButtonResponsiveStyles,
   defaultButtonStyles,
-} from "./defaultStyles";
+} from "@/defaultStyles/ButtonStyles/defaultButtonStyles";
 
 interface ResponsiveProperties {
   width?: string;
