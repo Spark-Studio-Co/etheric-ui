@@ -1,7 +1,4 @@
-export const defaultButtonResponsiveStyles: Record<
-  string,
-  React.CSSProperties
-> = {
+export const defaultButtonResponsive = {
   xxs: {
     width: "clamp(125px, 250 / 390 * 100vw, 500px)",
     height: "clamp(25px, 50 / 390 * 100vw, 100px)",
@@ -50,7 +47,7 @@ export const defaultButtonResponsiveStyles: Record<
     fontSize: "clamp(6px, 12 / 1024 * 100vw, 24px)",
     borderRadius: "0px",
   },
-  tablet_sm: {
+  tabletSm: {
     width: "clamp(125px, 250 / 1200 * 100vw, 500px)",
     height: "clamp(25px, 50 / 1200 * 100vw, 100px)",
     fontSize: "clamp(6px, 12 / 1200 * 100vw, 24px)",
@@ -98,17 +95,4 @@ export const defaultButtonResponsiveStyles: Record<
     fontSize: "clamp(6px, 12 / 5120 * 100vw, 24px)",
     borderRadius: "0px",
   },
-};
-
-export const defaultButtonStyles = {
-  backgroundColor: "#845EC2",
-  cursor: "pointer",
-  fontWeight: "700",
-  fontFamily: "Helvetica",
-  textDecoration: "none",
-  border: "none",
-  color: "white",
-  hoverBackgroundColor: "#4B4453",
-  hoverColor: "white",
-  transition: "0.3s ease-in-out",
 };
