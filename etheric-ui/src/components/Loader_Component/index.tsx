@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import useWindowSize from "@/components/useWindowSize";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
@@ -27,12 +27,32 @@ interface ILoaderProps extends CombinedAttributes {
   defaultStyles?: boolean;
   border?: string;
   color?: string;
+  image?: ReactNode;
+  spinner: ReactNode;
+  text?: string;
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   transition?: string;
-  text: string;
   id?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
+
+const isCSSProperty = (
+  property: string
+): property is keyof React.CSSProperties => {
+  return property in ({} as React.CSSProperties);
+};
+
+const filterCSSProperties = (
+  props: CombinedAttributes
+): React.CSSProperties => {
+  const cssProps: React.CSSProperties = {};
+  for (const key in props) {
+    if (isCSSProperty(key)) {
+      cssProps[key as keyof React.CSSProperties] = props[key];
+    }
+  }
+  return cssProps;
+};
 
 export const Loader: React.FC<ILoaderProps> = ({
   text,
@@ -45,9 +65,11 @@ export const Loader: React.FC<ILoaderProps> = ({
   textDecoration,
   border,
   color,
+  image,
   transition,
   responsive,
   defaultStyles,
+  spinner,
   ...rest
 }) => {
   const { width: windowWidth } = useWindowSize();
@@ -63,11 +85,13 @@ export const Loader: React.FC<ILoaderProps> = ({
     transition: defaultLoaderStyles.transition,
     fontWeight: defaultLoaderStyles.fontWeight,
     fontFamily: defaultLoaderStyles.fontFamily,
+    display: defaultLoaderStyles.display,
+    flexDirection: defaultLoaderStyles.flexDirection,
+    gap: defaultLoaderStyles.gap,
     textDecoration: defaultLoaderStyles.textDecoration,
     border: defaultLoaderStyles.border,
-    ...rest,
+    ...filterCSSProperties(rest),
   };
-
   const styles = useStyle({
     loader: {
       ...responsiveStyles,
@@ -90,7 +114,9 @@ export const Loader: React.FC<ILoaderProps> = ({
       }
       {...rest}
     >
-      {text}
+      {image}
+      {spinner}
+      <span>{text}</span>
     </div>
   );
 };

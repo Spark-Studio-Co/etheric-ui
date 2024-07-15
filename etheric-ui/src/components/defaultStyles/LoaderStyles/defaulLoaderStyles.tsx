@@ -1,6 +1,9 @@
 export const defaultLoaderStyles = {
   backgroundColor: "#845EC2",
   fontWeight: "700",
+  display: "flex",
+  flexDirection: "column" as "column", // Explicitly type the value
+  gap: "48px",
   fontFamily: "Helvetica",
   textDecoration: "none",
   color: "white",
