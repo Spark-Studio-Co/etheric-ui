@@ -23,6 +23,7 @@ interface IButtonProps extends CombinedAttributes {
   fontSize?: string;
   fontWeight?: string;
   fontFamily?: string;
+  defaultStyles?: boolean;
   textDecoration?: string;
   border?: string;
   color?: string;
@@ -52,6 +53,7 @@ export const Button: React.FC<IButtonProps> = ({
   hoverBorder,
   transition,
   responsive,
+  defaultStyles,
   ...rest
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -60,6 +62,32 @@ export const Button: React.FC<IButtonProps> = ({
 
   const responsiveStyles =
     responsive[breakpoint] || defaultButtonResponsive[breakpoint];
+
+  const getResponsiveProperty = (
+    property: keyof ResponsiveProperties,
+    defaultValue: string
+  ): string => {
+    const breakpoint: DeviceSize = getBreakpoint(windowWidth) as DeviceSize;
+    return responsive[breakpoint]?.[property] || defaultValue;
+  };
+
+  const combinedStyles: React.CSSProperties = {
+    ...(defaultStyles ? defaultButtonStyles : {}),
+    ...responsiveStyles,
+    color: isHovered
+      ? hoverColor || defaultButtonStyles.hoverColor
+      : color || defaultButtonStyles.color,
+    backgroundColor: isHovered
+      ? hoverBackgroundColor || defaultButtonStyles.hoverBackgroundColor
+      : backgroundColor || defaultButtonStyles.backgroundColor,
+    transition: transition || defaultButtonStyles.transition,
+    cursor: defaultButtonStyles.cursor,
+    fontWeight: fontWeight || defaultButtonStyles.fontWeight,
+    fontFamily: fontFamily || defaultButtonStyles.fontFamily,
+    textDecoration: textDecoration || defaultButtonStyles.textDecoration,
+    border: border || defaultButtonStyles.border,
+    ...rest,
+  };
 
   const styles = useStyle({
     defaultbutton: {
@@ -80,14 +108,6 @@ export const Button: React.FC<IButtonProps> = ({
     },
   });
 
-  const getResponsiveProperty = (
-    property: keyof ResponsiveProperties,
-    defaultValue: string
-  ): string => {
-    const breakpoint: DeviceSize = getBreakpoint(windowWidth) as DeviceSize;
-    return responsive[breakpoint]?.[property] || defaultValue;
-  };
-
   const getMargin = () => getResponsiveProperty("margin", "5px");
 
   const getFontSize = () => getResponsiveProperty("fontSize", "16px");
@@ -104,15 +124,19 @@ export const Button: React.FC<IButtonProps> = ({
     <button
       id={id}
       onClick={onClick}
-      style={{
-        ...styles.defaultbutton,
-        margin: getMargin(),
-        fontSize: getFontSize(),
-        padding: getPadding(),
-        width: getWidth(),
-        height: getHeight(),
-        borderRadius: getBorderRadius(),
-      }}
+      style={
+        defaultStyles
+          ? {
+              ...styles.defaultbutton,
+              margin: getMargin(),
+              fontSize: getFontSize(),
+              padding: getPadding(),
+              width: getWidth(),
+              height: getHeight(),
+              borderRadius: getBorderRadius(),
+            }
+          : combinedStyles
+      }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       {...rest}
