@@ -9,6 +9,7 @@ interface StyleTypes {
   defaultbutton: React.CSSProperties;
   iconbutton: React.CSSProperties;
   defaultinput: React.CSSProperties;
+  loader: React.CSSProperties;
   mergeStyles?: (customStyles: Partial<StyleTypes>) => StyleTypes;
 }
 
@@ -60,6 +61,17 @@ const defaultStyles: StyleTypes = {
   defaultinput: {
     cursor: "text",
     outline: "none",
+  },
+  loader: {
+    width: "100vw",
+    height: "100vw",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyItems: "center",
+    zIndex: "10",
+    position: "fixed",
+    top: "0",
+    left: "0",
   },
   mergeStyles: (customStyles) => {
     return {

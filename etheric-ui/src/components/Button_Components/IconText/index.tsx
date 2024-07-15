@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
+import { defaultIconButtonResponsive } from "@/components/defaultStyles/IconButtonStyles/defaultIconButtonResponsive";
+import { defaultIconButtonStyles } from "@/components/defaultStyles/IconButtonStyles/defaultIconButtonStyles";
 
 interface ResponsiveProperties {
   width?: string;
