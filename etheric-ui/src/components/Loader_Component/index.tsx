@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import useWindowSize from "@/components/useWindowSize";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
 import { getBreakpoint } from "@/utils/getBreakpoint";
 import { defaultLoaderResponsive } from "../defaultStyles/LoaderStyles/defaultLoaderResponsive";
+import { defaultLoaderStyles } from "../defaultStyles/LoaderStyles/defaulLoaderStyles";
 
 interface ResponsiveProperties {
   width?: string;
@@ -23,12 +24,10 @@ interface ILoaderProps extends CombinedAttributes {
   fontWeight?: string;
   fontFamily?: string;
   textDecoration?: string;
+  defaultStyles?: boolean;
   border?: string;
   color?: string;
-  hoverBackgroundColor?: string;
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
-  hoverColor?: string;
-  hoverBorder?: string;
   transition?: string;
   text: string;
   id?: string;
@@ -46,11 +45,9 @@ export const Loader: React.FC<ILoaderProps> = ({
   textDecoration,
   border,
   color,
-  hoverBackgroundColor,
-  hoverColor,
-  hoverBorder,
   transition,
   responsive,
+  defaultStyles,
   ...rest
 }) => {
   const { width: windowWidth } = useWindowSize();
@@ -58,6 +55,18 @@ export const Loader: React.FC<ILoaderProps> = ({
 
   const responsiveStyles =
     responsive[breakpoint] || defaultLoaderResponsive[breakpoint];
+
+  const combinedStyles: React.CSSProperties = {
+    ...responsiveStyles,
+    color: defaultLoaderStyles.color,
+    backgroundColor: defaultLoaderStyles.backgroundColor,
+    transition: defaultLoaderStyles.transition,
+    fontWeight: defaultLoaderStyles.fontWeight,
+    fontFamily: defaultLoaderStyles.fontFamily,
+    textDecoration: defaultLoaderStyles.textDecoration,
+    border: defaultLoaderStyles.border,
+    ...rest,
+  };
 
   const styles = useStyle({
     loader: {
@@ -68,32 +77,17 @@ export const Loader: React.FC<ILoaderProps> = ({
     },
   });
 
-  const getResponsiveProperty = (
-    property: keyof ResponsiveProperties,
-    defaultValue: string
-  ): string => {
-    const breakpoint: DeviceSize = getBreakpoint(windowWidth) as DeviceSize;
-    return responsive[breakpoint]?.[property] || defaultValue;
-  };
-
-  const getMargin = () => getResponsiveProperty("margin", "5px");
-
-  const getFontSize = () => getResponsiveProperty("fontSize", "16px");
-
-  const getPadding = () => getResponsiveProperty("padding", "5px");
-
-  const getBorderRadius = () => getResponsiveProperty("borderRadius", "20px");
-
   return (
     <div
       id={id}
-      style={{
-        ...styles.loader,
-        margin: getMargin(),
-        fontSize: getFontSize(),
-        padding: getPadding(),
-        borderRadius: getBorderRadius(),
-      }}
+      // style={combinedStyles}
+      style={
+        defaultStyles
+          ? {
+              ...styles.loader,
+            }
+          : combinedStyles
+      }
       {...rest}
     >
       {text}
