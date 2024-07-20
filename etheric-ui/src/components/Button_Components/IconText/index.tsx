@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import useWindowSize from "../../useWindowSize";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
-import useWindowSize from "@/components/useWindowSize";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
+import { defaultIconButtonResponsive } from "@/components/defaultStyles/IconButtonStyles/defaultIconButtonResponsive";
+import { defaultIconButtonStyles } from "@/components/defaultStyles/IconButtonStyles/defaultIconButtonStyles";
 
 interface ResponsiveProperties {
   width?: string;
@@ -11,32 +15,39 @@ interface ResponsiveProperties {
   margin?: string;
   padding?: string;
   borderRadius?: string;
+  iconFontSize?: string;
+  gap?: string;
 }
 
-interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type CombinedAttributes = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  React.CSSProperties;
+
+interface IIconTextProps extends CombinedAttributes {
+  icon: IconDefinition;
   backgroundColor?: string;
-  fontSize?: string;
   fontWeight?: string;
   fontFamily?: string;
   textDecoration?: string;
   border?: string;
   color?: string;
   hoverBackgroundColor?: string;
-  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   hoverColor?: string;
   hoverBorder?: string;
   transition?: string;
   text: string;
+  iconColor?: string;
+  iconHoverColor?: string;
   id?: string;
+  responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const Button: React.FC<IButtonProps> = ({
+export const IconTextButton: React.FC<IIconTextProps> = ({
+  icon,
   text,
   onClick,
   id,
   backgroundColor,
-  fontSize,
   fontWeight,
   fontFamily,
   textDecoration,
@@ -45,6 +56,8 @@ export const Button: React.FC<IButtonProps> = ({
   hoverBackgroundColor,
   hoverColor,
   hoverBorder,
+  iconColor,
+  iconHoverColor,
   transition,
   responsive,
   ...rest
@@ -53,7 +66,7 @@ export const Button: React.FC<IButtonProps> = ({
   const { width: windowWidth } = useWindowSize();
 
   const styles = useStyle({
-    defaultbutton: {
+    iconbutton: {
       color: isHovered ? hoverColor : color,
       border: isHovered ? hoverBorder : border,
       transition,
@@ -80,29 +93,50 @@ export const Button: React.FC<IButtonProps> = ({
 
   const getWidth = () => getResponsiveProperty("width", "20px");
 
-  const getHeight = () => getResponsiveProperty("width", "20px");
+  const getHeight = () => getResponsiveProperty("height", "20px");
 
   const getBorderRadius = () => getResponsiveProperty("borderRadius", "20px");
+
+  const getIconFontSize = () => getResponsiveProperty("iconFontSize", "24px");
+
+  const getGap = () => getResponsiveProperty("gap", "20px");
 
   return (
     <button
       id={id}
       onClick={onClick}
       style={{
-        ...styles.defaultbutton,
+        ...styles.iconbutton,
         margin: getMargin(),
-        fontSize: getFontSize(),
+        borderRadius: getBorderRadius(),
+        height: getHeight(),
         padding: getPadding(),
         width: getWidth(),
-        height: getHeight(),
-        borderRadius: getBorderRadius(),
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       {...rest}
-      type="submit"
     >
-      {text}
+      <FontAwesomeIcon
+        icon={icon}
+        style={{
+          ...styles.iconbutton,
+          color: isHovered ? iconHoverColor : iconColor || color,
+          fontSize: getIconFontSize(),
+          marginRight: getGap(),
+        }}
+      />
+      <span
+        style={{
+          ...styles.iconbutton,
+          fontSize: getFontSize(),
+          color: isHovered ? hoverColor : color,
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {text}
+      </span>
     </button>
   );
 };

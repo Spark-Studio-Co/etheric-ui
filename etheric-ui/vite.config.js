@@ -12,8 +12,8 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, "./src/components/index.tsx"),
-            name: "spark-ui",
-            fileName: "spark-ui",
+            name: "etheric-ui",
+            fileName: "etheric-ui",
         },
         rollupOptions: {
             external: ["react", "react-dom"],

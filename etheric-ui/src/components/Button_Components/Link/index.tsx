@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { AnchorHTMLAttributes, useState } from "react";
 import useWindowSize from "../../useWindowSize";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getBreakpoint } from "../../../utils/getBreakpoint";
 import { useStyle } from "@/components/styleContext";
 import { DeviceSize } from "@/types/deviceSize";
@@ -13,13 +11,15 @@ interface ResponsiveProperties {
   margin?: string;
   padding?: string;
   borderRadius?: string;
-  iconFontSize?: string;
-  gap?: string;
 }
 
-interface IIconTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: IconDefinition;
+type CombinedAttributes = AnchorHTMLAttributes<HTMLAnchorElement> &
+  React.CSSProperties;
+
+interface IButtonLinkProps extends CombinedAttributes {
+  href: string;
   backgroundColor?: string;
+  target?: string;
   fontWeight?: string;
   fontFamily?: string;
   textDecoration?: string;
@@ -30,15 +30,13 @@ interface IIconTextProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   hoverBorder?: string;
   transition?: string;
   text: string;
-  iconColor?: string;
-  iconHoverColor?: string;
   id?: string;
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-export const IconTextButton: React.FC<IIconTextProps> = ({
-  icon,
+export const LinkButton: React.FC<IButtonLinkProps> = ({
+  href,
   text,
   onClick,
   id,
@@ -51,8 +49,7 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
   hoverBackgroundColor,
   hoverColor,
   hoverBorder,
-  iconColor,
-  iconHoverColor,
+  target,
   transition,
   responsive,
   ...rest
@@ -61,7 +58,7 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
   const { width: windowWidth } = useWindowSize();
 
   const styles = useStyle({
-    iconbutton: {
+    navlinkbutton: {
       color: isHovered ? hoverColor : color,
       border: isHovered ? hoverBorder : border,
       transition,
@@ -69,6 +66,8 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
       fontWeight,
       fontFamily,
       backgroundColor: isHovered ? hoverBackgroundColor : backgroundColor,
+      display: "inline-block",
+      ...rest,
     },
   });
 
@@ -81,57 +80,32 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
   };
 
   const getMargin = () => getResponsiveProperty("margin", "5px");
-
   const getFontSize = () => getResponsiveProperty("fontSize", "16px");
-
   const getPadding = () => getResponsiveProperty("padding", "5px");
-
-  const getWidth = () => getResponsiveProperty("width", "20px");
-
-  const getHeight = () => getResponsiveProperty("width", "20px");
-
+  const getWidth = () => getResponsiveProperty("width", "auto");
+  const getHeight = () => getResponsiveProperty("height", "auto");
   const getBorderRadius = () => getResponsiveProperty("borderRadius", "20px");
 
-  const getIconFontSize = () => getResponsiveProperty("iconFontSize", "24px");
-
-  const getGap = () => getResponsiveProperty("gap", "20px");
-
   return (
-    <button
+    <a
       id={id}
-      onClick={onClick}
+      href={href}
+      target={target}
       style={{
-        ...styles.iconbutton,
+        ...styles.navlinkbutton,
         margin: getMargin(),
-        borderRadius: getBorderRadius(),
-        height: getHeight(),
+        fontSize: getFontSize(),
         padding: getPadding(),
         width: getWidth(),
+        height: getHeight(),
+        borderRadius: getBorderRadius(),
       }}
+      onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       {...rest}
     >
-      <FontAwesomeIcon
-        icon={icon}
-        style={{
-          ...styles.iconbutton,
-          color: isHovered ? iconHoverColor : iconColor || color,
-          fontSize: getIconFontSize(),
-          marginRight: getGap(),
-        }}
-      />
-      <span
-        style={{
-          ...styles.iconbutton,
-          fontSize: getFontSize(),
-          color: isHovered ? hoverColor : color,
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {text}
-      </span>
-    </button>
+      {text}
+    </a>
   );
 };
