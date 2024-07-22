@@ -119,7 +119,6 @@ export const FooterSocial: React.FC<IFooterProps> = ({
   buttonHref,
   linkColor,
   buttonTextDecoration,
-  buttonTransition,
   linkBackgroundColor,
   linkFontWeight,
   linkFontFamily,
@@ -168,7 +167,7 @@ export const FooterSocial: React.FC<IFooterProps> = ({
   const styles = useStyle({
     contactlinkbutton: {
       color: isHovered ? buttonHoverColor : buttonColor,
-      transition: buttonTransition,
+      transition: linkTransition,
       textDecoration: buttonTextDecoration,
       border: isHovered ? buttonHoverBorder : buttonBorder,
       backgroundColor: isHovered
@@ -206,8 +205,6 @@ export const FooterSocial: React.FC<IFooterProps> = ({
   const getFooterMargin = () => getResponsiveProperty("footerMargin", "auto");
   const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
 
-  const allRightsFontSize = getResponsiveProperty("allRightsFontSize", "12px");
-  const allRightsMargin = getResponsiveProperty("allRightsMargin", "20px auto");
   return (
     <footer
       style={{
@@ -277,6 +274,7 @@ export const FooterSocial: React.FC<IFooterProps> = ({
           href={buttonHref}
           style={{
             ...styles.contactlinkbutton,
+            cursor: "pointer",
             padding: getResponsiveProperty("buttonPadding", "10px 20px"),
             fontSize: getResponsiveProperty("buttonFontSize", "16px"),
             margin: getResponsiveProperty("buttonMargin", "0 10px"),
@@ -350,8 +348,8 @@ export const FooterSocial: React.FC<IFooterProps> = ({
       ) : (
         <span
           style={{
-            fontSize: allRightsFontSize,
-            margin: allRightsMargin,
+            fontSize: getResponsiveProperty("allRightsFontSize", "8px"),
+            margin: getResponsiveProperty("allRightsMargin", "auto"),
           }}
         >
           © All rights reserved.

@@ -1,0 +1,17 @@
+export const defaultFooterStyles = {
+  backgroundColorFooter: "transparent",
+  buttonBackgroundColor: "#845EC2",
+  buttonTextDecoration: "none",
+  buttonText: "Subscribe",
+  buttonColor: "#ffffff",
+  linkFontWeight: "normal",
+  linkFontFamily: "Arial, sans-serif",
+  linkTextDecoration: "none",
+  hoverButtonBackgroundColor: "none",
+  buttonHoverColor: "none",
+  linkColor: "#845EC2",
+  linkHoverColor: "none",
+  separatorBackgroundColor: "#845EC2",
+  iconHoverColor: "#845EC2",
+  iconColor: "#4B4453",
+};

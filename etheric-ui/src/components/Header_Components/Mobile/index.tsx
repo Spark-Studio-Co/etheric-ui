@@ -14,13 +14,13 @@ interface ResponsiveProperties {
   buttonFontSize?: string;
   burgerLineHeight?: string;
   buttonMargin?: string;
-  phonePadding?: string;
+  privateDataPadding?: string;
+  privateDataGap?: string;
   phoneFontSize?: string;
   phoneMargin?: string;
   phoneWidth?: string;
   phoneHeight?: string;
   phoneBorderRadius?: string;
-  emailPadding?: string;
   emailFontSize?: string;
   emailMargin?: string;
   emailWidth?: string;
@@ -224,7 +224,7 @@ export const HeaderMobile: React.FC<Link> = ({
         <a href={logoHref} style={{ scrollBehavior: "smooth" }}>
           <img
             src={logo}
-            alt="Logo"
+            alt="Etheric"
             style={{
               width: getLogoWidth(),
               height: getLogoHeight(),
@@ -233,189 +233,215 @@ export const HeaderMobile: React.FC<Link> = ({
         </a>
         {isBurgerMenu ? (
           <>
-            <div
-              style={{
-                cursor: "pointer",
-                height: getResponsiveProperty("burgerContainerHeight", "20px"),
-                width: getResponsiveProperty("burgerContainerWidth", "20px"),
-                margin: getResponsiveProperty("burgerContainerMargin", "auto"),
-                overflow: "visible",
-                position: "relative",
-                zIndex: "9999",
-              }}
-              onClick={() => handleBurgerClick()}
-            >
-              <span
-                style={{
-                  background: burgerLineColor,
-                  display: "block",
-                  height: getResponsiveProperty("burgerLineHeight", "2px"),
-                  position: "absolute",
-                  transition: "0.3s ease-in-out",
-                  width: getResponsiveProperty("burgerLineWidth", "27px"),
-                  top: isActive
-                    ? "0px"
-                    : getResponsiveProperty("topLineTop", "-8px"),
-                  transform: isActive ? "rotate(45deg)" : "none",
-                }}
-              ></span>
-              <span
-                style={{
-                  background: burgerLineColor,
-                  display: "block",
-                  height: getResponsiveProperty("burgerLineHeight", "2px"),
-                  position: "absolute",
-                  transition: "0.3s ease-in-out",
-                  width: getResponsiveProperty("burgerLineWidth", "27px"),
-                  opacity: isActive ? 0 : 1,
-                  top: "0px",
-                }}
-              ></span>
-              <span
-                style={{
-                  background: burgerLineColor,
-                  display: "block",
-                  height: getResponsiveProperty("burgerLineHeight", "2px"),
-                  position: "absolute",
-                  transition: "0.3s ease-in-out",
-                  width: getResponsiveProperty("burgerLineWidth", "27px"),
-                  top: isActive
-                    ? "0px"
-                    : getResponsiveProperty("bottomLineTop", "8px"),
-                  transform: isActive ? "rotate(-45deg)" : "none",
-                }}
-              ></span>
-            </div>
-            {isOpen && (
+            <div>
               <div
                 style={{
-                  background: menuBackground,
-                  width: "100%",
-                  height: "100vh",
-                  display: "flex",
-                  position: "fixed",
-                  left: "0",
-                  top: "0",
-                  boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
-                  zIndex: "1000",
-                  overflow: "hidden",
+                  cursor: "pointer",
+                  height: getResponsiveProperty("burgerContainerHeight", "0"),
+                  width: getResponsiveProperty("burgerContainerWidth", "0"),
+                  margin: getResponsiveProperty("burgerContainerMargin", "0"),
+                  overflow: "visible",
+                  position: "relative",
+                  zIndex: "9999",
                 }}
+                onClick={() => handleBurgerClick()}
               >
-                <nav
+                <span
                   style={{
+                    background: burgerLineColor,
+                    display: "block",
+                    height: getResponsiveProperty("burgerLineHeight", "2px"),
                     position: "absolute",
-                    alignItems: menuPosition,
-                    gap: getResponsiveProperty("navigationGap", "20px"),
-                    top: getResponsiveProperty("navigationTop", "150px"),
-                    display: "flex",
-                    flexDirection: "column",
+                    transition: "0.3s ease-in-out",
+                    width: getResponsiveProperty("burgerLineWidth", "27px"),
+                    top: isActive
+                      ? "0px"
+                      : getResponsiveProperty("topLineTop", "-8px"),
+                    transform: isActive ? "rotate(45deg)" : "none",
+                  }}
+                ></span>
+                <span
+                  style={{
+                    background: burgerLineColor,
+                    display: "block",
+                    height: getResponsiveProperty("burgerLineHeight", "2px"),
+                    position: "absolute",
+                    transition: "0.3s ease-in-out",
+                    width: getResponsiveProperty("burgerLineWidth", "27px"),
+                    opacity: isActive ? 0 : 1,
+                    top: "0px",
+                  }}
+                ></span>
+                <span
+                  style={{
+                    background: burgerLineColor,
+                    display: "block",
+                    height: getResponsiveProperty("burgerLineHeight", "2px"),
+                    position: "absolute",
+                    transition: "0.3s ease-in-out",
+                    width: getResponsiveProperty("burgerLineWidth", "27px"),
+                    top: isActive
+                      ? "0px"
+                      : getResponsiveProperty("bottomLineTop", "8px"),
+                    transform: isActive ? "rotate(-45deg)" : "none",
+                  }}
+                ></span>
+              </div>
+              {isOpen && (
+                <div
+                  style={{
+                    background: menuBackground,
                     width: "100%",
-                    padding: getResponsiveProperty("navigationPadding", "0"),
+                    height: "100vh",
+                    display: "flex",
+                    position: "fixed",
+                    left: "0",
+                    top: "0",
+                    boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
+                    zIndex: "1000",
+                    overflow: "hidden",
                   }}
                 >
-                  {links.map((link, index) => (
-                    <a
-                      href={link.href}
-                      key={index}
-                      className={animateLinks ? "link-enter" : "link-exit"}
+                  <nav
+                    style={{
+                      position: "absolute",
+                      alignItems: menuPosition,
+                      gap: getResponsiveProperty("navigationGap", "0"),
+                      top: getResponsiveProperty("navigationTop", "0"),
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "100%",
+                      padding: getResponsiveProperty("navigationPadding", "0"),
+                    }}
+                  >
+                    {links.map((link, index) => (
+                      <a
+                        href={link.href}
+                        key={index}
+                        className={animateLinks ? "link-enter" : "link-exit"}
+                        style={{
+                          ...styles.navlinkbutton,
+                          animationDelay: `${baseDelay * index}s`,
+                          margin: getResponsiveProperty("linkMargin", "0"),
+                          backgroundColor: linkBackgroundColor,
+                          fontSize: getResponsiveProperty(
+                            "linkFontSize",
+                            "20px"
+                          ),
+                          padding: getResponsiveProperty(
+                            "linkPadding",
+                            "10px 20px"
+                          ),
+                          width: getResponsiveProperty("linkWidth", "auto"),
+                          height: getResponsiveProperty("linkHeight", "auto"),
+                          border: linkBorder,
+                          borderRadius: getResponsiveProperty(
+                            "linkBorderRadius",
+                            "0"
+                          ),
+                          color: linkColor,
+                        }}
+                        onClick={handleLinkClick}
+                        role="button"
+                      >
+                        {link.text}
+                      </a>
+                    ))}
+                    <div
                       style={{
-                        ...styles.navlinkbutton,
-                        animationDelay: `${baseDelay * index}s`,
-                        margin: getResponsiveProperty("linkMargin", "0"),
-                        backgroundColor: linkBackgroundColor,
-                        fontSize: getResponsiveProperty("linkFontSize", "20px"),
+                        display: "flex",
+                        flexDirection: "column",
                         padding: getResponsiveProperty(
-                          "linkPadding",
-                          "10px 20px"
+                          "privateDataPadding",
+                          "0 0 0 10px"
                         ),
-                        width: getResponsiveProperty("linkWidth", "auto"),
-                        height: getResponsiveProperty("linkHeight", "auto"),
-                        border: linkBorder,
-                        borderRadius: getResponsiveProperty(
-                          "linkBorderRadius",
-                          "5px"
-                        ),
-                        color: linkColor,
+                        gap: getResponsiveProperty("privateDataGap", "20px"),
                       }}
-                      onClick={handleLinkClick}
-                      role="button"
                     >
-                      {link.text}
-                    </a>
-                  ))}
-                  <a
-                    href={phoneHref}
-                    className={animateLinks ? "link-enter" : "link-exit"}
-                    style={{
-                      animationDelay: "0.5s",
-                      padding: getResponsiveProperty(
-                        "phonePadding",
-                        "10px 20px"
-                      ),
-                      fontSize: getResponsiveProperty("phoneFontSize", "16px"),
-                      margin: getResponsiveProperty("phoneMargin", "0"),
-                      width: getResponsiveProperty("phoneWidth", "auto"),
-                      height: getResponsiveProperty("phoneHeight", "auto"),
-                      borderRadius: getResponsiveProperty(
-                        "phoneBorderRadius",
-                        "5px"
-                      ),
-                      color: phoneColor,
-                      textDecoration: phoneTextDecoration,
-                      border: phoneBorder,
-                      backgroundColor: phoneBackgroundColor,
-                      fontWeight: phoneFontWeight,
-                      fontFamily: phoneFontFamily,
-                    }}
-                    onClick={handleLinkClick}
-                    role="button"
-                  >
-                    {phoneText}
-                  </a>
-                  <a
-                    href={emailHref}
-                    className={animateLinks ? "link-enter" : "link-exit"}
-                    style={{
-                      animationDelay: "0.6s",
-                      padding: getResponsiveProperty(
-                        "emailPadding",
-                        "10px 20px"
-                      ),
-                      fontSize: getResponsiveProperty("emailFontSize", "16px"),
-                      margin: getResponsiveProperty("emailMargin", "0"),
-                      width: getResponsiveProperty("emailWidth", "auto"),
-                      height: getResponsiveProperty("emailHeight", "auto"),
-                      borderRadius: getResponsiveProperty(
-                        "emailBorderRadius",
-                        "5px"
-                      ),
-                      color: emailColor,
-                      textDecoration: emailTextDecoration,
-                      border: emailBorder,
-                      backgroundColor: emailBackgroundColor,
-                      fontWeight: emailFontWeight,
-                      fontFamily: emailFontFamily,
-                    }}
-                    onClick={handleLinkClick}
-                    role="button"
-                  >
-                    {emailText}
-                  </a>
-                </nav>
-              </div>
-            )}
+                      {phoneText && (
+                        <a
+                          href={phoneHref}
+                          className={animateLinks ? "link-enter" : "link-exit"}
+                          style={{
+                            animationDelay: "0.5s",
+                            fontSize: getResponsiveProperty(
+                              "phoneFontSize",
+                              "16px"
+                            ),
+                            margin: getResponsiveProperty("phoneMargin", "0"),
+                            width: getResponsiveProperty("phoneWidth", "auto"),
+                            height: getResponsiveProperty(
+                              "phoneHeight",
+                              "auto"
+                            ),
+                            borderRadius: getResponsiveProperty(
+                              "phoneBorderRadius",
+                              "5px"
+                            ),
+                            color: phoneColor,
+                            textDecoration: phoneTextDecoration,
+                            border: phoneBorder,
+                            backgroundColor: phoneBackgroundColor,
+                            fontWeight: phoneFontWeight,
+                            fontFamily: phoneFontFamily,
+                          }}
+                          onClick={handleLinkClick}
+                          role="button"
+                        >
+                          {phoneText}
+                        </a>
+                      )}
+                      {emailText && (
+                        <a
+                          href={emailHref}
+                          className={animateLinks ? "link-enter" : "link-exit"}
+                          style={{
+                            animationDelay: "0.6s",
+                            fontSize: getResponsiveProperty(
+                              "emailFontSize",
+                              "16px"
+                            ),
+                            margin: getResponsiveProperty("emailMargin", "0"),
+                            width: getResponsiveProperty("emailWidth", "auto"),
+                            height: getResponsiveProperty(
+                              "emailHeight",
+                              "auto"
+                            ),
+                            borderRadius: getResponsiveProperty(
+                              "emailBorderRadius",
+                              "5px"
+                            ),
+                            color: emailColor,
+                            textDecoration: emailTextDecoration,
+                            border: emailBorder,
+                            backgroundColor: emailBackgroundColor,
+                            fontWeight: emailFontWeight,
+                            fontFamily: emailFontFamily,
+                          }}
+                          onClick={handleLinkClick}
+                          role="button"
+                        >
+                          {emailText}
+                        </a>
+                      )}
+                    </div>
+                  </nav>
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <a
             href={buttonHref}
             style={{
               ...styles.contactlinkbutton,
-              padding: getResponsiveProperty("buttonPadding", "10px 20px"),
-              fontSize: getResponsiveProperty("buttonFontSize", "16px"),
-              margin: getResponsiveProperty("buttonMargin", "0 10px"),
+              cursor: "pointer",
+              padding: getResponsiveProperty("buttonPadding", "auto"),
+              fontSize: getResponsiveProperty("buttonFontSize", "auto"),
+              margin: getResponsiveProperty("buttonMargin", "0"),
               width: getResponsiveProperty("buttonWidth", "auto"),
               height: getResponsiveProperty("buttonHeight", "auto"),
-              borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
+              borderRadius: getResponsiveProperty("buttonBorderRadius", "0"),
             }}
             role="button"
           >

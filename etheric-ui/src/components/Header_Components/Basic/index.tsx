@@ -5,11 +5,8 @@ import { useStyle } from "../../styleContext";
 import { DeviceSize } from "@/types/deviceSize";
 
 interface ResponsiveProperties {
-  width?: string;
-  height?: string;
-  fontSize?: string;
-  margin?: string;
-  padding?: string;
+  logoWidth?: string;
+  logoHeight?: string;
   borderRadius?: string;
   linkWidth?: string;
   linkHeight?: string;
@@ -82,7 +79,6 @@ export const HeaderBasic: React.FC<Link> = ({
   buttonHref,
   linkColor,
   buttonTextDecoration,
-  buttonTransition,
   id,
   linkBackgroundColor,
   linkFontWeight,
@@ -115,7 +111,7 @@ export const HeaderBasic: React.FC<Link> = ({
   const styles = useStyle({
     contactlinkbutton: {
       color: isHovered ? buttonHoverColor : buttonColor,
-      transition: buttonTransition,
+      transition: linkTransition,
       textDecoration: buttonTextDecoration,
       border: isHovered ? buttonHoverBorder : buttonBorder,
       backgroundColor: isHovered
@@ -142,8 +138,8 @@ export const HeaderBasic: React.FC<Link> = ({
     return responsive[breakpoint]?.[property] || defaultValue;
   };
 
-  const getLogoWidth = () => getResponsiveProperty("width", "auto");
-  const getLogoHeight = () => getResponsiveProperty("height", "auto");
+  const getLogoWidth = () => getResponsiveProperty("logoWidth", "auto");
+  const getLogoHeight = () => getResponsiveProperty("logoHeight", "auto");
 
   const getHeaderWidth = () => getResponsiveProperty("headerWidth", "100%");
   const getHeaderMargin = () => getResponsiveProperty("headerMargin", "0 auto");
@@ -212,6 +208,10 @@ export const HeaderBasic: React.FC<Link> = ({
           href={buttonHref}
           style={{
             ...styles.contactlinkbutton,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
             padding: getResponsiveProperty("buttonPadding", "10px 20px"),
             fontSize: getResponsiveProperty("buttonFontSize", "16px"),
             margin: getResponsiveProperty("buttonMargin", "0 10px"),

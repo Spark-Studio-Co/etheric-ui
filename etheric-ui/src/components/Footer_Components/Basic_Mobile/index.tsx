@@ -181,9 +181,6 @@ export const FooterBasicMobile: React.FC<IFooterProps> = ({
   const getFooterMargin = () => getResponsiveProperty("footerMargin", "auto");
   const getFooterWidth = () => getResponsiveProperty("footerWidth", "100%");
 
-  const allRightsFontSize = getResponsiveProperty("allRightsFontSize", "12px");
-  const allRightsMargin = getResponsiveProperty("allRightsMargin", "20px auto");
-
   return (
     <footer
       style={{
@@ -198,8 +195,9 @@ export const FooterBasicMobile: React.FC<IFooterProps> = ({
       <a href={logoHref} style={{ scrollBehavior: "smooth" }}>
         <img
           src={logo}
-          alt="Logo"
+          alt="Etheric"
           style={{
+            cursor: "pointer",
             margin: getLogoMargin(),
             width: getLogoWidth(),
             height: getLogoHeight(),
@@ -267,7 +265,7 @@ export const FooterBasicMobile: React.FC<IFooterProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: getResponsiveProperty("separatorHeight", "2px"),
+          height: getResponsiveProperty("separatorHeight", "1px"),
           background: separatorBackgroundColor,
           border: "none",
         }}
@@ -296,8 +294,8 @@ export const FooterBasicMobile: React.FC<IFooterProps> = ({
       ) : (
         <span
           style={{
-            fontSize: allRightsFontSize,
-            margin: allRightsMargin,
+            fontSize: getResponsiveProperty("allRightsFontSize", "8px"),
+            margin: getResponsiveProperty("allRightsMargin", "auto"),
           }}
         >
           © All rights reserved.

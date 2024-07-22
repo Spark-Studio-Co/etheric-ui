@@ -106,6 +106,10 @@ export const IconTextButton: React.FC<IIconTextProps> = ({
       id={id}
       onClick={onClick}
       style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
         ...styles.iconbutton,
         margin: getMargin(),
         borderRadius: getBorderRadius(),
