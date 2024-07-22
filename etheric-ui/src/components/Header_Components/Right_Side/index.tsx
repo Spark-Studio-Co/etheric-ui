@@ -5,8 +5,8 @@ import { useStyle } from "../../styleContext";
 import { DeviceSize } from "@/types/deviceSize";
 
 interface ResponsiveProperties {
-  width?: string;
-  height?: string;
+  logoWidth?: string;
+  logoHeight?: string;
   fontSize?: string;
   margin?: string;
   padding?: string;
@@ -18,16 +18,16 @@ interface ResponsiveProperties {
   linkMargin?: string;
   linkBorderRadius?: string;
   linkPadding?: string;
-  contactWidth?: string;
-  contactHeight?: string;
-  contactFontSize?: string;
-  contactMargin?: string;
-  contactBorderRadius?: string;
-  contactPadding?: string;
+  buttonWidth?: string;
+  buttonHeight?: string;
+  buttonFontSize?: string;
+  buttonMargin?: string;
+  buttonBorderRadius?: string;
+  buttonPadding?: string;
   headerWidth?: string;
   containerWidth?: string;
   headerMargin?: string;
-  gap?: string;
+  navigationGap?: string;
 }
 
 interface LinkProps {
@@ -39,63 +39,55 @@ interface Link {
   logo: string;
   links: LinkProps[];
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
-  hoverContactBackgroundColor?: string;
-  contactBackgroundColor?: string;
-  contactFontWeight?: string;
-  contactFontFamily?: string;
-  contactTextDecoration?: string;
-  contactText: string;
-  contactHref: string;
-  contactHoverBorder?: string;
-  contactBorder?: string;
-  contactHoverColor?: string;
-  contactColor?: string;
-  contactTransition?: string;
   logoHref?: string;
-  gap?: string;
-  backgroundColor?: string;
-  fontSize?: string;
-  fontWeight?: string;
-  fontFamily?: string;
-  textDecoration?: string;
-  border?: string;
-  color?: string;
-  hoverBackgroundColor?: string;
-  hoverColor?: string;
-  hoverBorder?: string;
-  transition?: string;
-  padding?: string;
-  cursor?: string;
-  id?: string;
+  buttonText?: string;
+  buttonBackgroundColor?: string;
+  buttonBorder?: string;
+  buttonColor?: string;
+  buttonFontFamily?: string;
+  buttonFontWeight?: string;
+  hoverButtonBorder?: string;
+  hoverButtonColor?: string;
+  hoverButtonBackgroundColor?: string;
+  buttonHref?: string;
+  buttonTextDecoration?: string;
+  linkColor?: string;
+  linkBackgroundColor?: string;
+  linkFontWeight?: string;
+  linkFontFamily?: string;
+  linkTextDecoration?: string;
+  linkBorder?: string;
+  hoverLinkBackgroundColor?: string;
+  hoverLinkColor?: string;
+  hoverLinkBorder?: string;
+  linkTransition?: string;
 }
 
 export const HeaderRightSide: React.FC<Link> = ({
   links,
   responsive,
-  contactBackgroundColor,
-  contactBorder,
-  contactColor,
-  contactText,
+  buttonBackgroundColor,
+  buttonBorder,
+  buttonColor,
+  buttonText,
   logoHref,
-  contactFontFamily,
-  contactFontWeight,
-  contactHoverBorder,
-  contactHoverColor,
-  hoverContactBackgroundColor,
-  contactHref,
-  color,
-  contactTextDecoration,
-  contactTransition,
-  id,
-  backgroundColor,
-  fontWeight,
-  fontFamily,
-  textDecoration,
-  border,
-  hoverBackgroundColor,
-  hoverColor,
-  hoverBorder,
-  transition,
+  buttonFontFamily,
+  buttonFontWeight,
+  hoverButtonBorder,
+  hoverButtonColor,
+  hoverButtonBackgroundColor,
+  buttonHref,
+  linkColor,
+  buttonTextDecoration,
+  linkBackgroundColor,
+  linkFontWeight,
+  linkFontFamily,
+  linkTextDecoration,
+  linkBorder,
+  hoverLinkBackgroundColor,
+  hoverLinkColor,
+  hoverLinkBorder,
+  linkTransition,
   logo,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -117,21 +109,21 @@ export const HeaderRightSide: React.FC<Link> = ({
 
   const styles = useStyle({
     contactlinkbutton: {
-      color: isHovered ? contactHoverColor : contactColor,
-      transition: contactTransition,
-      textDecoration: contactTextDecoration,
-      border: isHovered ? contactHoverBorder : contactBorder,
+      color: isHovered ? hoverButtonColor : buttonColor,
+      transition: linkTransition,
+      textDecoration: buttonTextDecoration,
+      border: isHovered ? hoverButtonBorder : buttonBorder,
       backgroundColor: isHovered
-        ? hoverContactBackgroundColor
-        : contactBackgroundColor,
-      fontWeight: contactFontWeight,
-      fontFamily: contactFontFamily,
+        ? hoverButtonBackgroundColor
+        : buttonBackgroundColor,
+      fontWeight: buttonFontWeight,
+      fontFamily: buttonFontFamily,
     },
     navlinkbutton: {
-      fontWeight: fontWeight,
-      fontFamily: fontFamily,
-      textDecoration: textDecoration,
-      transition: transition,
+      fontWeight: linkFontWeight,
+      fontFamily: linkFontFamily,
+      textDecoration: linkTextDecoration,
+      transition: linkTransition,
     },
   });
 
@@ -145,8 +137,8 @@ export const HeaderRightSide: React.FC<Link> = ({
     return responsive[breakpoint]?.[property] || defaultValue;
   };
 
-  const getLogoWidth = () => getResponsiveProperty("width", "auto");
-  const getLogoHeight = () => getResponsiveProperty("height", "auto");
+  const getLogoWidth = () => getResponsiveProperty("logoWidth", "auto");
+  const getLogoHeight = () => getResponsiveProperty("logoHeight", "auto");
 
   const getHeaderWidth = () => getResponsiveProperty("headerWidth", "100%");
   const getHeaderMargin = () => getResponsiveProperty("headerMargin", "0 auto");
@@ -156,7 +148,6 @@ export const HeaderRightSide: React.FC<Link> = ({
 
   return (
     <header
-      id={id}
       style={{
         width: getHeaderWidth(),
         ...styles.header,
@@ -186,7 +177,10 @@ export const HeaderRightSide: React.FC<Link> = ({
           }}
         >
           <nav
-            style={{ ...styles.nav, gap: getResponsiveProperty("gap", "20px") }}
+            style={{
+              ...styles.nav,
+              gap: getResponsiveProperty("navigationGap", "20px"),
+            }}
           >
             {links.map((link, index) => (
               <a
@@ -196,18 +190,18 @@ export const HeaderRightSide: React.FC<Link> = ({
                   ...styles.navlinkbutton,
                   margin: getResponsiveProperty("linkMargin", "0 10px"),
                   backgroundColor: hoverStates[index]
-                    ? hoverBackgroundColor
-                    : backgroundColor,
+                    ? hoverLinkBackgroundColor
+                    : linkBackgroundColor,
                   fontSize: getResponsiveProperty("linkFontSize", "16px"),
                   padding: getResponsiveProperty("linkPadding", "10px 20px"),
                   width: getResponsiveProperty("linkWidth", "auto"),
                   height: getResponsiveProperty("linkHeight", "auto"),
-                  border: hoverStates[index] ? hoverBorder : border,
+                  border: hoverStates[index] ? hoverLinkBorder : linkBorder,
                   borderRadius: getResponsiveProperty(
                     "linkBorderRadius",
                     "5px"
                   ),
-                  color: hoverStates[index] ? hoverColor : color,
+                  color: hoverStates[index] ? hoverLinkColor : linkColor,
                 }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
@@ -218,21 +212,25 @@ export const HeaderRightSide: React.FC<Link> = ({
             ))}
           </nav>
           <a
-            href={contactHref}
+            href={buttonHref}
             style={{
               ...styles.contactlinkbutton,
-              padding: getResponsiveProperty("contactPadding", "10px 20px"),
-              fontSize: getResponsiveProperty("contactFontSize", "16px"),
-              margin: getResponsiveProperty("contactMargin", "0 10px"),
-              width: getResponsiveProperty("contactWidth", "auto"),
-              height: getResponsiveProperty("contactHeight", "auto"),
-              borderRadius: getResponsiveProperty("contactBorderRadius", "5px"),
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              padding: getResponsiveProperty("buttonPadding", "10px 20px"),
+              fontSize: getResponsiveProperty("buttonFontSize", "16px"),
+              margin: getResponsiveProperty("buttonMargin", "0 10px"),
+              width: getResponsiveProperty("buttonWidth", "auto"),
+              height: getResponsiveProperty("buttonHeight", "auto"),
+              borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             role="button"
           >
-            {contactText}
+            {buttonText}
           </a>
         </div>
       </div>
