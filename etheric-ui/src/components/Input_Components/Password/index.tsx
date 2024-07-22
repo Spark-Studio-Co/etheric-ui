@@ -33,11 +33,13 @@ interface IPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   border?: string;
   focusBackgroundColor?: string;
   focusColor?: string;
+  borderBottom?: string;
   focusBorder?: string;
   transition?: string;
   placeholderColor?: string;
+  hoverBorder?: string;
   focusPlaceholderColor?: string;
-  focusBorderBottomColor?: string;
+  focusBorderBottom?: string;
   borderBottomColor?: string;
   inputType?: "borderBottom";
   iconColor?: string;
@@ -56,6 +58,8 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
   focusBackgroundColor,
   name,
   value,
+  borderBottom,
+  hoverBorder,
   onChange,
   focusColor,
   focusBorder,
@@ -63,7 +67,7 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
   placeholderColor,
   focusPlaceholderColor,
   borderBottomColor,
-  focusBorderBottomColor,
+  focusBorderBottom,
   inputType,
   iconColor,
   iconHoverColor,
@@ -71,6 +75,7 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
 }) => {
   const [visible, setVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [isIconHovered, setIconIsHovered] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
 
@@ -83,6 +88,7 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
   };
 
   const inputStyle: React.CSSProperties = {
+    cursor: "pointer",
     margin: getResponsiveProperty("margin", "5px"),
     padding: getResponsiveProperty("padding", "5px"),
     backgroundColor: isFocused ? focusBackgroundColor : backgroundColor,
@@ -99,24 +105,18 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
       inputType !== "borderBottom"
         ? isFocused
           ? focusBorder
-          : border
+          : isHovered
+            ? hoverBorder
+            : border
         : "none",
     borderBottom:
       inputType === "borderBottom"
         ? isFocused
-          ? focusBorderBottomColor
-          : borderBottomColor
+          ? focusBorderBottom
+          : isHovered
+            ? hoverBorder
+            : borderBottom
         : border,
-  };
-
-  const iconStyle: React.CSSProperties = {
-    position: "absolute",
-    top: getResponsiveProperty("top", "50%"),
-    right: getResponsiveProperty("right", "10px"),
-    fontSize: getResponsiveProperty("iconFontSize", "1rem"),
-    color: isHovered ? iconHoverColor : iconColor,
-    cursor: "pointer",
-    transition,
   };
 
   return (
@@ -132,18 +132,27 @@ export const PasswordInput: React.FC<IPasswordProps> = ({
         className={`default-input ${isFocused ? "focused" : ""} ${s.input} ${inputType === "borderBottom" ? s.borderBottom : ""}`}
         style={inputStyle}
         onFocus={() => setIsFocused(true)}
+        onMouseEnter={() => setIsHovered(true)}
         onChange={onChange}
         value={value}
         name={name}
+        onMouseLeave={() => setIsHovered(false)}
         onBlur={() => setIsFocused(false)}
         {...rest}
       />
       <FontAwesomeIcon
         icon={visible ? faEyeSlash : faEye}
         onClick={() => setVisible(!visible)}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={iconStyle}
+        onMouseEnter={() => setIconIsHovered(true)}
+        onMouseLeave={() => setIconIsHovered(false)}
+        style={{
+          position: "absolute",
+          top: getResponsiveProperty("top", "0"),
+          right: getResponsiveProperty("right", "0"),
+          fontSize: getResponsiveProperty("iconFontSize", "0"),
+          color: isIconHovered ? iconHoverColor : iconColor,
+          cursor: "pointer",
+        }}
       />
     </div>
   );
