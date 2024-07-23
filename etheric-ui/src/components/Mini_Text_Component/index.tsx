@@ -57,7 +57,6 @@ export const MiniText: React.FC<IMiniText> = ({
         fontWeight,
         animation,
         transition,
-        cursor: "pointer",
         color: isHovered ? hoverColor : color,
       }}
       {...rest}

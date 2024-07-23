@@ -16,7 +16,6 @@ interface ResponsiveProperties {
   buttonBorderRadius?: string;
   buttonPadding?: string;
   iconFontSize?: string;
-  containerBoxShadow?: string;
   buttonLeft?: string;
   containerRight?: string;
   containerBorderRadius?: string;
@@ -33,6 +32,7 @@ interface ResponsiveProperties {
 interface KebabMenuProps {
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
   items: string[];
+  containerBoxShadow?: string;
   icon: IconDefinition;
   buttonBackgroundColor?: string;
   containerBackgroundColor?: string;
@@ -67,6 +67,7 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
   iconColor,
   buttonColor,
   iconHoverColor,
+  containerBoxShadow,
   optionZIndex,
   containerBackgroundColor,
   optionHoverColor,
@@ -90,19 +91,17 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
   const getTop = () => getResponsiveProperty("buttonTop", "0px");
   const getRight = () => getResponsiveProperty("buttonRight", "0px");
   const getBottom = () => getResponsiveProperty("buttonBottom", "0px");
-  const getFontSize = () => getResponsiveProperty("buttonFontSize", "16px");
+  const getFontSize = () => getResponsiveProperty("buttonFontSize", "0px");
   const getWidth = () => getResponsiveProperty("buttonWidth", "100%");
   const getHeight = () => getResponsiveProperty("buttonHeight", "auto");
   const getBorderRadius = () =>
     getResponsiveProperty("buttonBorderRadius", "5px");
-  const getIconFontSize = () => getResponsiveProperty("iconFontSize", "24px");
+  const getIconFontSize = () => getResponsiveProperty("iconFontSize", "20px");
   const getMargin = () => getResponsiveProperty("margin", "0px");
   const getLeft = () => getResponsiveProperty("buttonLeft", "25px");
   const getOptionFontSize = () =>
     getResponsiveProperty("optionFontSize", "20px");
 
-  const getContainerBoxShadow = () =>
-    getResponsiveProperty("containerBoxShadow", "0 2px 5px rgba(0,0,0,0.2)");
   const getContainerRight = () =>
     getResponsiveProperty("containerRight", "0px");
   const getContainerTop = () => getResponsiveProperty("containerTop", "0px");
@@ -124,77 +123,80 @@ export const KebabMenu: React.FC<KebabMenuProps> = ({
 
   return (
     <>
-      <button
-        onClick={handleOpenMenu}
-        style={{
-          position: "absolute",
-          padding: getPadding(),
-          top: getTop(),
-          right: getRight(),
-          left: getLeft(),
-          bottom: getBottom(),
-          backgroundColor: buttonBackgroundColor || "defaultColor", // Provide default fallbacks
-          fontSize: getFontSize(),
-          width: getWidth(),
-          height: getHeight(),
-          borderRadius: getBorderRadius(),
-          border: buttonBorder || "none",
-          color: buttonColor || "black",
-          transition: transition || "none",
-          margin: getMargin(),
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <FontAwesomeIcon
-          icon={icon}
+      <div style={{ position: "relative" }}>
+        <button
+          onClick={handleOpenMenu}
           style={{
-            fontSize: getIconFontSize(),
-            color: isHovered ? iconHoverColor : iconColor,
-            transition,
+            cursor: "pointer",
+            padding: getPadding(),
+            top: getTop(),
+            right: getRight(),
+            left: getLeft(),
+            bottom: getBottom(),
+            backgroundColor: buttonBackgroundColor || "transparent",
+            fontSize: getFontSize(),
+            width: getWidth(),
+            height: getHeight(),
+            borderRadius: getBorderRadius(),
+            border: buttonBorder || "none",
+            color: buttonColor || "none",
+            transition: transition || "none",
+            margin: getMargin(),
+            // position: "absolute",
           }}
-        />
-      </button>
-      {isKebabOpen && (
-        <div
-          style={{
-            boxShadow: getContainerBoxShadow(),
-            position: "absolute",
-            zIndex: optionZIndex,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            right: getContainerRight(),
-            top: getContainerTop(),
-            left: getContainerLeft(),
-            bottom: getContainerBottom(),
-            borderRadius: getContainerBorderRadius(),
-            backgroundColor: containerBackgroundColor,
-            width: getContainerWidth(),
-            height: getContainerHeight(),
-          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          {items.map((option, index) => (
-            <span
-              key={index}
-              onClick={() => onClickFunctions[index](index)}
-              style={{
-                padding: getOptionPadding(),
-                margin: getOptionMargin(),
-                transition,
-                fontSize: getOptionFontSize(),
-                fontFamily: optionFontFamily,
-                color: hoveredOption === index ? optionHoverColor : color,
-                cursor: "pointer",
-              }}
-              onMouseEnter={() => setHoveredOption(index)}
-              onMouseLeave={() => setHoveredOption(null)}
-            >
-              {option}
-            </span>
-          ))}
-        </div>
-      )}
+          <FontAwesomeIcon
+            icon={icon}
+            style={{
+              fontSize: getIconFontSize(),
+              color: isHovered ? iconHoverColor : iconColor,
+              transition,
+            }}
+          />
+        </button>
+        {isKebabOpen && (
+          <div
+            style={{
+              boxShadow: containerBoxShadow,
+              zIndex: optionZIndex,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              borderRadius: getContainerBorderRadius(),
+              backgroundColor: containerBackgroundColor,
+              width: getContainerWidth(),
+              height: getContainerHeight(),
+              position: "absolute",
+              right: getContainerRight(),
+              top: getContainerTop(),
+              left: getContainerLeft(),
+              bottom: getContainerBottom(),
+            }}
+          >
+            {items.map((option, index) => (
+              <span
+                key={index}
+                onClick={() => onClickFunctions[index](index)}
+                style={{
+                  padding: getOptionPadding(),
+                  margin: getOptionMargin(),
+                  transition,
+                  fontSize: getOptionFontSize(),
+                  fontFamily: optionFontFamily,
+                  color: hoveredOption === index ? optionHoverColor : color,
+                  cursor: "pointer",
+                }}
+                onMouseEnter={() => setHoveredOption(index)}
+                onMouseLeave={() => setHoveredOption(null)}
+              >
+                {option}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };
