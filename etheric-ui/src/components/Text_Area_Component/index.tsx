@@ -24,6 +24,8 @@ export interface TextAreaProps
   focusPlaceholderColor?: string;
   color?: string;
   id?: string;
+  hoverBorder?: string;
+  transition?: string;
   focusBorder?: string;
   placeholderColor?: string;
   responsive: Partial<Record<DeviceSize, ResponsiveProperties>>;
@@ -36,8 +38,10 @@ export const TextArea: React.FC<TextAreaProps> = ({
   height,
   textAlign,
   background,
+  transition,
   id,
   border,
+  hoverBorder,
   focusPlaceholderColor,
   color,
   focusBorder,
@@ -46,6 +50,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
 
   const getResponsiveProperty = (
@@ -96,14 +101,18 @@ export const TextArea: React.FC<TextAreaProps> = ({
           height: getHeight(),
           textAlign,
           background,
-          border: isFocused ? focusBorder : border,
+          border: isFocused ? focusBorder : isHovered ? hoverBorder : border,
           padding: getPadding(),
           borderRadius: getBorderRadius(),
+          cursor: "pointer",
+          transition,
           overflow: "hidden",
           outline: "none",
           color,
         }}
         placeholder={placeholder}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         required

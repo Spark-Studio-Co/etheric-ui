@@ -28,11 +28,11 @@ export const HorizontalSeparator: React.FC<IHorizontalSeparatorProps> = ({
     return responsive[breakpoint]?.[property] || defaultValue;
   };
 
-  const getMargin = () => getResponsiveProperty("margin", "5px");
+  const getMargin = () => getResponsiveProperty("margin", "0");
 
-  const getWidth = () => getResponsiveProperty("width", "20px");
+  const getWidth = () => getResponsiveProperty("width", "0");
 
-  const getHeight = () => getResponsiveProperty("width", "20px");
+  const getHeight = () => getResponsiveProperty("height", "0");
 
   return (
     <hr
