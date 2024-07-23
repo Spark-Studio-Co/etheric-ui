@@ -122,7 +122,7 @@ export const ResponsiveLinkButton: Story = {
     cursor: "pointer",
     justifyContent: "center",
     fontFamily: "Helvetica",
-    textDecoration: "underline",
+    textDecoration: "none",
     backgroundColor: "#845EC2",
     color: "#ffffff",
     hoverBackgroundColor: "#4B4453",

@@ -15,40 +15,71 @@ type Story = StoryObj<typeof ErrorTab>;
 
 const responsiveSettings = {
   xxs: {
-    fontSize: "12px",
-    padding: "8px",
+    fontSize: "clamp(6px, 12 / 390 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 390 * 100vw, 16px)",
   },
   xs: {
-    fontSize: "14px",
-    padding: "10px",
+    fontSize: "clamp(6px, 12 / 480 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 480 * 100vw, 16px)",
   },
   s: {
-    fontSize: "16px",
-    padding: "12px",
+    fontSize: "clamp(6px, 12 / 575 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 575 * 100vw, 16px)",
   },
   m: {
-    fontSize: "18px",
-    padding: "14px",
+    fontSize: "clamp(6px, 12 / 720 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 720 * 100vw, 16px)",
+  },
+  sm: {
+    fontSize: "clamp(6px, 12 / 860 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 860 * 100vw, 16px)",
   },
   l: {
-    fontSize: "20px",
-    padding: "16px",
+    fontSize: "clamp(6px, 12 / 992 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 992 * 100vw, 16px)",
+  },
+  tablet: {
+    fontSize: "clamp(6px, 12 / 1024 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1024 * 100vw, 16px)",
+  },
+  md: {
+    fontSize: "clamp(6px, 12 / 1100 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1100 * 100vw, 16px)",
+  },
+  tablet_sm: {
+    fontSize: "clamp(6px, 12 / 1200 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1200 * 100vw, 16px)",
+  },
+  lg: {
+    fontSize: "clamp(6px, 12 / 1360 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1360 * 100vw, 16px)",
   },
   xl: {
-    fontSize: "22px",
-    padding: "18px",
+    fontSize: "clamp(6px, 12 / 1520 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1520 * 100vw, 16px)",
   },
   twoXl: {
-    fontSize: "24px",
-    padding: "20px",
+    fontSize: "clamp(6px, 12 / 1680 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1680 * 100vw, 16px)",
   },
   threeXl: {
-    fontSize: "26px",
-    padding: "22px",
+    fontSize: "clamp(6px, 12 / 1920 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 1920 * 100vw, 16px)",
+  },
+  fourXl: {
+    fontSize: "clamp(6px, 12 / 2560 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 2560 * 100vw, 16px)",
+  },
+  fiveXl: {
+    fontSize: "clamp(6px, 12 / 3840 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 3840 * 100vw, 16px)",
+  },
+  sixXl: {
+    fontSize: "clamp(6px, 12 / 5120 * 100vw, 24px)",
+    padding: "clamp(4px, 8 / 5120 * 100vw, 16px)",
   },
 };
 
-// Default story to render the ErrorTab with responsiveness
 export const Default: Story = {
   args: {
     text: "User with such email already exists.",
