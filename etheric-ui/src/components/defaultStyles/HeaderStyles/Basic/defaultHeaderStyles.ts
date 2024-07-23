@@ -3,7 +3,7 @@ export const defaultHeaderStyles = {
   buttonBackgroundColor: "#845EC2",
   buttonBorder: "none",
   buttonColor: "#fff",
-  buttonHoverColor: "none",
+  hoverButtonColor: "none",
   hoverButtonBackgroundColor: "#4B4453",
   buttonTextDecoration: "none",
   linkTextDecoration: "none",

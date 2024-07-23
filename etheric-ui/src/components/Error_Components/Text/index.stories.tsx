@@ -15,22 +15,54 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const responsiveSettings = {
-  xxs: { fontSize: "12px", margin: "5px" },
-  xs: { fontSize: "14px", margin: "10px" },
-  s: { fontSize: "16px", margin: "15px" },
-  m: { fontSize: "18px", margin: "20px" },
-  sm: { fontSize: "20px", margin: "25px" },
-  l: { fontSize: "22px", margin: "30px" },
-  md: { fontSize: "24px", margin: "35px" },
-  tablet: { fontSize: "26px", margin: "40px" },
-  tabletSm: { fontSize: "28px", margin: "45px" },
-  lg: { fontSize: "30px", margin: "50px" },
-  xl: { fontSize: "32px", margin: "55px" },
-  twoXl: { fontSize: "34px", margin: "60px" },
-  threeXl: { fontSize: "36px", margin: "65px" },
-  fourXl: { fontSize: "38px", margin: "70px" },
-  fiveXl: { fontSize: "40px", margin: "75px" },
-  sixXl: { fontSize: "42px", margin: "80px" },
+  xxs: {
+    fontSize: "clamp(6px, 12 / 390 * 100vw, 24px)",
+  },
+  xs: {
+    fontSize: "clamp(6px, 12 / 480 * 100vw, 24px)",
+  },
+  s: {
+    fontSize: "clamp(6px, 12 / 575 * 100vw, 24px)",
+  },
+  m: {
+    fontSize: "clamp(6px, 12 / 720 * 100vw, 24px)",
+  },
+  sm: {
+    fontSize: "clamp(6px, 12 / 860 * 100vw, 24px)",
+  },
+  l: {
+    fontSize: "clamp(6px, 12 / 992 * 100vw, 24px)",
+  },
+  tablet: {
+    fontSize: "clamp(6px, 12 / 1024 * 100vw, 24px)",
+  },
+  md: {
+    fontSize: "clamp(6px, 12 / 1100 * 100vw, 24px)",
+  },
+  tablet_sm: {
+    fontSize: "clamp(6px, 12 / 1200 * 100vw, 24px)",
+  },
+  lg: {
+    fontSize: "clamp(6px, 12 / 1360 * 100vw, 24px)",
+  },
+  xl: {
+    fontSize: "clamp(6px, 12 / 1520 * 100vw, 24px)",
+  },
+  twoXl: {
+    fontSize: "clamp(6px, 12 / 1680 * 100vw, 24px)",
+  },
+  threeXl: {
+    fontSize: "clamp(6px, 12 / 1920 * 100vw, 24px)",
+  },
+  fourXl: {
+    fontSize: "clamp(6px, 12 / 2560 * 100vw, 24px)",
+  },
+  fiveXl: {
+    fontSize: "clamp(6px, 12 / 3840 * 100vw, 24px)",
+  },
+  sixXl: {
+    fontSize: "clamp(6px, 12 / 5120 * 100vw, 24px)",
+  },
 };
 
 export const ResponsiveErrorDisplay: Story = {
@@ -38,7 +70,5 @@ export const ResponsiveErrorDisplay: Story = {
     responsive: responsiveSettings,
     message: "This is a responsive error message.",
     color: "red",
-    fontWeight: "bold",
-    animation: "fadeIn 0.5s ease-out",
   },
 };

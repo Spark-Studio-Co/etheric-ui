@@ -28,8 +28,10 @@ interface IDefaultInputProps
   focusBorder?: string;
   transition?: string;
   focusBorderBottom?: string;
+  type?: string;
   placeholderColor?: string;
   focusPlaceholderColor?: string;
+  hoverBorder?: string;
   borderBottom?: string;
   inputType?: "borderBottom";
 }
@@ -41,11 +43,13 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
   fontWeight,
   value,
   fontFamily,
+  type,
   border,
   color,
   focusBackgroundColor,
   focusColor,
   focusBorder,
+  hoverBorder,
   name,
   transition,
   inputType,
@@ -58,6 +62,7 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
   ...rest
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
 
   const getResponsiveProperty = (
@@ -69,15 +74,16 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
   };
 
   const inputStyle: React.CSSProperties = {
-    margin: getResponsiveProperty("margin", "5px"),
-    padding: getResponsiveProperty("padding", "5px"),
+    cursor: "pointer",
+    margin: getResponsiveProperty("margin", "0"),
+    padding: getResponsiveProperty("padding", "0"),
     backgroundColor: isFocused ? focusBackgroundColor : backgroundColor,
-    fontSize: getResponsiveProperty("fontSize", "16px"),
+    fontSize: getResponsiveProperty("fontSize", "8px"),
     fontWeight: fontWeight,
     fontFamily: fontFamily,
     width: getResponsiveProperty("width", "100%"),
     height: getResponsiveProperty("height", "auto"),
-    borderRadius: getResponsiveProperty("borderRadius", "5px"),
+    borderRadius: getResponsiveProperty("borderRadius", "0"),
     color: color,
     transition: transition,
     outline: "none",
@@ -85,13 +91,17 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
       inputType !== "borderBottom"
         ? isFocused
           ? focusBorder
-          : border
+          : isHovered
+            ? hoverBorder
+            : border
         : "none",
     borderBottom:
       inputType === "borderBottom"
         ? isFocused
           ? focusBorderBottom
-          : borderBottom
+          : isHovered
+            ? hoverBorder
+            : borderBottom
         : border,
   };
 
@@ -102,14 +112,16 @@ export const DefaultInput: React.FC<IDefaultInputProps> = ({
         {`#${id}:focus::placeholder { color: ${focusPlaceholderColor || placeholderColor}; }`}
       </style>
       <input
-        type="text"
+        type={type}
         id={id}
         placeholder={placeholder}
         className={`default-input ${isFocused ? "focused" : ""} ${s.input} ${inputType === "borderBottom" ? s.borderBottom : ""}`}
         style={inputStyle}
         onFocus={() => setIsFocused(true)}
+        onMouseEnter={() => setIsHovered(true)}
         value={value}
         name={name}
+        onMouseLeave={() => setIsHovered(false)}
         onBlur={() => setIsFocused(false)}
         onChange={onChange}
         {...rest}

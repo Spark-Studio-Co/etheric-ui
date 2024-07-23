@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Logo } from "./index";
-import logo from "./logo-402d9f18.svg";
+import logo from "@/assets/etheric_ui.svg";
 
 const meta: Meta<typeof Logo> = {
   title: "Logo/Logo",

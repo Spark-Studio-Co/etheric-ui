@@ -20,6 +20,7 @@ interface ResponsiveProperties {
   buttonBorderRadius?: string;
   bigTextMargin?: string;
   paragraphMargin?: string;
+  paragraphWidth?: string;
   popupPadding?: string;
 }
 
@@ -78,7 +79,7 @@ export const Popup: React.FC<IPopupProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { width: windowWidth } = useWindowSize();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const styles = useStyle({
     defaultbutton: {
@@ -124,11 +125,11 @@ export const Popup: React.FC<IPopupProps> = ({
     >
       <div
         style={{
-          height: getResponsiveProperty("popupHeight", "200px"),
-          width: getResponsiveProperty("popupWidth", "300px"),
-          borderRadius: getResponsiveProperty("popupBorderRadius", "10px"),
+          height: getResponsiveProperty("popupHeight", ""),
+          width: getResponsiveProperty("popupWidth", ""),
+          borderRadius: getResponsiveProperty("popupBorderRadius", ""),
           display: "flex",
-          padding: getResponsiveProperty("popupPadding", "20px"),
+          padding: getResponsiveProperty("popupPadding", ""),
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
@@ -142,8 +143,8 @@ export const Popup: React.FC<IPopupProps> = ({
             src={logo}
             alt="Logo"
             style={{
-              width: getResponsiveProperty("logoWidth", "50px"),
-              height: getResponsiveProperty("logoHeight", "50px"),
+              width: getResponsiveProperty("logoWidth", ""),
+              height: getResponsiveProperty("logoHeight", ""),
             }}
           />
         </a>
@@ -152,21 +153,23 @@ export const Popup: React.FC<IPopupProps> = ({
             textAlign: "center",
             fontFamily: bigTextFontFamily,
             fontWeight: bigTextFontWeight,
-            margin: getResponsiveProperty("bigTextMargin", "10px"),
+            margin: getResponsiveProperty("bigTextMargin", ""),
             color: bigTextColor,
-            fontSize: getResponsiveProperty("bigTextFontSize", "16px"),
+            fontSize: getResponsiveProperty("bigTextFontSize", ""),
           }}
         >
           {bigText}
         </span>
         <p
           style={{
+            width: getResponsiveProperty("paragraphWidth", ""),
+            lineHeight: "19px",
             textAlign: "center",
             fontFamily: paragraphFontFamily,
             fontWeight: paragraphFontWeight,
-            margin: getResponsiveProperty("paragraphMargin", "10px"),
+            margin: getResponsiveProperty("paragraphMargin", ""),
             color: paragraphColor,
-            fontSize: getResponsiveProperty("paragraphFontSize", "14px"),
+            fontSize: getResponsiveProperty("paragraphFontSize", ""),
           }}
         >
           {paragraph}
@@ -175,12 +178,13 @@ export const Popup: React.FC<IPopupProps> = ({
           onClick={togglePopup}
           style={{
             ...styles.defaultbutton,
-            margin: getResponsiveProperty("buttonMargin", "10px"),
-            fontSize: getResponsiveProperty("buttonFontSize", "16px"),
-            padding: getResponsiveProperty("buttonPadding", "12px"),
+            cursor: "pointer",
+            margin: getResponsiveProperty("buttonMargin", "0"),
+            fontSize: getResponsiveProperty("buttonFontSize", ""),
+            padding: getResponsiveProperty("buttonPadding", ""),
             width: getResponsiveProperty("buttonWidth", "auto"),
             height: getResponsiveProperty("buttonHeight", "auto"),
-            borderRadius: getResponsiveProperty("buttonBorderRadius", "5px"),
+            borderRadius: getResponsiveProperty("buttonBorderRadius", ""),
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

@@ -44,7 +44,7 @@ interface Link {
   buttonHref: string;
   buttonHoverBorder?: string;
   buttonBorder?: string;
-  buttonHoverColor?: string;
+  hoverButtonColor?: string;
   buttonColor?: string;
   buttonTransition?: string;
   logoHref?: string;
@@ -74,7 +74,7 @@ export const HeaderBasic: React.FC<Link> = ({
   buttonFontFamily,
   buttonFontWeight,
   buttonHoverBorder,
-  buttonHoverColor,
+  hoverButtonColor,
   hoverButtonBackgroundColor,
   buttonHref,
   linkColor,
@@ -110,7 +110,7 @@ export const HeaderBasic: React.FC<Link> = ({
 
   const styles = useStyle({
     contactlinkbutton: {
-      color: isHovered ? buttonHoverColor : buttonColor,
+      color: isHovered ? hoverButtonColor : buttonColor,
       transition: linkTransition,
       textDecoration: buttonTextDecoration,
       border: isHovered ? buttonHoverBorder : buttonBorder,
